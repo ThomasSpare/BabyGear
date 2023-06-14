@@ -41,13 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'channels',
     'chatapp',
-=======
-    'chatrooms',
-    'app',
->>>>>>> 4e173b8c477722b898409853915cf62136c80ccb
 ]
 
 MIDDLEWARE = [
