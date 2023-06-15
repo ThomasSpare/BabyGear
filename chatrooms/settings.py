@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
-
-
 import dj_database_url
 if os.path.isfile("env.py"):
     import env
@@ -21,7 +19,7 @@ if os.path.isfile("env.py"):
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL'),
     'API_SECRET': os.environ.get('API_SECRET'),
-    'API_KEY': os.environ.get('API_KEY')
+    'API_KEY': os.environ.get('API_KEY'),
 }
 
 MEDIA_URL = '/media/'
@@ -35,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get("DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,9 +80,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'chatrooms.wsgi.application'
+# WSGI_APPLICATION = 'chatrooms.wsgi.application'
 
 ASGI_APPLICATION = "chatrooms.routing.application"
+
 CHANNEL_LAYERS = {'default': {'BACKEND': "channels.layers.InMemoryChannelLayer"}}
 
 
