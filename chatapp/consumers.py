@@ -6,7 +6,7 @@ from channels.generic.websocket import WebsocketConsumer
 
 class TextRoomConsumer(WebsocketConsumer):
     def connect(self):
-        self.room_name = self.scope\['url_route'\]['kwargs']['room_name']
+        self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
         # Join room group
         async_to_sync(self.channel_layer.group_add)(
@@ -14,11 +14,12 @@ class TextRoomConsumer(WebsocketConsumer):
             self.channel_name
         )
         self.accept()
-        def disconnect(self, close_code):
-            # Leave room group
-            async_to_sync(self.channel_layer.group_discard)(
-                self.room_group_name,
-                self.channel_name
+               
+    def disconnect(self, close_code):
+        # Leave room group
+        async_to_sync(self.channel_layer.group_discard)(
+            self.room_group_name,
+            self.channel_name
         )
 
     def receive(self, text_data):
@@ -45,3 +46,5 @@ class TextRoomConsumer(WebsocketConsumer):
             'text': text,
             'sender': sender
         }))
+
+

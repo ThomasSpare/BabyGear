@@ -13,6 +13,7 @@ from pathlib import Path
 import os
 
 
+
 import dj_database_url
 if os.path.isfile("env.py"):
     import env
@@ -83,23 +84,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chatrooms.wsgi.application'
 
-ASGI_APPLICATION = "chat.routing.application" #routing.py will handle the ASGI
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': "channels.layers.InMemoryChannelLayer"
-        }
-    }
+ASGI_APPLICATION = "chatrooms.routing.application"
+CHANNEL_LAYERS = {'default': {'BACKEND': "channels.layers.InMemoryChannelLayer"}}
 
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
 
 DATABASES = {
     'default': ({

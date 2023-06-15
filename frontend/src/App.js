@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -7,7 +8,11 @@ import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Paper from "@material-ui/core/Paper";
+
 import { withStyles } from "@material-ui/core/styles";
+
+
+
 const useStyles = (theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -33,7 +38,10 @@ class App extends Component {
         sender: this.state.name,
       })
     );
-    this.state.value = "";
+    this.setState({
+      value: ""
+  })
+    // this.state.value = "";
     e.preventDefault();
   };
   componentDidMount() {
@@ -133,5 +141,5 @@ class App extends Component {
       </Container>
     );
   }
-export default withStyles(useStyles)(App);
 }
+export default withStyles(useStyles)(App);
