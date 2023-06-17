@@ -10,9 +10,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Paper from "@material-ui/core/Paper";
 
 import { withStyles } from "@material-ui/core/styles";
-// import TextareaAutosize from '@mui/base/TextareaAutosize';
-
-
 
 const useStyles = (theme) => ({
   submit: {
@@ -20,17 +17,17 @@ const useStyles = (theme) => ({
   },
 });
 
-
 class App extends Component {
   state = {
     filledForm: false,
     messages: [],
-    value: '',
-    name: '',
-    room: 'test',
-  }
-  client = new W3CWebSocket('ws://127.0.0.1:8000/ws/' + this.state.room + '/'); //gets room_name from the state and connects to the backend server
-  
+    value: "",
+    name: "",
+    room: "test",
+  };
+
+  client = new W3CWebSocket("ws://127.0.0.1:8000/ws/" + this.state.room + "/");
+
   onButtonClicked = (e) => {
     this.client.send(
       JSON.stringify({
@@ -42,9 +39,9 @@ class App extends Component {
     this.setState({
       value: ""
   })
-    // this.state.value = "";
     e.preventDefault();
   };
+
   componentDidMount() {
     this.client.onopen = () => {
       console.log("WebSocket Client Connected");
@@ -63,8 +60,9 @@ class App extends Component {
         }));
       }
     };
-  } 
-  render(){
+  }
+
+  render() {
     const { classes } = this.props;
     return (
       <Container component="main" maxWidth="xs">
@@ -96,7 +94,11 @@ class App extends Component {
                   this.value = this.state.value;
                 }}
               />
-              <Button type="submit" fullWidth variant="contained" color="primary"
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
                 className={classes.submit}
               >
                 Send Message
@@ -130,7 +132,11 @@ class App extends Component {
                     this.value = this.state.name;
                   }}
                 />
-                <Button type="submit" fullWidth variant="contained" color="primary"
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
                   className={classes.submit}
                 >
                   Submit
@@ -144,4 +150,3 @@ class App extends Component {
   }
 }
 export default withStyles(useStyles)(App);
-

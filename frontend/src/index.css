@@ -14,7 +14,7 @@ body {
 }
 
 #root > main > div > div{
-  background-color: #00bf8f;
+  background-color: rgba(0, 0, 0, 0.12);
 }
 
 #outlined-helperText{

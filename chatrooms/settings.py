@@ -37,7 +37,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['8000-thomasspare-chatroomsgi-2lvcswinlti.ws-eu99.gitpod.io']
+ALLOWED_HOSTS = ['8000-thomasspare-chatroomsgi-2lvcswinlti.ws-eu99.gitpod.io', '']
 
 # Application definition
 
@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'daphne',
     'django.contrib.staticfiles',
+    'redis',
     'channels',
     'chatapp',
 ]
@@ -82,9 +84,16 @@ TEMPLATES = [
 
 # WSGI_APPLICATION = 'chatrooms.wsgi.application'
 
-ASGI_APPLICATION = "chatrooms.routing.application"
+ASGI_APPLICATION = "chatrooms.asgi.application"
 
-CHANNEL_LAYERS = {'default': {'BACKEND': "channels.layers.InMemoryChannelLayer"}}
+CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                "hosts": [('127.0.0.1', 6379)],
+            },
+        },
+    }
 
 
 DATABASES = {
