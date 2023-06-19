@@ -8,12 +8,17 @@ import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Paper from "@material-ui/core/Paper";
+<<<<<<< HEAD
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Box from '@mui/material/Box';
 
 
+=======
+>>>>>>> 82a6e86c6d397481d23f30f8e1492c73cff98b8c
 import { withStyles } from "@material-ui/core/styles";
 import { TextareaAutosize } from "@material-ui/core";
+
+
 
 const useStyles = (theme) => ({
   submit: {
@@ -87,7 +92,7 @@ class App extends Component {
     room: "test",
   };
 
-  client = new W3CWebSocket("ws://127.0.0.1:8000/ws/" + this.state.room + "/");
+  client = new W3CWebSocket("ws://127.0.0.1:3000/ws/" + this.state.room + "/");
 
   onButtonClicked = (e) => {
     this.client.send(
@@ -219,6 +224,7 @@ class App extends Component {
     );
   }
 }
+<<<<<<< HEAD
 
 export default withStyles(useStyles)(App);
 
@@ -244,3 +250,6 @@ export function EmptyTextarea() {
     800: '#32383f',
     900: '#24292f',
   }};
+=======
+export default withStyles(useStyles)(App);
+>>>>>>> 82a6e86c6d397481d23f30f8e1492c73cff98b8c
