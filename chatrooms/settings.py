@@ -37,7 +37,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['8000-thomasspare-chatroomsgi-2lvcswinlti.ws-eu99.gitpod.io', '']
+ALLOWED_HOSTS = ['http://localhost:3000/']
 
 # Application definition
 
