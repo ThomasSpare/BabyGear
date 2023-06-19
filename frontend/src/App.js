@@ -8,8 +8,9 @@ import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Paper from "@material-ui/core/Paper";
-
 import { withStyles } from "@material-ui/core/styles";
+
+
 
 const useStyles = (theme) => ({
   submit: {
@@ -26,7 +27,7 @@ class App extends Component {
     room: "test",
   };
 
-  client = new W3CWebSocket("ws://127.0.0.1:8000/ws/" + this.state.room + "/");
+  client = new W3CWebSocket("ws://127.0.0.1:3000/ws/" + this.state.room + "/");
 
   onButtonClicked = (e) => {
     this.client.send(
