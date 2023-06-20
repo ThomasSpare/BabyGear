@@ -10,7 +10,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Paper from "@material-ui/core/Paper";
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Box from '@mui/material/Box';
-
+import EmojiPicker from 'emoji-picker-react';
 
 import { withStyles } from "@material-ui/core/styles";
 import { TextareaAutosize } from "@material-ui/core";
@@ -54,8 +54,8 @@ const useStyles = (theme) => ({
   -moz-osx-font-smoothing: grayscale;
     font-weight: 600;
     line-height: 1.5;
-    margin-top: 50px;
-    margin-left: 50px;
+    margin-top: 30%;
+    margin-left: 30%;
     padding: 12px;
     border-radius: 12px;
     color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
@@ -78,7 +78,6 @@ const useStyles = (theme) => ({
     }
   `,
   );
-
 
 class App extends Component {
   state = {
@@ -134,6 +133,7 @@ class App extends Component {
       <StyledTextarea aria-label="empty textarea" placeholder="Waiting on tutor ... " />
         </Grid>
       <Grid xs={3} component="main" maxWidth="xs">
+     
         {this.state.filledForm ? (
           <div style={{ marginTop: 50 }}>
             Room Name: {this.state.room}
@@ -149,7 +149,6 @@ class App extends Component {
                 </>
               ))}
             </Paper>
-          <Button>Hello</Button>
             <form
               className={classes.form}
               noValidate
@@ -175,6 +174,7 @@ class App extends Component {
               </Button>
             </form>
           </div>
+          
         ) : (
           <div>
             <CssBaseline />
@@ -216,6 +216,9 @@ class App extends Component {
           </div>
         )}
       </Grid>
+      <div>
+      <EmojiPicker height={300} width={200}/>
+    </div>
       </Grid>
       </Box>
     );
