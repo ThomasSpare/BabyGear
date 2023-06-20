@@ -4,13 +4,14 @@ import { styled } from '@mui/material/styles';
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Paper from "@material-ui/core/Paper";
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Box from '@mui/material/Box';
 import EmojiPicker from 'emoji-picker-react';
+import "./api/axiosDefaults";
+import SignIn from "./components/SignIn"
 
 import { withStyles } from "@material-ui/core/styles";
 import { TextareaAutosize } from "@material-ui/core";
@@ -79,6 +80,10 @@ const useStyles = (theme) => ({
   `,
   );
 
+
+
+
+
 class App extends Component {
   state = {
     filledForm: false,
@@ -125,6 +130,7 @@ class App extends Component {
   }
 
   render() {
+    <SignIn/>
     const { classes } = this.props;
     return (
       <Box sx={{ width: '100%' }}>
