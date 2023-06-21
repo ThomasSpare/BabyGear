@@ -4,8 +4,11 @@ import logo from "../assets/CodeCoachLogo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 
+
 const NavBar = () => {
+
   return (
+  
     <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container>
         <NavLink to="/">

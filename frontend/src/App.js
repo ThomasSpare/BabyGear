@@ -11,10 +11,12 @@ import Grid from '@mui/material/Grid'; // Grid version 1
 import Box from '@mui/material/Box';
 import EmojiPicker from 'emoji-picker-react';
 import "./api/axiosDefaults";
-import SignIn from "./components/SignIn"
+//import SignIn from "./components/SignIn";
+import NavBar from "./components/NavBar";
 
 import { withStyles } from "@material-ui/core/styles";
 import { TextareaAutosize } from "@material-ui/core";
+import { Router } from "react-router-dom";
 
 
 
@@ -130,7 +132,12 @@ class App extends Component {
   }
 
   render() {
-    <SignIn/>
+
+{ console.log("just before nav")}
+
+
+     // This is the NavBar I am trying to import  
+    { console.log("just after nav")}
     const { classes } = this.props;
     return (
       <Box sx={{ width: '100%' }}>
@@ -139,7 +146,7 @@ class App extends Component {
       <StyledTextarea aria-label="empty textarea" placeholder="Waiting on tutor ... " />
         </Grid>
       <Grid xs={3} component="main" maxWidth="xs">
-     
+    
         {this.state.filledForm ? (
           <div style={{ marginTop: 50 }}>
             Room Name: {this.state.room}
@@ -219,6 +226,9 @@ class App extends Component {
                 </Button>
               </form>
             </div>
+            <Router>
+<NavBar /> 
+</Router>
           </div>
         )}
       </Grid>

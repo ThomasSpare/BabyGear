@@ -3,10 +3,10 @@ import NavBar from "./../components/NavBar";
 import Container from "react-bootstrap/Container";
 import { Route, Switch } from "react-router-dom";
 import SignUpForm from "./../pages/auth/SignUpForm";
-import "./api/axiosDefaults";
+import "../api/axiosDefaults";
 
 
-function SignIn() {
+const SignIn = () =>{
     return (
       <div className={styles.App}>
         <NavBar />
