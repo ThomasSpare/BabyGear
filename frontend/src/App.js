@@ -33,7 +33,7 @@ class App extends Component {
     room: "test",
   };
 
-  client = new W3CWebSocket("ws://127.0.0.1:3000/ws/" + this.state.room + "/");
+  client = new W3CWebSocket("ws://localhost:8080/ws/" + this.state.room + "/");
 
   onButtonClicked = (e) => {
     this.client.send(
@@ -70,18 +70,14 @@ class App extends Component {
   }
 
   render() {
-
-
-  // This is the NavBar I am trying to import
-
     const { classes } = this.props;
     return (
       <Box sx={{ width: '100%' }}>
         <NavBar />
       <Grid container rowSpacing={1} columnSpacing={{ xs: 3, sm: 2, md: 3 }}>
       <Grid xs={6}>
-      
-      <EmptyTextarea/>
+{/* Tutor Text Area  */}
+      <EmptyTextarea/>     
         </Grid>
       <Grid xs={3} component="main" maxWidth="xs">
      
@@ -135,8 +131,8 @@ class App extends Component {
                 noValidate
                 onSubmit={(value) => this.setState({ filledForm: true })}
               >
-                <TextField variant="outlined" margin="normal" required fullWidth label="Room name"
-                  name="Room name"
+                <TextField variant="outlined" margin="normal" required fullWidth label="Specify what you need to learn"
+                  name="Room"
                   autoFocus
                   value={this.state.room}
                   onChange={(e) => {
@@ -168,7 +164,7 @@ class App extends Component {
         )}
       </Grid>
       <div>
-      <EmojiPicker height={300} width={200}/>
+      <EmojiPicker height={400} width={200}/>
     </div>
       </Grid>
       </Box>

@@ -27,17 +27,21 @@ export default function EmptyTextarea() {
 
   const StyledTextarea = styled(TextareaAutosize)(
     ({ theme }) => `
-    width: 320px;
-    font-family: IBM Plex Sans, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
+    width: 700px;
+    margin-left: 20%;
+    margin-top: 20%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    font-weight: 800;
     line-height: 1.5;
     padding: 12px;
-    border-radius: 12px;
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+    border-radius: 12px 12px 0 12px;
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[700]};
     background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
     border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 2px ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
+    box-shadow: 0px 2px 24px ${
+      theme.palette.mode === 'dark' ? blue[900] : blue[100]
+    };
   
     &:hover {
       border-color: ${blue[400]};
@@ -45,7 +49,7 @@ export default function EmptyTextarea() {
   
     &:focus {
       border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[500] : blue[200]};
+      box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[400] : blue[200]};
     }
   
     // firefox
@@ -55,5 +59,7 @@ export default function EmptyTextarea() {
   `,
   );
 
-  return <StyledTextarea aria-label="empty textarea" placeholder="Waiting on Tutor... " />;
+  return <StyledTextarea 
+  maxRows={20}
+  aria-label="empty textarea" placeholder="Waiting on Tutor... " />;
 }

@@ -32,7 +32,10 @@
   }
   
   a {
-    color: #555555;
+    font-family: 'JetBrains Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #dadada;
     transition: color ease-in-out 0.3s;
   }
   

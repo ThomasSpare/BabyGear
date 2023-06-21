@@ -7,16 +7,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root > div > div > main > div > div{
-  
-}
-
 /* Form */
 #root > div > div > main{
   margin-left: 0%;
   margin-top: 10%;
 }
-#root > div > div > div:nth-child(3) > aside.EmojiPickerReact{--epr-emoji-size: 18px;}
+
+/* Emoji box */
+#root > div > div > div:nth-child(3) > aside{
+  margin-top: 200%;
+  margin-left: 10px;
+  border-color: black;
+}
+
+/* Emoji Picker styling */
+#root > div > div > div:nth-child(3) > aside.EmojiPickerReact{
+  --epr-emoji-size: 18px;
+  --epr-bg-color:  rgba(37, 94, 72, 0.739);
+  --epr-category-label-bg-color:  rgba(28, 44, 38, 0.739);
+  --epr-text-color: white;
+  --epr-hover-bg-color: rgba(28, 44, 38, 0.739);
+}
+
 #root > div > div > div:nth-child(3) > aside > div.Flex.epr-preview.FlexRow > div> img{
 height: 18px;
 }
@@ -35,14 +47,12 @@ height: 18px;
   font-family: 'JetBrains Mono', monospace;
 }
 
-#root > div > div > div:nth-child(3) > aside{
-  margin-top: 270%;
-  margin-left: 10px;
-}
+/* Chat box background */
 #root > div > div > main > div > div{
   background-color: rgba(64, 163, 125, 0.739);
 }
 
+/* Chat box */
 #outlined-helperText{
   background-color: rgb(142, 184, 170);
   font-family: 'JetBrains Mono', monospace;
