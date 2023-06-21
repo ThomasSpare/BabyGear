@@ -77,9 +77,10 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <Box sx={{ width: '100%' }}>
+        <NavBar />
       <Grid container rowSpacing={1} columnSpacing={{ xs: 3, sm: 2, md: 3 }}>
       <Grid xs={6}>
-      <NavBar />
+      
       <EmptyTextarea/>
         </Grid>
       <Grid xs={3} component="main" maxWidth="xs">

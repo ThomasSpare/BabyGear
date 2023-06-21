@@ -55,5 +55,5 @@ export default function EmptyTextarea() {
   `,
   );
 
-  return <StyledTextarea aria-label="empty textarea" placeholder="Empty" />;
+  return <StyledTextarea aria-label="empty textarea" placeholder="Waiting on Tutor... " />;
 }
