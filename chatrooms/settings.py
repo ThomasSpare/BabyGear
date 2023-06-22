@@ -13,18 +13,16 @@ from pathlib import Path
 import os
 
 import dj_database_url
-if os.path.isfile("env.py"):
+
+if os.path.exists('env.py'):
     import env
 
 CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL'),
-    'API_SECRET': os.environ.get('API_SECRET'),
-    'API_KEY': os.environ.get('API_KEY'),
+    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
 
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,11 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'daphne',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'rest_framework',
+    'daphne',
     'redis',
     'channels',
     'chatapp',
+    'profiles',
 ]
 
 MIDDLEWARE = [
