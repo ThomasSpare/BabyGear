@@ -20,24 +20,21 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
             <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
+              exact="true"
+              className={ ({ isActive }) => isActive ? styles.Active : styles.NavLink}
               to="/"
             >
               <i className="fas fa-home"></i>Home
             </NavLink>
             <NavLink
-              className={styles.NavLink}
-              activeClassName={styles.Active}
+              className={ ({ isActive }) => isActive ? styles.Active : styles.NavLink}
               to="/signin"
             >
               <i className="fas fa-sign-in-alt"></i>Sign in
             </NavLink>
             <NavLink
               to="/signup"
-              className={styles.NavLink}
-              activeClassName={styles.Active}
+              className={ ({ isActive }) => isActive ? styles.Active : styles.NavLink}
             >
               <i className="fas fa-user-plus"></i>Sign up
             </NavLink>
