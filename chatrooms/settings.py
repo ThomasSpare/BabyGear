@@ -64,9 +64,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 #DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'https://codecoach-a2f14f649917.herokuapp.com/']
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-3sm1tivpx4e.ws-eu100.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-3sm1tivpx4e.ws-eu100.gitpod.io', 'https://codecoach-a2f14f649917.herokuapp.com/']
 
 # Application definition
 
