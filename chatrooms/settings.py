@@ -45,8 +45,8 @@ if 'DEV' not in os.environ:
 
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+JWT_AUTH_COOKIE = 'chatrooms-auth'
+JWT_AUTH_REFRESH_COOKIE = 'chatrooms-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {
