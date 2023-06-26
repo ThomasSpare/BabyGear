@@ -3,6 +3,7 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/CodeCoachLogo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
+import SignUpForm from "../pages/auth/SignUpForm";
 
 
 const NavBar = () => {
@@ -33,7 +34,7 @@ const NavBar = () => {
               <i className="fas fa-sign-in-alt"></i>Sign in
             </NavLink>
             <NavLink
-              to="/signup"
+              to="/signup" render={() => <SignUpForm />}
               className={ ({ isActive }) => isActive ? styles.Active : styles.NavLink}
             >
               <i className="fas fa-user-plus"></i>Sign up

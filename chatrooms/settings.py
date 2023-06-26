@@ -56,7 +56,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-3sm1tivpx4e.ws-eu100.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['*']
 
 # Application definition
 

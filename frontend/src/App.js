@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { Route, Switch } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -10,10 +11,11 @@ import Grid from "@material-ui/core/Grid"; // Grid version 1
 import Box from "@material-ui/core/Box";
 import EmojiPicker from "emoji-picker-react";
 import "./api/axiosDefaults";
-//import SignIn from "./components/SignIn";
+import SignUpForm from "./pages/auth/SignUpForm";
 import NavBar from "./components/NavBar";
 import EmptyTextarea from "./components/TextArea";
 import { withStyles } from "@material-ui/core/styles";
+
 
 const useStyles = (theme) => ({
   submit: {
@@ -92,6 +94,12 @@ class App extends Component {
     return (
       <Box sx={{ width: "100%" }}>
         <NavBar />
+        <Switch>
+        <Route>
+        <Route exact path="/signup" render={() => <SignUpForm />} />
+        </Route>
+        </Switch>
+
         <Grid container>
           <Grid item xs={6}>
             {/* Tutor Text Area  */}
