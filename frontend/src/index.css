@@ -49,7 +49,7 @@ height: 18px;
 
 /* Chat box background */
 #root > div > div > main > div > div{
-  background-color: rgba(64, 163, 125, 0.739);
+  background-color: #048ca1da;
 }
 
 /* Chat box */

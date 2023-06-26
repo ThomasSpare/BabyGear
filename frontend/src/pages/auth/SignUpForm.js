@@ -130,7 +130,7 @@ const SignUpForm = () => {
       >
         <Image
           className={`${appStyles.FillerImage}`}
-          src={"https://www.gumtree.com.au/s-ad/sydney-city/hsc-university-school-tutoring/professional-tutor-for-computer-science-subjects/1313467152.jpg"}
+          src={"https://res.cloudinary.com/djunroohl/image/upload/v1687803058/codetutor_grj1ef.jpg"}
         />
       </Col>
     </Row>

@@ -1,16 +1,20 @@
 .Row {
   height: calc(100vh - 81px);
-  width: 50vw;
-  margin-left: 25%;
+  width: 25vw;
+  margin-left: 35%;
 }
 .Input {
-  background: #ffffff;
-  border: 1px solid #f0f1f9;
+  background: #d3d3d3;  
+  border: 1px solid #008f6b;
   box-sizing: border-box;
   border-radius: 2px;
-  color: #7177a1;
+  color: #c2c4ce;
   text-align: center;
   padding: 10px;
+}
+
+#root > div > div.SignInUpForm_Row__apzgi.row > div.my-auto.py-2.p-md-2.col-md-6 > div.App_Content__9goiP.p-4.container > form > div:nth-child(1){
+  margin-right: 10px;
 }
 
 .Header {
@@ -21,7 +25,7 @@
   text-align: center;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #2142b2;
+  color: #ececec;
 }
 
 .Link {
