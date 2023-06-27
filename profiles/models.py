@@ -12,6 +12,7 @@ class Profile(models.Model):
     image = models.ImageField(
         upload_to='images/', default='../image/upload/v1/6_man_shorthair_blackhair_happy_carzgj.jpg'
     )
+    learning = models.TextField(blank=True)
 
     class Meta:
         ordering = ['-created_at']
