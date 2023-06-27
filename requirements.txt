@@ -16,6 +16,7 @@ django-cloudinary-storage==0.3.0
 django-filter==2.4.0
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
+gunicorn==20.1.0
 hyperlink==21.0.0
 incremental==22.10.0
 msgpack==1.0.5
