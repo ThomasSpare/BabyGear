@@ -61,6 +61,7 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-6g9u5h5j602.ws-eu100
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,9 +78,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
-    'daphne',
-    'redis',
-    'channels',
     'chatapp',
     'profiles',
 ]
@@ -125,7 +123,9 @@ CHANNEL_LAYERS = {
                 "hosts": [('127.0.0.1', 6379)],
             },
         },
-    }
+   }
+
+
 
 
 if 'DEV' in os.environ:

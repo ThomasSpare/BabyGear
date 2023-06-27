@@ -33,7 +33,7 @@ class App extends Component {
     room: "test",
   };
 
-  // client = new W3CWebSocket("ws://localhost:8080/ws/" + this.state.room + "/");
+  client = new W3CWebSocket("ws://127.0.0.1:8080/ws/" + this.state.room + "/");
 
   onButtonClicked = (e) => {
     this.client.send(
@@ -43,15 +43,13 @@ class App extends Component {
         sender: this.state.name,
       })
     );
-    this.setState({
-      value: "",
-    });
+    this.state.value = "";
     e.preventDefault();
   };
-
+ 
   connect = () => {
     this.client = new W3CWebSocket(
-      "ws://localhost:8080/ws/" + this.state.room + "/"
+      "ws://127.0.0.1:8080/ws/" + this.state.room + "/"
     );
 
     this.client.onopen = () => {
