@@ -56,7 +56,7 @@ DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-6g9u5h5j602.ws-eu100.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-6g9u5h5j602.ws-eu100.gitpod.io', 'https://codecoach-a2f14f649917.herokuapp.com']
 
 # Application definition
 
