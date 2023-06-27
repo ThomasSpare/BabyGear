@@ -54,9 +54,9 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://8080-thomasspare-codecoach-e2xmxgjkwh2.ws-eu100.gitpod.io']
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-3sm1tivpx4e.ws-eu100.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8080-thomasspare-codecoach-e2xmxgjkwh2.ws-eu100.gitpod.io']
 
 # Application definition
 
