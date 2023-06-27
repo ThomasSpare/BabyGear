@@ -12,6 +12,11 @@ import Box from "@material-ui/core/Box";
 import EmojiPicker from "emoji-picker-react";
 import "./api/axiosDefaults";
 import SignUpForm from "./pages/auth/SignUpForm";
+import SignInForm from "./pages/auth/SignInForm";
+import ProfileEditForm from "./pages/auth/profiles/ProfileEditForm";
+import ProfilePage from "./pages/auth/profiles/ProfilePage";
+import UsernameForm from "./pages/auth/profiles/UsernameForm";
+import UserPasswordForm from "./pages/auth/profiles/UserPasswordForm";
 import NavBar from "./components/NavBar";
 import EmptyTextarea from "./components/TextArea";
 import { withStyles } from "@material-ui/core/styles";
@@ -93,10 +98,26 @@ class App extends Component {
       <Box sx={{ width: "100%" }}>
         <NavBar />
         <Switch>
-        <Route>
-        <Route exact path="/signup" render={() => <SignUpForm />} />
-        </Route>
+          <Route exact path="/signin" render={() => <SignInForm />} />
+          <Route exact path="/signup" render={() => <SignUpForm />} />
+          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+          <Route
+            exact
+            path="/profiles/:id/edit/username"
+            render={() => <UsernameForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit/password"
+            render={() => <UserPasswordForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() => <ProfileEditForm />}
+          />
         </Switch>
+      
 
         <Grid container>
           <Grid item xs={6}>
