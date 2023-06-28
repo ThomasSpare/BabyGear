@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
+from datetime import timedelta
 from pathlib import Path
 import os
 
@@ -54,9 +56,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['https://codecoach-a2f14f649917.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['https://thomasspare-codecoach-gwerldmfxqg.ws-eu101.gitpod.io', '8000-thomasspare-codecoach-gwerldmfxqg.ws-eu101.gitpod.io','localhost']
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-6g9u5h5j602.ws-eu100.gitpod.io', 'https://codecoach-a2f14f649917.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://thomasspare-codecoach-gwerldmfxqg.ws-eu101.gitpod.io']
 
 # Application definition
 
@@ -180,3 +182,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFTETIME': timedelta(minutes=30),
+}
+
+AUTH_USER_MODEL = "profiles.UserAccount"
