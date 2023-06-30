@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid"; // Grid version 1
 import Box from "@material-ui/core/Box";
 import EmojiPicker from "emoji-picker-react";
 import "./api/axiosDefaults";
+import SignInForm from "./pages/auth/SignInForm";
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import ProfileEditForm from "./pages/auth/profiles/ProfileEditForm";
@@ -20,6 +21,8 @@ import UserPasswordForm from "./pages/auth/profiles/UserPasswordForm";
 import NavBar from "./components/NavBar";
 import EmptyTextarea from "./components/TextArea";
 import { withStyles } from "@material-ui/core/styles";
+
+
 
 
 const useStyles = (theme) => ({
@@ -97,7 +100,18 @@ class App extends Component {
     return (
       <Box sx={{ width: "100%" }}>
         <NavBar />
+        <BrowserRouter>
         <Switch>
+         CodeCoach
+        <Route exact path="/signin">
+        <SignInForm />
+        </Route>
+        <Route exact path="/signup">
+        <SignUpForm />
+        </Route>
+        </Switch>
+        </BrowserRouter>
+
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
@@ -117,7 +131,6 @@ class App extends Component {
             render={() => <ProfileEditForm />}
           />
         </Switch>
-      
 
         <Grid container>
           <Grid item xs={6}>
