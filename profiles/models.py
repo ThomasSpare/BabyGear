@@ -14,7 +14,7 @@ class UserAccountManager(BaseUserManager):
         email = email.lower()
 
         user = self.model(
-            first_name=firstname,
+            first_name=first_name,
             last_name=last_name,
             email=email,
         )
@@ -24,23 +24,22 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
+    def create_superuser(self, first_name, last_name, email, password=None):
+        """
+        Creates and saves a superuser with the given email and password.
+        """
+        user = self.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=password,
+        )
 
-def create_superuser(self, first_name, last_name, email, password=None):
-    """
-    Creates and saves a superuser with the given email and password.
-    """
-    user = self.create_user(
-        first_name,
-        last_name,
-        email,
-        password=password,
-    )
-    # user.is_admin = True
-    user.is_staff = True
-    user.is_superuser = True
-    user.save(using=self._db)
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
 
-    return user
+        return user
 
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):

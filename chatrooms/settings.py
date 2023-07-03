@@ -56,9 +56,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['https://thomasspare-codecoach-gwerldmfxqg.ws-eu101.gitpod.io', '8000-thomasspare-codecoach-gwerldmfxqg.ws-eu101.gitpod.io','localhost']
+ALLOWED_HOSTS = ['8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io', 'localhost']
 
-CSRF_TRUSTED_ORIGINS = ['https://thomasspare-codecoach-gwerldmfxqg.ws-eu101.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io']
 
 # Application definition
 
