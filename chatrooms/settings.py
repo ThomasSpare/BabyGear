@@ -59,6 +59,7 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "ThomasSpare/CodeCoach.herokuapp.com",
     "8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
 
 ]
@@ -108,7 +109,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+     ]
+else:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^https://.*\.gitpod\.io$",
+     ]
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
