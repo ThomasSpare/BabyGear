@@ -61,10 +61,12 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "codecoach-a2f14f649917.herokuapp.com",
     "8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
+    "3000-thomasspare-codecoachfr-8czc2d32dwb.ws-eu101.gitpod.io"
 
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io', 'codecoach-a2f14f649917.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io', 'codecoach-a2f14f649917.herokuapp.com',
+"https://3000-thomasspare-codecoachfr-8czc2d32dwb.ws-eu101.gitpod.io"]
 
 # Application definition
 
@@ -126,12 +128,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "https://codecoach-a2f14f649917.herokuapp.com",
+    "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "https://codecoach-a2f14f649917.herokuapp.com",
+    "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
     "https://thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
 ]
 
@@ -139,6 +143,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "https://codecoach-a2f14f649917.herokuapp.com",
+    "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
     "https://thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
 
 ]
