@@ -116,17 +116,16 @@ if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.environ.get('CLIENT_ORIGIN')
      ]
- else:
+else:
     CORS_ALLOWED_ORIGIN_REGEXES = [
         r"^https://.*\.gitpod\.io$",
      ]
 
 
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "codecoach-a2f14f649917.herokuapp.com",
+    "https://codecoach-a2f14f649917.herokuapp.com",
 ]
 
 CORS_ORIGIN_WHITELIST = [
