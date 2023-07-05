@@ -59,12 +59,12 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "ThomasSpare/CodeCoach.herokuapp.com",
+    "codecoach-a2f14f649917.herokuapp.com",
     "8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
 
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io', 'codecoach-a2f14f649917.herokuapp.com']
 
 # Application definition
 
@@ -116,29 +116,30 @@ if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.environ.get('CLIENT_ORIGIN')
      ]
-else:
+ else:
     CORS_ALLOWED_ORIGIN_REGEXES = [
         r"^https://.*\.gitpod\.io$",
      ]
 
 
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "https://codecoach.com",
+    "codecoach-a2f14f649917.herokuapp.com",
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "https://codecoach.com",
+    "https://codecoach-a2f14f649917.herokuapp.com",
     "https://thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "https://codecoach.com",
+    "https://codecoach-a2f14f649917.herokuapp.com",
     "https://thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
 
 ]
