@@ -14,9 +14,6 @@ class UserManager(BaseUserManager):
         first_name=None,         
         last_name=None,
         password=None,
-        birth_date=None,
-        country=None,
-        learning=None,
     ):
         if not email:
             raise ValueError("Users must have an email address")
@@ -34,12 +31,10 @@ class UserManager(BaseUserManager):
             raise ValueError("Users must choose what they want to learn")
         
         user = self.model(
-            email=self.normalize_email(email),
-            birth_date=birth_date,
             first_name=first_name,
             last_name=last_name,
-            country=country,
-            learning=learning,
+            email=self.normalize_email(email),
+            password=password,
         )
 
         user.set_password(password)
