@@ -66,7 +66,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io', 'codecoach-a2f14f649917.herokuapp.com', 'https://3000-thomasspare-codecoachfr-8czc2d32dwb.ws-eu101.gitpod.io', 'https://codecoach-frontend-2102ce726626.herokuapp.com']
-                                                                                                                                                                                                                             # Frontend
+                                                                                                                                                                                                                            # Frontend
 # Application definition
 
 INSTALLED_APPS = [
@@ -182,17 +182,17 @@ CHANNEL_LAYERS = {
         },
    }
 
-if 'DEV' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-    }
+# if 'DEV' in os.environ:
+# DATABASES = {
+# 'default': {
+            # 'ENGINE': 'django.db.backends.sqlite3',
+            # 'NAME': BASE_DIR / 'db.sqlite3',
+        # }
+    # }
+# else:
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
 
 if "DEVELOPMENT" in os.environ:
     # DATABASES = {
@@ -263,7 +263,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES':[
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
