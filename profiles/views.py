@@ -10,8 +10,10 @@ class RegisterView(APIView):
         data = request.data
 
         serializer = UserCreateSerializer(data=data)
+
         if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)       
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                   
         user = serializer.create(serializer.validated_data)
         user = UserSerializer(user)
 

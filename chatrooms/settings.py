@@ -178,37 +178,37 @@ TEMPLATES = [
 WSGI_APPLICATION = 'chatrooms.wsgi.application'
 ASGI_APPLICATION = 'chatrooms.asgi.application'
 
-CHANNEL_LAYERS = {
-        'default': {
-            'BACKEND': 'channels_redis.core.RedisChannelLayer',
-            'CONFIG': {
-                "hosts": [('127.0.0.1', 6379)],
-            },
-        },
-   }
+# CHANNEL_LAYERS = {
+#         'default': {
+#             'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#             'CONFIG': {
+#                 "hosts": [('127.0.0.1', 6379)],
+#             },
+#         },
+#    }
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-            "capacity": 8000,
-            "channel_capacity": {
-                "http.request": 8000,
-                "http.response": 8000,
-                "http.websocket": 8000,
-                "websocket.receive": 8000,
-                "websocket.send": 8000,
-                "websocket.disconnect": 8000,
-                "websocket.connect": 8000,
-                },
-            },
-        },
-    }
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#             "capacity": 8000,
+#             "channel_capacity": {
+#                 "http.request": 8000,
+#                 "http.response": 8000,
+#                 "http.websocket": 8000,
+#                 "websocket.receive": 8000,
+#                 "websocket.send": 8000,
+#                 "websocket.disconnect": 8000,
+#                 "websocket.connect": 8000,
+#                 },
+#             },
+#         },
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
