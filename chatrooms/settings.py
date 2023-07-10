@@ -57,19 +57,15 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = [
-    "localhost:8000",    # backend
-    "127.0.0.1:8000",
-    "8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
-    "localhost:3000",    # frontend
-    "127.0.0.1:3000",
-    "3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io",
-]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS")
 
-CSRF_TRUSTED_ORIGINS = [
-        'https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io',    # backend
-        'https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io',  # Frontend
-]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS")
+
+CORS_ORIGIN_WHITELIST = os.environ.get("CORS_ORIGIN_WHITELIST")
+
 
 # Application definition
 
@@ -110,34 +106,6 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:8000",    # backend
-#     "http://127.0.0.1:8000",
-#     "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
-#     "http://localhost:3000",    # frontend
-#     "http://127.0.0.1:3000",
-#     "https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io",
-# ]
-
-
-CORS_ORIGIN_WHITELIST = [
-    "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
-    "https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io",
-]
-
-
-# CSRF_TRUSTED_ORIGINS = [
-#     "http://localhost:8000",    # backend
-#     "http://127.0.0.1:8000",
-#     "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
-#     "http://localhost:3000",    # frontend
-#     "http://127.0.0.1:3000",
-#     "https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io",
-# ]
-
-
-CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'chatrooms.urls'
 
