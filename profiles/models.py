@@ -15,21 +15,15 @@ class UserManager(BaseUserManager):
         last_name=None,
         password=None,
     ):
-        if not email:
-            raise ValueError("Users must have an email address")
-        if not password:
-            raise ValueError("Users must have a password")
-        if not birth_date:
-            raise ValueError("Users must have a birth date")
         if not first_name:
             raise ValueError("Users must have a first name")
         if not last_name:
             raise ValueError("Users must have a last name")
-        if not country:
-            raise ValueError("Users must have a country")
-        if not learning:
-            raise ValueError("Users must choose what they want to learn")
-        
+        if not email:
+            raise ValueError("Users must have an email address")
+        if not password:
+            raise ValueError("Users must have a password")
+ 
         user = self.model(
             first_name=first_name,
             last_name=last_name,
@@ -43,18 +37,19 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, first_name, last_name, email, password=None):
+    def create_superuser(self, first_name, last_name, email, birth_date, country, learning, password=None):
         """
         Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
             first_name=first_name,
             last_name=last_name,
-            # birth_date=birth_date,
+            birth_date=birth_date,
             email=email,
             password=password,
-            # country=country,
-            # learning=learning,
+            country=country,
+            learning=learning,
+
         )
 
         user.is_staff = True

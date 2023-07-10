@@ -41,6 +41,7 @@ REST_USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'chatrooms.serializers.CurrentUserSerializer'
@@ -57,25 +58,23 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "codecoach-a2f14f649917.herokuapp.com",
+    "localhost:8000",    # backend
+    "127.0.0.1:8000",
     "8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
-    "codecoach-frontend-2102ce726626.herokuapp.com",   # Frontend
-
+    "localhost:3000",    # frontend
+    "127.0.0.1:3000",
+    "3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-        'https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io',
-        'codecoach-a2f14f649917.herokuapp.com',
-        'https://3000-thomasspare-codecoachfr-8czc2d32dwb.ws-eu101.gitpod.io',
-        'https://codecoach-frontend-2102ce726626.herokuapp.com',  # Frontend
+        'https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io',    # backend
+        'https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io',  # Frontend
 ]
 
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
+    # 'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -89,7 +88,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'dj_rest_auth',
     'django.contrib.sites',
-    "channels",
+    # "channels",
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -97,13 +96,6 @@ INSTALLED_APPS = [
     'chatapp',
     'profiles',
 ]
-
-REST_FRAMEWORK = {
-    "EXCEPTION_HANDLER": "authentication.exceptions.status_code_handler",
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
-    ],
-}
 
 SITE_ID = 1
 
@@ -118,42 +110,32 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-     ]
-else:
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://.*\.gitpod\.io$",
-     ]
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8000",    # backend
+#     "http://127.0.0.1:8000",
+#     "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
+#     "http://localhost:3000",    # frontend
+#     "http://127.0.0.1:3000",
+#     "https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io",
+# ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "https://codecoach-a2f14f649917.herokuapp.com",
-    "https://codecoach-frontend-2102ce726626.herokuapp.com",    # Frontend
-    "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
-]
 
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "https://codecoach-a2f14f649917.herokuapp.com",
-    "https://codecoach-frontend-2102ce726626.herokuapp.com",      # Frontend
     "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
-    "https://thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
+    "https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io",
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "https://codecoach-a2f14f649917.herokuapp.com",
-    "https://codecoach-frontend-2102ce726626.herokuapp.com",    # Frontend
-    "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
-    "https://thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
 
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     "http://localhost:8000",    # backend
+#     "http://127.0.0.1:8000",
+#     "https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu101.gitpod.io",
+#     "http://localhost:3000",    # frontend
+#     "http://127.0.0.1:3000",
+#     "https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu101.gitpod.io",
+# ]
+
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -176,7 +158,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chatrooms.wsgi.application'
-ASGI_APPLICATION = 'chatrooms.asgi.application'
+# ASGI_APPLICATION = 'chatrooms.asgi.application'
 
 # CHANNEL_LAYERS = {
 #         'default': {
@@ -244,7 +226,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 
 # Default primary key field type
