@@ -58,18 +58,33 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "codecoach-a2f14f649917.herokuapp.com",
-    "localhost:8000",
-    "127.0.0.1:8000",
-    "codecoach-frontend-2102ce726626.herokuapp.com",
+    'localhost',
+    # frontend
+    'codecoach-frontend-2102ce726626.herokuapp.com',
+    'localhost:3000',
+    # backend
+    'codecoach-a2f14f649917.herokuapp.com',
+    'localhost:8000',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = ['https://codecoach-frontend-2102ce726626.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = [
+    # frontend
+    'https://codecoach-frontend-2102ce726626.herokuapp.com',
+    'http://localhost:3000',
+    # backend
+    'https://codecoach-a2f14f649917.herokuapp.com',
+    'http://localhost:8000',
+]
 
-CORS_ORIGIN_WHITELIST = ['https://codecoach-frontend-2102ce726626.herokuapp.com']
+CORS_ORIGIN_WHITELIST = [
+    # frontend
+    'https://codecoach-frontend-2102ce726626.herokuapp.com',
+    'http://localhost:3000',
+    # backend
+    'https://codecoach-a2f14f649917.herokuapp.com',
+    'http://localhost:8000',
+]
 
 
 # Application definition
