@@ -10,9 +10,9 @@ class UserManager(BaseUserManager):
     """
     def create_user(
         self,
-        email,
         first_name=None,
         last_name=None,
+        email=None,
         password=None,
     ):
         if not first_name:
