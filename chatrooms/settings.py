@@ -62,9 +62,11 @@ ALLOWED_HOSTS = [
     # frontend
     'codecoach-frontend-2102ce726626.herokuapp.com',
     'localhost:3000',
+    '127.0.0.1:3000',
     # backend
     'codecoach-a2f14f649917.herokuapp.com',
     'localhost:8000',
+    '127.0.0.1:8000',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -80,10 +82,8 @@ CSRF_TRUSTED_ORIGINS = [
 CORS_ORIGIN_WHITELIST = [
     # frontend
     'https://codecoach-frontend-2102ce726626.herokuapp.com',
-    'http://localhost:3000',
     # backend
     'https://codecoach-a2f14f649917.herokuapp.com',
-    'http://localhost:8000',
 ]
 
 
