@@ -15,22 +15,12 @@ class UserManager(BaseUserManager):
         email=None,
         password=None,
     ):
-        if not first_name:
-            raise ValueError("Users must have a first name")
-        if not last_name:
-            raise ValueError("Users must have a last name")
-        if not email:
-            raise ValueError("Users must have an email address")
-        if not password:
-            raise ValueError("Users must have a password")
-
         user = self.model(
             first_name=first_name,
             last_name=last_name,
             email=self.normalize_email(email),
             password=password,
         )
-
         user.set_password(password)
         user.save(using=self._db)
         user.is_staff = False
