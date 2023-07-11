@@ -8,8 +8,7 @@ User = get_user_model()
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'password')
-    # Validation on model level
+        fields = '__all__'
 
     def validate(self, data):
         user = User(**data)
