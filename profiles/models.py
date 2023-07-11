@@ -11,7 +11,7 @@ class UserManager(BaseUserManager):
     def create_user(
         self,
         email,
-        first_name=None,         
+        first_name=None,
         last_name=None,
         password=None,
     ):
@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
             raise ValueError("Users must have an email address")
         if not password:
             raise ValueError("Users must have a password")
- 
+
         user = self.model(
             first_name=first_name,
             last_name=last_name,
@@ -93,4 +93,3 @@ class UserAccount(AbstractUser):
                 (self.birth_date.month, self.birth_date.day)
             )
         )
-
