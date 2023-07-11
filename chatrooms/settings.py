@@ -145,6 +145,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'chatrooms.wsgi.application'
 # ASGI_APPLICATION = 'chatrooms.asgi.application'
 
