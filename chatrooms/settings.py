@@ -147,7 +147,14 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = 'chatrooms.wsgi.application'
-# ASGI_APPLICATION = 'chatrooms.asgi.application'
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+# set username field to email
+AUTH_USER_MODEL_USERNAME_FIELD = "email"
+
 
 # CHANNEL_LAYERS = {
 #         'default': {
