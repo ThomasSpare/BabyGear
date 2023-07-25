@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
+from datetime import timedelta
 from pathlib import Path
 import os
 
@@ -27,21 +29,12 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-REST_FRAMEWORK = {
+""" REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [(
         'rest_framework.authentication.SessionAuthentication'
         if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
-    )],
-    'DEFAULT_PAGINATION_CLASS':
-        'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
-    'DATETIME_FORMAT': '%d %b %Y',
-}
-if 'DEV' not in os.environ:
-    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
-        'rest_framework.renderers.JSONRenderer',
-    ]
+
 
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
@@ -61,16 +54,49 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+
+DEBUG = True
 #DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = ['*', 'https://codecoach-a2f14f649917.herokuapp.com/']
 
 CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-3sm1tivpx4e.ws-eu100.gitpod.io', 'https://codecoach-a2f14f649917.herokuapp.com/']
 
+DEBUG = 'DEV' in os.environ
+
+ALLOWED_HOSTS = [
+    'localhost',
+    # frontend
+    'codecoach-frontend-2102ce726626.herokuapp.com',
+    'localhost:3000',
+    '127.0.0.1:3000',
+    # backend
+    'codecoach-a2f14f649917.herokuapp.com',
+    'localhost:8000',
+    '127.0.0.1:8000',
+]
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    # frontend
+    'https://codecoach-frontend-2102ce726626.herokuapp.com',
+    'http://localhost:3000',
+    # backend
+    'https://codecoach-a2f14f649917.herokuapp.com',
+    'http://localhost:8000',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    # frontend
+    'https://codecoach-frontend-2102ce726626.herokuapp.com',
+    # backend
+    'https://codecoach-a2f14f649917.herokuapp.com',
+]
+
 # Application definition
 
 INSTALLED_APPS = [
+    # 'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,17 +106,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'rest_framework',
+    "corsheaders",
     'rest_framework.authtoken',
     'dj_rest_auth',
     'django.contrib.sites',
+    # "channels",
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'corsheaders',
-    'daphne',
-    'redis',
-    'channels',
+    # 'daphne',
+    # 'redis',
+    # 'channels',
     'chatapp',
     'profiles',
 ]
@@ -106,6 +134,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
@@ -116,6 +145,7 @@ else:
         r"^https://.*\.gitpod\.io$",
     ]
 CORS_ALLOW_CREDENTIALS = True
+
 
 ROOT_URLCONF = 'chatrooms.urls'
 
@@ -135,28 +165,55 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'chatrooms.wsgi.application'
+REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "authentication.exceptions.status_code_handler",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+}
 
-ASGI_APPLICATION = "chatrooms.asgi.application"
 
-CHANNEL_LAYERS = {
-        'default': {
-            'BACKEND': 'channels_redis.core.RedisChannelLayer',
-            'CONFIG': {
-                "hosts": [('127.0.0.1', 6379)],
-            },
-        },
-    }
+WSGI_APPLICATION = 'chatrooms.wsgi.application'
 
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+# set username field to email
+AUTH_USER_MODEL_USERNAME_FIELD = "email"
+
+
+# CHANNEL_LAYERS = {
+#         'default': {
+#             'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#             'CONFIG': {
+#                 "hosts": [('127.0.0.1', 6379)],
+#             },
+#         },
+#    }
 
 DATABASES = {
-    'default': ({
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    } if 'DEV' in os.environ else dj_database_url.parse(
-        os.environ.get('DATABASE_URL')
-    ))
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#             "capacity": 8000,
+#             "channel_capacity": {
+#                 "http.request": 8000,
+#                 "http.response": 8000,
+#                 "http.websocket": 8000,
+#                 "websocket.receive": 8000,
+#                 "websocket.send": 8000,
+#                 "websocket.disconnect": 8000,
+#                 "websocket.connect": 8000,
+#                 },
+#             },
+#         },
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -194,9 +251,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFTETIME': timedelta(minutes=30),
+}
+
+AUTH_USER_MODEL = "profiles.UserAccount"
