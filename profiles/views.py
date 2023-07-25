@@ -12,12 +12,13 @@ class RegisterView(APIView):
         serializer = UserCreateSerializer(data=data)
 
         if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.
+                            HTTP_400_BAD_REQUEST)
 
         user = serializer.create(serializer.validated_data)
         user = UserSerializer(user)
 
-        return response(user.data, status=HTTP_201_CREATED)
+        return Response(user.data, status=status.HTTP_201_CREATED)
 
 
 class RetrieveUserView(APIView):

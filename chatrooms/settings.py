@@ -29,18 +29,19 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-""" REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [(
-        'rest_framework.authentication.SessionAuthentication'
-        if 'DEV' in os.environ
-        else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [(
+#         'rest_framework.authentication.SessionAuthentication'
+#         if 'DEV' in os.environ
+#         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+#     )]
+# }
 
-
-REST_USE_JWT = True
-JWT_AUTH_SECURE = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
-JWT_AUTH_SAMESITE = 'None'
+# REST_USE_JWT = True
+# JWT_AUTH_SECURE = True
+# JWT_AUTH_COOKIE = 'my-app-auth'
+# JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+# JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'chatrooms.serializers.CurrentUserSerializer'
@@ -58,39 +59,43 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 #DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['*', 'https://codecoach-a2f14f649917.herokuapp.com/']
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-3sm1tivpx4e.ws-eu100.gitpod.io', 'https://codecoach-a2f14f649917.herokuapp.com/']
-
-DEBUG = 'DEV' in os.environ
+# DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
     'localhost',
+    '3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu102.gitpod.io',
     # frontend
     'codecoach-frontend-2102ce726626.herokuapp.com',
     'localhost:3000',
     '127.0.0.1:3000',
     # backend
     'codecoach-a2f14f649917.herokuapp.com',
+    '8000-thomasspare-codecoach-spvitnctgqr.ws-eu102.gitpod.io',
     'localhost:8000',
     '127.0.0.1:8000',
 ]
+
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
     # frontend
     'https://codecoach-frontend-2102ce726626.herokuapp.com',
+    'https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu102.gitpod.io',
     'http://localhost:3000',
     # backend
     'https://codecoach-a2f14f649917.herokuapp.com',
+    'https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu102.gitpod.io',
     'http://localhost:8000',
 ]
 
 CORS_ORIGIN_WHITELIST = [
     # frontend
+    'https://3000-thomasspare-codecoachfr-xylbmbx08l5.ws-eu102.gitpod.io',
     'https://codecoach-frontend-2102ce726626.herokuapp.com',
     # backend
     'https://codecoach-a2f14f649917.herokuapp.com',
+    'https://8000-thomasspare-codecoach-spvitnctgqr.ws-eu102.gitpod.io',
 ]
 
 # Application definition
@@ -115,10 +120,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
-    'corsheaders',
-    # 'daphne',
     # 'redis',
-    # 'channels',
     'chatapp',
     'profiles',
 ]
@@ -134,8 +136,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
+
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.environ.get('CLIENT_ORIGIN')
@@ -144,6 +146,11 @@ else:
     CORS_ALLOWED_ORIGIN_REGEXES = [
         r"^https://.*\.gitpod\.io$",
     ]
+
+CORS_ALLOW_METHODS: ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
+CORS_ALLOW_HEADERS = ["accept", "accept-encoding", "authorization", "content-type", "dnt", "origin", "user-agent", "x-csrftoken", "x-requested-with", ]
+
+
 CORS_ALLOW_CREDENTIALS = True
 
 
@@ -172,8 +179,15 @@ REST_FRAMEWORK = {
     ],
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
 
 WSGI_APPLICATION = 'chatrooms.wsgi.application'
+ASGI_APPLICATION = 'backend.asgi.application'
+
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
@@ -220,16 +234,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'NumericPasswordValidator',
     },
 ]
 
