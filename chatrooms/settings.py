@@ -34,8 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
         'rest_framework.authentication.SessionAuthentication'
         if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
-    )]
-} """
+
 
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
@@ -55,6 +54,14 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
+DEBUG = True
+#DEBUG = 'DEV' in os.environ
+
+ALLOWED_HOSTS = ['*', 'https://codecoach-a2f14f649917.herokuapp.com/']
+
+CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-3sm1tivpx4e.ws-eu100.gitpod.io', 'https://codecoach-a2f14f649917.herokuapp.com/']
+
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
@@ -86,7 +93,6 @@ CORS_ORIGIN_WHITELIST = [
     'https://codecoach-a2f14f649917.herokuapp.com',
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -109,6 +115,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'corsheaders',
+    # 'daphne',
+    # 'redis',
+    # 'channels',
     'chatapp',
     'profiles',
 ]
@@ -116,6 +126,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -125,6 +136,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+else:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^https://.*\.gitpod\.io$",
+    ]
+CORS_ALLOW_CREDENTIALS = True
 
 
 ROOT_URLCONF = 'chatrooms.urls'
@@ -222,6 +242,8 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+USE_L10N = True  # added this one one from moments settings
 
 USE_TZ = True
 

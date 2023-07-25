@@ -13,6 +13,7 @@ dj-rest-auth==2.1.9
 Django==4.2.2
 django-allauth==0.54.0
 django-cloudinary-storage==0.3.0
+django-cors-headers==4.1.0
 django-cors-headers==3.13.0
 django-filter==2.4.0
 djangorestframework==3.14.0
