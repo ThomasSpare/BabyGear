@@ -8,7 +8,7 @@ User = get_user_model()
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('first_name', 'last_name', 'email', 'password')
 
     def validate(self, data):
         user = User(**data)
@@ -21,10 +21,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
             raise exceptions.ValidationError(
                 {'password': serializer_errors['non_field_errors']}
             )
-            return data
+        return data
 
     def create(self, validated_data):
-        User = User.objects.create_user(
+        user = User.objects.create_user(
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             email=validated_data['email'],
