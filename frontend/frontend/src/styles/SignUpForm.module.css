@@ -1,0 +1,52 @@
+.Row {
+    height: calc(100vh - 81px);
+    width: 25vw;
+    margin-left: 35%;
+  }
+  .Input {
+    background: #d3d3d3;  
+    border: 1px solid #008f6b;
+    box-sizing: border-box;
+    border-radius: 2px;
+    color: #c2c4ce;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  #root > div > div.SignInUpForm_Row__apzgi.row > div.my-auto.py-2.p-md-2.col-md-6 > div.App_Content__9goiP.p-4.container > form > div:nth-child(1){
+    margin-right: 10px;
+  }
+  
+  .Header {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ececec;
+  }
+  
+  .Link {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+  
+  .Link span {
+    color: #ff9254;
+  }
+  
+  .Container {
+    padding: 30px 10px;
+  }
+  
+  .SignInCol {
+    height: 320px;
+  }
+  
+  .SignUpCol {
+    height: 375px;
+  }

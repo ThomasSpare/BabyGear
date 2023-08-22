@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from datetime import timedelta
 from pathlib import Path
-import os
 
 import dj_database_url
 
@@ -29,13 +29,13 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-""" REST_FRAMEWORK = {
+REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [(
         'rest_framework.authentication.SessionAuthentication'
         if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )]
-} """
+}
 
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
@@ -60,11 +60,13 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [
     'localhost',
     # frontend
+    '3000-thomasspare-codecoachfr-4nehgwypy59.ws-eu104.gitpod.io',
     'codecoach-frontend-2102ce726626.herokuapp.com',
     'localhost:3000',
     '127.0.0.1:3000',
     # backend
     'codecoach-a2f14f649917.herokuapp.com',
+    '8000-thomasspare-codecoach-0b302pv0w2m.ws-eu104.gitpod.io',
     'localhost:8000',
     '127.0.0.1:8000',
 ]
@@ -72,18 +74,21 @@ CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
     # frontend
-    'https://codecoach-frontend-2102ce726626.herokuapp.com',
+    'https://3000-thomasspare-codecoachfr-4nehgwypy59.ws-eu104.gitpod.io',
     'http://localhost:3000',
     # backend
     'https://codecoach-a2f14f649917.herokuapp.com',
+    'https://8000-thomasspare-codecoach-0b302pv0w2m.ws-eu104.gitpod.io',
     'http://localhost:8000',
 ]
 
 CORS_ORIGIN_WHITELIST = [
     # frontend
     'https://codecoach-frontend-2102ce726626.herokuapp.com',
+    'https://3000-thomasspare-codecoachfr-4nehgwypy59.ws-eu104.gitpod.io',
     # backend
     'https://codecoach-a2f14f649917.herokuapp.com',
+    'https://8000-thomasspare-codecoach-0b302pv0w2m.ws-eu104.gitpod.io',
 ]
 
 
@@ -104,6 +109,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'dj_rest_auth',
     'django.contrib.sites',
+    "authentication",
     # "channels",
     'allauth',
     'allauth.account',
@@ -145,14 +151,6 @@ TEMPLATES = [
     },
 ]
 
-REST_FRAMEWORK = {
-    "EXCEPTION_HANDLER": "authentication.exceptions.status_code_handler",
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
-    ],
-}
-
-
 WSGI_APPLICATION = 'chatrooms.wsgi.application'
 
 AUTHENTICATION_BACKENDS = [
@@ -172,9 +170,7 @@ AUTH_USER_MODEL_USERNAME_FIELD = "email"
 #         },
 #    }
 
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-}
+DATABASES = {'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
 # CHANNEL_LAYERS = {
 #     "default": {

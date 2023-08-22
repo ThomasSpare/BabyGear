@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 
@@ -27,19 +28,15 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, first_name, last_name, email, birth_date, country, learning, password=None):
+    def create_superuser(self, first_name, last_name, email, password=None):
         """
         Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
             first_name=first_name,
             last_name=last_name,
-            birth_date=birth_date,
             email=email,
             password=password,
-            country=country,
-            learning=learning,
-
         )
 
         user.is_staff = True
@@ -66,7 +63,7 @@ class UserAccount(AbstractUser):
     tutor_sessions = models.CharField(max_length=100, null=True, blank=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["birth_date", "first_name", "last_name", "country", "learning"]
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
     objects = UserManager()
 
