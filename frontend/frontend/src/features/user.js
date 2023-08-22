@@ -12,7 +12,7 @@ export const register = createAsyncThunk(
 		} = data;
 		console.log("register done");
 		try {
-			const response = await axios.post('/profiles/register', {
+			const response = await axios.post('/profiles/register/', {
 				first_name,
 				last_name,
 				email,
@@ -49,7 +49,7 @@ export const getUser = createAsyncThunk('', async (_, thunkAPI) => {
 export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
 		const { email, password } = data;
 	try {
-		const response = await axios.post("login", { email, password });
+		const response = await axios.post("login/", { email, password });
 		const { dispatch } = thunkAPI;
 		dispatch(getUser());
 		return response.data;
@@ -63,7 +63,7 @@ export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 	try {
-	  const response = await axios.post("logout", { withCredentials: true });
+	  const response = await axios.post("logout/", { withCredentials: true });
 	  return response.data;
 	} catch (error) {
 	  return thunkAPI.rejectWithValue(error.response.data.error);
@@ -84,7 +84,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 	"auth/checkAuth",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.get("verify-token", {
+		const response = await axios.get("verify-token/", {
 			withCredentials: true,
 		});
 		const { dispatch } = thunkAPI;
@@ -102,7 +102,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 	"auth/refreshToken",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.post("refresh", { withCredentials: true });
+		const response = await axios.post("refresh/", { withCredentials: true });
 		const { dispatch } = thunkAPI;
 		dispatch(checkAuth());
 		return response.data;

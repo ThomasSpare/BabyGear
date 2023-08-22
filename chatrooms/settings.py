@@ -55,42 +55,16 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV' in os.environ
+DEBUG = 'DEBUG' in os.environ
 
 ALLOWED_HOSTS = [
+    os.environ.get('ALLOWED_HOST'),
     'localhost',
-    # frontend
-    '3000-thomasspare-codecoachfr-4nehgwypy59.ws-eu104.gitpod.io',
-    'codecoach-frontend-2102ce726626.herokuapp.com',
-    'localhost:3000',
-    '127.0.0.1:3000',
-    # backend
-    'codecoach-a2f14f649917.herokuapp.com',
-    '8000-thomasspare-codecoach-0b302pv0w2m.ws-eu104.gitpod.io',
-    'localhost:8000',
-    '127.0.0.1:8000',
-]
-CORS_ALLOW_CREDENTIALS = True
-
-CSRF_TRUSTED_ORIGINS = [
-    # frontend
-    'https://3000-thomasspare-codecoachfr-4nehgwypy59.ws-eu104.gitpod.io',
-    'http://localhost:3000',
-    # backend
-    'https://codecoach-a2f14f649917.herokuapp.com',
-    'https://8000-thomasspare-codecoach-0b302pv0w2m.ws-eu104.gitpod.io',
-    'http://localhost:8000',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    # frontend
-    'https://codecoach-frontend-2102ce726626.herokuapp.com',
-    'https://3000-thomasspare-codecoachfr-4nehgwypy59.ws-eu104.gitpod.io',
-    # backend
-    'https://codecoach-a2f14f649917.herokuapp.com',
-    'https://8000-thomasspare-codecoach-0b302pv0w2m.ws-eu104.gitpod.io',
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get('CLIENT_ORIGIN')
 ]
-
 
 # Application definition
 
@@ -152,6 +126,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chatrooms.wsgi.application'
+ASGI_APPLICATION = 'chatrooms.asgi.application'
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
@@ -226,6 +201,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+BASE_URL = os.environ.get("BASE_URL")
 
 
 # Default primary key field type

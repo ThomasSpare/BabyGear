@@ -8,20 +8,20 @@ from django.contrib.auth.models import User
 
 
 class RegisterView(APIView):
-    permission_classes = (permissions.IsAuthenticated)
+    authentication_classes = [JWTAuthentication]
 
     def post(self, request):
         data = request.data
         serializer = UserCreateSerializer(data=data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            user = serializer.create(serializer.validated_data)
-            user = UserSerializer(user)
+        user = serializer.create(serializer.validated_data)
+        user = UserSerializer(user)
         return Response(user.data, status=status.HTTP_201_CREATED)
 
 
 class RetrieveUserView(APIView):
-    permission_classes = (permissions.IsAuthenticated)
+    authentication_classes = [JWTAuthentication]
 
     def get(self, request):
         user = request.user
