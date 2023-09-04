@@ -1,11 +1,11 @@
-import { Emoji, EmojiStyle } from 'emoji-picker-react';
+// import { Emoji, EmojiStyle } from 'emoji-picker-react';
 
-const EmojiPicker = () => {
-    return(
-      <div>
-        <Picker onEmojiSelected={this.logEmoji.bind(this)} />
-      </div>
+// const EmojiPicker = () => {
+//     return(
+//       <div>
+//         <Picker onEmojiSelected={this.logEmoji.bind(this)} />
+//       </div>
     
-    )
-}
-export default EmojiPicker;
+//     )
+// }
+// export default EmojiPicker;

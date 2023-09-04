@@ -3,12 +3,13 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 from django.contrib.auth import get_user_model
 from authentication.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 from .serializers import UserCreateSerializer, UserSerializer
 from django.contrib.auth.models import User
 
 
 class RegisterView(APIView):
-    authentication_classes = [JWTAuthentication]
+    authentication_classes = [IsAuthenticated]
 
     def post(self, request):
         data = request.data
@@ -21,7 +22,7 @@ class RegisterView(APIView):
 
 
 class RetrieveUserView(APIView):
-    authentication_classes = [JWTAuthentication]
+    authentication_classes = [IsAuthenticated]
 
     def get(self, request):
         user = request.user
