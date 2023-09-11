@@ -29,13 +29,13 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [(
-        'rest_framework.authentication.SessionAuthentication'
-        if 'DEV' in os.environ
-        else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
-    )]
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [(
+#         'rest_framework.authentication.SessionAuthentication'
+#         if 'DEV' in os.environ
+#         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+#     )]
+# }
 
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
@@ -79,6 +79,8 @@ CORS_ALLOW_HEADERS = (
        'authorization',
        'x-csrftoken'
    )
+
+CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-uoh4mucx6xw.ws-eu104.gitpod.io']
 
 # Application definition
 
