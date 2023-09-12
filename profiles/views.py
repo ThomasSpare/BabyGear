@@ -6,9 +6,11 @@ from rest_framework import permissions, status
 from django.contrib.auth import get_user_model
 from authentication.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import UserCreateSerializer, UserSerializer, ProfileSerializer
-from django.contrib.auth.models import User
+from .serializers import UserCreateSerializer, ProfileSerializer
+from authentication.serializers import UserSerializer
 from .models import UserAccount
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 
 class RegisterView(APIView):

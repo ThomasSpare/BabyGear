@@ -3,6 +3,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.conf import settings
 
 
 class UserManager(BaseUserManager):
@@ -53,6 +54,7 @@ class UserAccount(AbstractUser):
         null=True,
         blank=True,
     )
+    owner = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     email = models.EmailField(null=True, unique=True)
     username = None
     birth_date = models.DateField(unique=True, null=True)

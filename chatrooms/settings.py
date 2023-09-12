@@ -145,8 +145,8 @@ WSGI_APPLICATION = 'chatrooms.wsgi.application'
 ASGI_APPLICATION = 'chatrooms.asgi.application'
 
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-]
+          'profiles.backends.CustomBackend'
+      ]
 
 # set username field to email
 AUTH_USER_MODEL_USERNAME_FIELD = "email"

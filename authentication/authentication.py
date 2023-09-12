@@ -3,8 +3,9 @@ import datetime
 from rest_framework import status, exceptions
 from rest_framework.response import Response
 from rest_framework.authentication import BaseAuthentication
-from profiles.models import UserManager, UserManager
-from django.contrib.auth.models import User
+from profiles.models import UserManager, UserAccount
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 
 class JWTAuthentication(BaseAuthentication):
@@ -98,4 +99,3 @@ def decode_refresh_token(token):
         return payload["user_id"]
     except:
         return None
-

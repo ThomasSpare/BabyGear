@@ -5,7 +5,7 @@ import axios from "axios";
 
 // axios.defaults.baseURL = baseUrl + "/api";
 
-const baseUrl = window.location.origin;
+const baseUrl = "https://8000-thomasspare-codecoach-uoh4mucx6xw.ws-eu104.gitpod.io";
 
 axios.defaults.baseURL = baseUrl + "/api";
 

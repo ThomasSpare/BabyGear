@@ -1,13 +1,14 @@
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from rest_framework import serializers
-from django.contrib.auth.models import User
 from .models import UserAccount
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    # is_owner = serializers.SerializerMethodField()
+    is_owner = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -16,7 +17,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAccount
         fields = [
-            'owner', 'email', 'username', 'birth_date', 'first_name', 'last_name',
+            'owner', 'is_owner', 'email', 'username', 'birth_date', 'first_name', 'last_name',
             'country', 'learning', 'tutor_sessions'
         ]
 
@@ -49,9 +50,3 @@ class UserCreateSerializer(serializers.ModelSerializer):
             password=validated_data['password'],
         )
         return User
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'email',)
