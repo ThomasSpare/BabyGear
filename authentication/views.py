@@ -20,6 +20,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from profiles.models import User
+from django.http import JsonResponse
 
 base_url = settings.BASE_URL
 
@@ -28,25 +29,11 @@ base_url = settings.BASE_URL
 class RegisterAPIView(APIView):
     def post(self, request):
         data = request.data
-
-        if data["password"] != data["password_confirm"]:
-            return Response(
-                {"error": "Passwords do not match"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
         serializer = UserSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        subject = "Welcome to Code Coach"
-        name = f'{data["first_name"]} {data["last_name"]}'
-        html_message = render_to_string(
-            "authentication/registration_email.html", {"name": name}
-        )
-        plain_message = strip_tags(html_message)
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class LoginAPIView(APIView):

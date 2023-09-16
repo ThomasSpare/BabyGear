@@ -7,12 +7,13 @@ class UserSerializer(ModelSerializer):
     """User Serializer"""
     class Meta:
         model = User
-        fields = ['owner', 'is_owner', 'email', 'username', 'birth_date', 'first_name', 'last_name',
-                  'country', 'learning', 'tutor_sessions']
+        fields = ['email',
+                  'username',
+                  'first_name',
+                  'last_name',
+                  'password']
         extra_kwargs = {
             "password": {"write_only": True},
-            "avatar": {"required": False},
-            "tutor_sessions": {"required": False},
         }
 
     def create(self, validated_data):

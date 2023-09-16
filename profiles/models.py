@@ -55,14 +55,14 @@ class UserAccount(AbstractUser):
         blank=True,
     )
     owner = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
-    email = models.EmailField(null=True, unique=True)
+    email = models.EmailField(max_length=254, unique=True)
     username = None
     birth_date = models.DateField(unique=True, null=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    country = models.CharField(max_length=100, null=True)
-    learning = models.CharField(max_length=100, null=True)
-    tutor_sessions = models.CharField(max_length=100, null=True, blank=True)
+    country = models.CharField(max_length=100)
+    learning = models.CharField(max_length=50, null=True)
+    tutor_sessions = models.CharField(max_length=50, null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]
