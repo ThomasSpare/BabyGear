@@ -69,7 +69,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <div className="dropdown">
-          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+          <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
             Learn with us
           </button>
           <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">

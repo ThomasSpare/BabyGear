@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
-import baseURL from '../api/axiosDefault'
 
 
 export const register = createAsyncThunk(
@@ -14,12 +13,12 @@ export const register = createAsyncThunk(
 		} = data;
 		console.log("register done");
 		try {
-			const response = await axios.post('/profiles/register/', {
+			const response = await axios.post('profiles/register/', {
 				first_name,
 				last_name,
 				email,
 				password,
-			},);
+			});
 			
 			return response.data;
 		}	catch (error) {
@@ -51,7 +50,7 @@ export const getUser = createAsyncThunk('', async (_, thunkAPI) => {
 export const login = createAsyncThunk('auth/profiles/login', async (data, thunkAPI) => {
 		const { email, password } = data;
 	try {
-		const response = await axios.post(`${baseURL}/api/profiles/login/`, { email, password });
+		const response = await axios.post('/profiles/login/', { email, password });
 		const { dispatch } = thunkAPI;
 		dispatch(getUser());
 		return response.data;
@@ -180,7 +179,7 @@ const userSlice = createSlice({
 	},
 });
 
-export const { resetRegistered, resetRedirect, resetError, resetMessage, setError, setMessage, setUser } = 
+export const { resetRegistered, isAuthenticated, resetRedirect, resetError, resetMessage, setError, setMessage, setUser } = 
 userSlice.actions;
 
 export default userSlice.reducer;

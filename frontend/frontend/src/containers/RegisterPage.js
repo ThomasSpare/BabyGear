@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import Layout from '../components/Layout';
 import { Navigate } from 'react-router-dom';
@@ -6,11 +6,10 @@ import { register } from "../features/user";
 
 
 
-
 const RegisterPage = () => {
-	const dispatch = useDispatch();	
-	const { registered, loading } = useSelector(state => state.user);
-
+	const dispatch = useDispatch();
+	const registered = useSelector(state => state.user.registered);
+	const loading = useSelector(state => state.auth);
 	const [formData, setFormData] = useState({
 		first_name: '',
 		last_name: '',
@@ -24,17 +23,21 @@ const RegisterPage = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
+	const onSubmit = async (data) => {
+		setFormData(data);
+		const payloadUser = {
+			first_name: data.first_name,
+			last_name: data.last_name,
+			email: data.email,
+			password: data.password,
+		};
+		dispatch(register(payloadUser));
+		};
+	
+	if (registered) {
+    	return <Navigate to="/" />;
+  	};
 
-	const onSubmit = e => {
-		e.preventDefault();
-
-		dispatch(register({ first_name, last_name, email, password }));
-	};
-	
-	if (registered) 
-		return <Navigate to="/" />;
-	
-	
 	return (
 		<Layout title='Auth Site | Register' content='Register page'>
 			<h1>Register for an Account</h1>
@@ -93,8 +96,8 @@ const RegisterPage = () => {
 				</div>
 				{loading ? (
 					<div className="spinner-grow" role="status">
-					<span className="sr-only">Loading...</span>
-				  </div>
+						<span className="sr-only">Loading...</span>
+					</div>
 				) : (
 					<button className='btn btn-primary mt-4'>Register</button>
 				)}

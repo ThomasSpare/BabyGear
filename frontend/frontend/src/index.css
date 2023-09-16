@@ -40,8 +40,13 @@ body {
   background-color: rgb(2, 38, 53);
   font-family: 'Kanit', sans-serif;
   text-align: left;
+  padding: 9px;
+  border-radius: 6px;
 }
 
+#navbarNavDropdown > ul > div > ul{
+  background-color: #3699bd;
+}
 #row-learn{
   padding-top: 5%;
   padding-bottom: 20%;
