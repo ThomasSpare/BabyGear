@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root > div > nav > div > button{
+  margin-right: 112px;
+}
+
 /* Form */
 #root > div > div > main{
   margin-left: 0%;

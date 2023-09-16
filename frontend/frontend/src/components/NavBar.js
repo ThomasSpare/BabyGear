@@ -48,7 +48,7 @@ const NavBar = () => {
       <button className="navbar-toggler" 
       type="button" 
       data-bs-toggle="collapse" 
-      data-bs-target="/learnnavbarNavDropdown" 
+      data-bs-target="#navbarNavDropdown" 
       aria-controls="navbarNavDropdown" 
       aria-expanded="false" 
       aria-label="Toggle navigation">
@@ -68,13 +68,11 @@ const NavBar = () => {
             Coaches
             </NavLink>
           </li>
-        <li className="nav-item dropdown">
-          <button className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Learn
+          <div className="dropdown">
+          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+            Learn with us
           </button>
-          <ul className="collapse navbar-collapse">
-            <div className="dropdown">
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                 <a id="html" className="dropdown-item" href="/learn">HTML</a>
                 <a id="css" className="dropdown-item" href="/learn">CSS</a>
                 <a id="python" className="dropdown-item" href="/learn">Python</a>
@@ -84,10 +82,8 @@ const NavBar = () => {
                 <a className="dropdown-item" href="/learn">Django Restframework</a>
                 <a className="dropdown-item" href="/learn">Deplyoing</a>
                 <a className="dropdown-item" href="/learn">Testing</a>
-              </div>
-            </div>
-            </ul>
-          </li>
+          </ul>
+        </div>
         </ul>
       </div>
     </div>
