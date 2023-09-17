@@ -29,29 +29,12 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': [(
-#         'rest_framework.authentication.SessionAuthentication'
-#         if 'DEV' in os.environ
-#         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
-#     )]
-# }
-
-REST_USE_JWT = True
-JWT_AUTH_SECURE = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
-JWT_AUTH_SAMESITE = 'None'
-
-# REST_AUTH_SERIALIZERS = {
-#     'USER_DETAILS_SERIALIZER': 'chatrooms.serializers.CurrentUserSerializer'
-# }
 REST_FRAMEWORK = {
-       'DEFAULT_AUTHENTICATION_CLASSES': [
-           'rest_framework_simplejwt.authentication.JWTAuthentication',
-           'rest_framework.authentication.TokenAuthentication',
-       ],
-   }
+    "EXCEPTION_HANDLER": "authentication.exceptions.status_code_handler",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -100,6 +83,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'django.contrib.sites',
     "authentication",
+    "django_pdb",
     # "channels",
     'allauth',
     'allauth.account',
@@ -128,7 +112,7 @@ ROOT_URLCONF = 'chatrooms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        "DIRS": [os.path.join(BASE_DIR.parent, "frontend")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

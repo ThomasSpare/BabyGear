@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
-
+const backendURL = "https://8000-thomasspare-codecoach-uoh4mucx6xw.ws-eu104.gitpod.io"
 
 export const register = createAsyncThunk(
-		"auth/register",
+		"auth/register/",
 		async (data, thunkAPI) => {
 		const {
 			first_name,
@@ -13,12 +13,18 @@ export const register = createAsyncThunk(
 		} = data;
 		console.log("register done");
 		try {
-			const response = await axios.post('profiles/register/', {
+			const config = {
+				headers: {
+				  'Content-Type': 'application/json',
+				}}
+			const response = await axios.post(
+				`${backendURL}/api/profiles/register/`, {
 				first_name,
 				last_name,
 				email,
 				password,
-			});
+			}, config
+			);
 			
 			return response.data;
 		}	catch (error) {

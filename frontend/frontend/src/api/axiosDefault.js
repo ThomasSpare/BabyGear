@@ -1,11 +1,7 @@
 import axios from "axios";
 
-
-// const baseUrl =  'https://codecoach-a2f14f649917.herokuapp.com';
-
-// axios.defaults.baseURL = baseUrl + "/api";
-
-const baseUrl = window.location.origin;
+const baseUrl =
+  "https://8000-thomasspare-codecoach-uoh4mucx6xw.ws-eu104.gitpod.io";
 
 axios.defaults.baseURL = baseUrl + "/api";
 
@@ -39,8 +35,8 @@ axios.interceptors.response.use(
           return Promise.reject("error");
         });
     } else {
-        console.clear();
-        return Promise.reject("error");
+      console.clear();
+      return Promise.reject("error");
     }
   }
 );

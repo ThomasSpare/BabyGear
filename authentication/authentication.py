@@ -3,9 +3,8 @@ import datetime
 from rest_framework import status, exceptions
 from rest_framework.response import Response
 from rest_framework.authentication import BaseAuthentication
-from profiles.models import UserManager, UserAccount
 from django.conf import settings
-User = settings.AUTH_USER_MODEL
+from profiles.models import UserAccount as User
 
 
 class JWTAuthentication(BaseAuthentication):

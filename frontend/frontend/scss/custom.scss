@@ -1,0 +1,9 @@
+@import "../node_modules/bootstrap/scss/functions";
+
+#navbarNavDropdown > ul > div > ul{
+    background-color: $teal-500;
+}
+
+#root > div > nav > div{
+    background-color: $cyan-200;
+}

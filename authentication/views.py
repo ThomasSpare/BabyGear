@@ -14,26 +14,27 @@ from .authentication import (
     decode_refresh_token,
 )
 from .models import ForgotPasswordToken
-
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from profiles.models import User
-from django.http import JsonResponse
 
 base_url = settings.BASE_URL
 
 
-# Create your views here.
 class RegisterAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
+
     def post(self, request):
         data = request.data
         serializer = UserSerializer(data=data)
-        serializer.is_valid(raise_exception=True)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        user = serializer.create(serializer.validated_data)
+        user = UserSerializer(user)
         serializer.save()
-
-        return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(user.data, status=status.HTTP_201_CREATED)
 
 
 class LoginAPIView(APIView):
