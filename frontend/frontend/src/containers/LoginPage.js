@@ -8,8 +8,7 @@ import { login, resetRegistered } from "../features/user";
 const LoginPage = () => {
 	const dispatch = useDispatch();
 	
-	const { loading, isAuthenticated, registered } = useSelector(
-		state => state.user
+	const { loading, isAuthenticated, registered } = useSelector(state => state.user
 	);
 
 	const [formData, setFormData] = useState({

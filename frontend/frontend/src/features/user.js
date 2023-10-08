@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
-const backendURL = "https://8000-thomasspare-codecoach-uoh4mucx6xw.ws-eu104.gitpod.io"
 
 export const register = createAsyncThunk(
 		"auth/register/",
@@ -17,15 +16,13 @@ export const register = createAsyncThunk(
 				headers: {
 				  'Content-Type': 'application/json',
 				}}
-			const response = await axios.post(
-				`${backendURL}/api/profiles/register/`, {
+			const response = await axios.post('/profiles/register/', {
 				first_name,
 				last_name,
 				email,
 				password,
 			}, config
 			);
-			
 			return response.data;
 		}	catch (error) {
 			let errorsData = error.response.data;
@@ -53,7 +50,7 @@ export const getUser = createAsyncThunk('', async (_, thunkAPI) => {
 });
 		
 
-export const login = createAsyncThunk('auth/profiles/login', async (data, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
 		const { email, password } = data;
 	try {
 		const response = await axios.post('/profiles/login/', { email, password });
@@ -90,7 +87,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 	"auth/checkAuth",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.get("verify-token/", {
+		const response = await axios.get("/token/verify/", {
 			withCredentials: true,
 		});
 		const { dispatch } = thunkAPI;
@@ -108,7 +105,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 	"auth/refreshToken",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.post("refresh/", { withCredentials: true });
+		const response = await axios.post("/refresh/", { withCredentials: true });
 		const { dispatch } = thunkAPI;
 		dispatch(checkAuth());
 		return response.data;

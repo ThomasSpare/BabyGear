@@ -47,6 +47,7 @@ const RegisterPage = () => {
 						First Name
 					</label>
 					<input
+						id='first_name'
 						className='form-control'
 						type='text'
 						name='first_name'
@@ -60,6 +61,7 @@ const RegisterPage = () => {
 						Last Name
 					</label>
 					<input
+						id='last_name'
 						className='form-control'
 						type='text'
 						name='last_name'
@@ -73,6 +75,7 @@ const RegisterPage = () => {
 						Email
 					</label>
 					<input
+						id='email'
 						className='form-control'
 						type='email'
 						name='email'
@@ -86,6 +89,7 @@ const RegisterPage = () => {
 						Password
 					</label>
 					<input
+						id='password'
 						className='form-control'
 						type='password'
 						name='password'

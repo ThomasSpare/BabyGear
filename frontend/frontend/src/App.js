@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { checkAuth } from "./features/user";
 import HomePage from "./containers/HomePage";
 import CoachArea from "./containers/CoachArea";
 import RegisterPage from "./containers/RegisterPage";
@@ -13,6 +16,11 @@ import "./App.css";
 
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() =>{
+   dispatch(checkAuth()); 
+  }, []);
 
 
   return (

@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const baseUrl =
-  "https://8000-thomasspare-codecoach-uoh4mucx6xw.ws-eu104.gitpod.io";
+  "https://8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io";
 
-axios.defaults.baseURL = baseUrl + "/api";
+axios.defaults.baseURL = baseUrl + "/api/";
 
 axios.defaults.withCredentials = true;
 

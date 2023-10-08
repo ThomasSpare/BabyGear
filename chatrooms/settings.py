@@ -46,8 +46,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    os.environ.get('ALLOWED_HOST'),
-    'localhost',
+    os.environ.get('ALLOWED_HOSTS'),
+    '8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io',
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -63,7 +63,7 @@ CORS_ALLOW_HEADERS = (
        'x-csrftoken'
    )
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-uoh4mucx6xw.ws-eu104.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io']
 
 # Application definition
 
@@ -83,7 +83,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'django.contrib.sites',
     "authentication",
-    "django_pdb",
+    # "django_pdb",
     # "channels",
     'allauth',
     'allauth.account',
@@ -98,12 +98,13 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 
@@ -129,7 +130,7 @@ WSGI_APPLICATION = 'chatrooms.wsgi.application'
 ASGI_APPLICATION = 'chatrooms.asgi.application'
 
 AUTHENTICATION_BACKENDS = [
-          'profiles.backends.CustomBackend'
+          'django.contrib.auth.backends.ModelBackend'
       ]
 
 # set username field to email
