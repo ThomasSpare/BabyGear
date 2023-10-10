@@ -53,6 +53,8 @@ CORS_ALLOWED_ORIGINS = [
     os.environ.get('CLIENT_ORIGIN')
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOW_HEADERS = (
        'x-requested-with',
        'content-type',

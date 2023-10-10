@@ -53,10 +53,10 @@ export const getUser = createAsyncThunk('', async (_, thunkAPI) => {
 });
 		
 
-export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
+export const login = createAsyncThunk('profiles/login/', async (data, thunkAPI) => {
 		const { email, password } = data;
 	try {
-		const response = await axios.post('/profiles/login/', { email, password });
+		const response = await axios.post('/profiles/login', { email, password });
 		const { dispatch } = thunkAPI;
 		dispatch(getUser());
 		return response.data;
