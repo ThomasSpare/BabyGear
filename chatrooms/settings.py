@@ -30,10 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 REST_FRAMEWORK = {
-    "EXCEPTION_HANDLER": "authentication.exceptions.status_code_handler",
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
 }
 
 # Quick-start development settings - unsuitable for production
@@ -83,6 +82,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'django.contrib.sites',
     "authentication",
+    'rest_framework_simplejwt',
     # "django_pdb",
     # "channels",
     'allauth',

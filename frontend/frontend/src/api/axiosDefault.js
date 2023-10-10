@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const baseUrl =
-  "https://8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io";
+const baseUrl = "https://8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io";
 
 axios.defaults.baseURL = baseUrl + "/api/";
 

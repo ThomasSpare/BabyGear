@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, AbstractUser, PermissionsMixin
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.conf import settings
@@ -30,9 +29,6 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, first_name, last_name, email, password=None):
-        """
-        Creates and saves a superuser with the given email and password.
-        """
         user = self.create_user(
             first_name=first_name,
             last_name=last_name,
@@ -47,15 +43,15 @@ class UserManager(BaseUserManager):
         return user
 
 
-class UserAccount(AbstractUser):
+class UserAccount(AbstractBaseUser, PermissionsMixin):
     avatar = CloudinaryField(
-        "avatar",
+        "avatar", 
         folder="profile_pics",
         null=True,
         blank=True,
     )
     owner = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
-    email = models.EmailField(max_length=254, unique=True)
+    email = models.EmailField(unique=True, max_length=254)
     username = None
     birth_date = models.DateField(unique=True, null=True)
     first_name = models.CharField(max_length=50)

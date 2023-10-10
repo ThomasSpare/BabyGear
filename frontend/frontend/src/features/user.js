@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
 
 export const register = createAsyncThunk(
-		"auth/register/",
+		"profiles/register",
 		async (data, thunkAPI) => {
 		const {
 			first_name,
@@ -13,16 +13,19 @@ export const register = createAsyncThunk(
 		console.log("register done");
 		try {
 			const config = {
+				method: 'POST',
 				headers: {
 				  'Content-Type': 'application/json',
 				}}
-			const response = await axios.post('/profiles/register/', {
+			const response = await axios.post(
+				'/profiles/register', {
 				first_name,
 				last_name,
 				email,
 				password,
 			}, config
 			);
+			
 			return response.data;
 		}	catch (error) {
 			let errorsData = error.response.data;
@@ -84,28 +87,28 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 
 
   export const checkAuth = createAsyncThunk(
-	"auth/checkAuth",
+	"token/verify/",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.get("/token/verify/", {
+		const response = await axios.get("/token/verify", {
 			withCredentials: true,
 		});
 		const { dispatch } = thunkAPI;
 		dispatch(getUser());
-		console.clear();
+		// console.clear();
 		return response.data;
 	  } catch (error) {
-		console.clear();
+		// console.clear();
 		return thunkAPI.rejectWithValue(error.response.data.error);
 	  }
 	}
   );
 
   export const refreshToken = createAsyncThunk(
-	"auth/refreshToken",
+	"token/refresh",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.post("/refresh/", { withCredentials: true });
+		const response = await axios.post("/token/refresh", { withCredentials: true });
 		const { dispatch } = thunkAPI;
 		dispatch(checkAuth());
 		return response.data;
