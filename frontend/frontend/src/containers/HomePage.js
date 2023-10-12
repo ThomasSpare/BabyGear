@@ -1,21 +1,23 @@
 import Layout from '../components/Layout';
-import coach1 from '../assets/images/coach1.jpg';
-import coach2 from '../assets/images/coach2.jpg';
-import coach4 from '../assets/images/coach4.jpg';
+import baby1 from '../assets/images/baby_bear.jpg';
+import baby2 from '../assets/images/baby_feet.jpg';
+import baby3 from '../assets/images/baby_look.jpg';
+import baby4 from '../assets/images/baby_shoe.jpg';
 
 
 const HomePage = () => {
     return (
-        <Layout title= 'Code Coach | Home' content='homepage, code, javascript, python'>
-        <h1>Say Hi to our Code Coaches</h1>
-        <p>Welcome to Code Coach - a place to learn and level up your code skills</p>
+        <Layout title= 'Baby Gear' content='baby products, product comparison site, pregnant, newborn, smart gadgets'>
+        <h1>Welcome to Baby Gear</h1>
+        <p>Find the best products to ease your way into parenthood</p>
         
-        <img src={coach1} className="img-thumbnail" alt="codecoach 1"></img>
-        <img src={coach2} className="img-thumbnail" alt="codecoach 2"></img>
-        <img src={coach4} className="img-thumbnail" alt="codecoach 4"></img>
+        <img src={baby1} className="img-thumbnail" alt="baby with bear"></img>
+        <img src={baby2} className="img-thumbnail" alt="baby feet"></img>
+        <img src={baby3} className="img-thumbnail" alt="baby look"></img>
+        <img src={baby4} className="img-thumbnail" alt="baby shoe"></img>
     
-        <p>With just a couple of hours per week you can learn practically anything<br>
-        </br>With the support from one who is an expert it becomes even more rewarding</p><br>
+        <p><br>
+        </br>Votes on baby Products from real parents</p><br>
         </br>
         </Layout>
     );     

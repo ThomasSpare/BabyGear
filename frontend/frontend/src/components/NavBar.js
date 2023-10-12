@@ -62,28 +62,18 @@ const NavBar = () => {
             Home
             </NavLink>
           </li>
-          {isAuthenticated ? authLinks : guestLinks }
+          <li className="nav-item">
+            <NavLink className='nav-link' to='/Learn'> 
+            Babyproducts
+            </NavLink>
+          </li>
+          { isAuthenticated ? authLinks : guestLinks }
           <li className="nav-item">
             <NavLink className='nav-link' to='/profile'> 
             Coaches
             </NavLink>
           </li>
-          <div className="dropdown">
-          <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-            Learn with us
-          </button>
-          <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <a id="html" className="dropdown-item" href="/learn">HTML</a>
-                <a id="css" className="dropdown-item" href="/learn">CSS</a>
-                <a id="python" className="dropdown-item" href="/learn">Python</a>
-                <a id="javascript" className="dropdown-item" href="/learn">Javascript</a>
-                <a id="django" className="dropdown-item" href="/learn">Django</a>
-                <a className="dropdown-item" href="/learn">Databases</a>
-                <a className="dropdown-item" href="/learn">Django Restframework</a>
-                <a className="dropdown-item" href="/learn">Deplyoing</a>
-                <a className="dropdown-item" href="/learn">Testing</a>
-          </ul>
-        </div>
+
         </ul>
       </div>
     </div>
