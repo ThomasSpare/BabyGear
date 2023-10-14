@@ -10,6 +10,7 @@ import DashboardPage from "./containers/DashboardPage";
 import ProfilePage from "./containers/ProfilePage";
 import Learn from "./containers/Learn";
 import "./App.css";
+import Strollers from "./containers/Strollers";
 
 
 
@@ -34,6 +35,7 @@ const App = () => {
                   <Route path='/register' element={<RegisterPage />} />
                   <Route path='/profile' element={<ProfilePage />} />
                   <Route path='/learn' element={<Learn />} />
+                  <Route path='/strollers' element={<Strollers />} />
               </Routes>
         </Router> 
     </div>

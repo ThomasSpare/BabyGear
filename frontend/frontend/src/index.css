@@ -20,6 +20,50 @@ body {
 /* Products row */
 #first_row{
     display: flex;
+    margin-top: 20px;
+  }
+
+#first_row_strollers{
+  display: flex;
+  margin-top: 20px;
+}
+
+/* Strollers */
+.w-75 {
+  width: 650px!important;
+}
+
+.navbar-brand {
+  white-space: wrap;   
+}
+
+
+element.style {
+}
+.rounded {
+    border-radius: var(--bs-border-radius)!important;
+}
+.float-start {
+    float: left!important;
+}
+.img-thumbnail {
+    padding: 0.25rem;
+    background-color: var(--bs-body-bg);
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    max-width: 100%;
+    height: auto;
+}
+img, svg {
+    vertical-align: middle;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
 }
 
 /* Products row */
@@ -105,3 +149,4 @@ body{
   text-align: justify;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+

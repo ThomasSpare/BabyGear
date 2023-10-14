@@ -1,7 +1,9 @@
+import { Link, NavLink } from "react-router-dom";
 import Layout from '../components/Layout';
 import stroller1 from '../assets/images/strollers/stroller200.jpg';
 import seats1 from '../assets/images/seats/seats200.jpg';
 import bottles1 from '../assets/images/bottles/bottles200.jpg';
+import toys1 from '../assets/images/toys/toys200.jpg';
 
 
 const Learn = () => {
@@ -14,9 +16,11 @@ const Learn = () => {
         </div>
         </div>
         <div className="float-start flex" id="first_row">
-        <div>    
+        <div>  
+        <Link className='navbar-brand' to='/strollers'>  
         <img src={stroller1} className="rounded float-start img-thumbnail" alt="stroller"></img>
-        <center><h4 className="center">Strollers</h4></center>
+        <center><h4>Strollers</h4></center>
+        </Link>
         </div>
         <div> 
         <img src={seats1} className="rounded mx-auto d-block img-thumbnail" alt="Baby chairs"></img>
@@ -25,6 +29,12 @@ const Learn = () => {
         <div> 
         <img src={bottles1} className="rounded mx-auto d-block img-thumbnail" alt="Bottle"></img>
         <center><h4>Bottles</h4></center>
+        </div>
+        <div>
+        <Link className='navbar-brand' to='/'>
+        <img src={toys1} className="rounded mx-auto d-block img-thumbnail" alt="Sensory toys"></img>
+        <center><h4>Sensory toys</h4></center>
+        </Link>
         </div>
         </div>
         </div>
