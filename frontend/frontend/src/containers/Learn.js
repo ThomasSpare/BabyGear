@@ -12,7 +12,7 @@ const Learn = () => {
         <div className="container" id="learn">
         <div className="row" id="row-learn">
         <div className="col-md-6 offset-md-3">
-        <h1>Baby Products</h1>
+        <h1 className="darkbacktext">Baby Products</h1>
         </div>
         </div>
         <div className="float-start flex" id="first_row">

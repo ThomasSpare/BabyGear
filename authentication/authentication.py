@@ -28,25 +28,6 @@ class JWTAuthentication(BaseAuthentication):
 
         return (user, None)
 
-    def websocket_authenticate(scope):
-        """Authenticate websocket request"""
-        access_token = scope["cookies"].get("access_token")
-
-        if access_token is None:
-            raise exceptions.AuthenticationFailed("No access token")
-
-        id = decode_access_token(access_token)
-
-        if id is None:
-            raise exceptions.AuthenticationFailed("Invalid access token")
-
-        user = User.objects.get(id=id)
-
-        if user is None:
-            raise exceptions.AuthenticationFailed("User not found")
-
-        return user
-
 
 def create_access_token(user_id):
     """
@@ -85,7 +66,7 @@ def decode_access_token(token):
     try:
         payload = jwt.decode(token, "access_secret", algorithms=["HS256"])
         return payload["user_id"]
-    except:
+    except jwt.exceptions.DecodeError:
         return None
 
 
@@ -96,5 +77,5 @@ def decode_refresh_token(token):
     try:
         payload = jwt.decode(token, "refresh_secret", algorithms=["HS256"])
         return payload["user_id"]
-    except:
+    except jwt.exceptions.DecodeError:
         return None

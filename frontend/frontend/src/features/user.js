@@ -86,19 +86,16 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 
 
 
-  export const checkAuth = createAsyncThunk(
+export const checkAuth = createAsyncThunk(
 	"token/verify/",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.get("/token/verify", {
-			withCredentials: true,
-		});
+		const token = localStorage.getItem('token');
+		const response = await axios.post("/token/verify", { token }, { withCredentials: true });
 		const { dispatch } = thunkAPI;
 		dispatch(getUser());
-		// console.clear();
 		return response.data;
 	  } catch (error) {
-		// console.clear();
 		return thunkAPI.rejectWithValue(error.response.data.error);
 	  }
 	}

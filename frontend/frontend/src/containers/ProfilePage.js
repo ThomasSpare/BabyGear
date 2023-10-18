@@ -6,7 +6,7 @@ import coach4 from '../assets/images/coach4.jpg';
 
 const ProfilePage = () => {
     return (
-        <Layout title= 'Code Coach | Profile' content='learn to code, javascript, python'>
+        <Layout title= 'Baby Gear' content='baby products, product comparison site, pregnant, newborn, smart gadgets'>
         <h1>Our Coaches</h1>
         <img src={coach1} className="img-thumbnail" alt="codecoach 1"></img>
         <button className="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#coach1" aria-controls="offcanvasWithBothOptions">Peter March, Frontend</button>

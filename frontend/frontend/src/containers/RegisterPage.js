@@ -5,8 +5,22 @@ import { Navigate } from 'react-router-dom';
 import { register } from "../features/user";
 
 
-
 const RegisterPage = () => {
+	const onSubmit = async (data) => {
+		if (!data.first_name || !data.last_name || !data.email || !data.password) {
+		  console.error('All fields must be defined');
+		  return;
+		}
+	  
+		setFormData(data);
+		const payloadUser = {
+		  first_name: data.first_name,
+		  last_name: data.last_name,
+		  email: data.email,
+		  password: data.password,
+		};
+		dispatch(register(payloadUser));
+	  };
 	const dispatch = useDispatch();
 	const registered = useSelector(state => state.user.registered);
 	const loading = useSelector(state => state.auth);
@@ -22,17 +36,6 @@ const RegisterPage = () => {
 	const onChange = e => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
-
-	const onSubmit = async (data) => {
-		setFormData(data);
-		const payloadUser = {
-			first_name: data.first_name,
-			last_name: data.last_name,
-			email: data.email,
-			password: data.password,
-		};
-		dispatch(register(payloadUser));
-		};
 	
 	if (registered) {
     	return <Navigate to="/" />;

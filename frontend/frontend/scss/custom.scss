@@ -1,4 +1,5 @@
 @import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
 
 #navbarNavDropdown > ul > div > ul{
     background-color: $teal-500;
@@ -6,4 +7,7 @@
 
 #root > div > nav > div{
     background-color: $cyan-200;
+}
+#mainlogo{
+$border-width:  5px;
 }

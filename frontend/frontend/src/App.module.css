@@ -36,7 +36,7 @@
     font-family: 'JetBrains Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #dadada;
+    color: #272727;
     transition: color ease-in-out 0.3s;
   }
   
@@ -54,7 +54,7 @@
   }
   
   i {
-    color: #cfced3;
+    color: #120c29;
     font-size: 1.6rem;
     padding: 7px;
     vertical-align: middle;

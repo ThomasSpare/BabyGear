@@ -1,8 +1,8 @@
 
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
-import logo from "../assets/CodeCoachLogo_edited.jpg";
+import { NavLink } from "react-router-dom";
+import logo from "../assets/images/babygear_BRAND/BGMEDIUMlogo2.png";
 
 const NavBar = () => {
   const { isAuthenticated } = useSelector(state => state.user);
@@ -41,10 +41,7 @@ const NavBar = () => {
   return (  
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container-fluid">
-      <Link className='navbar-brand' to='/'>
-        Code Coach
-      </Link>
-      <img className="mr-3 rounded mx-auto d-block" src={logo} alt="Code Coach logo"></img>
+      <img className="mr-3 rounded-circle border border-black mx-auto d-block" id="mainlogo" width="200" height="200" src={logo} alt="Baby Gear logo"></img>
       <button className="navbar-toggler" 
       type="button" 
       data-bs-toggle="collapse" 

@@ -28,6 +28,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = 'django-insecure-1i7hkbxezm8bm=_&%2s=^sqss$vdy74kt6)ojj4gm+5di)vdn3'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -45,13 +46,19 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    os.environ.get('ALLOWED_HOSTS'),
+    'localhost',
     '8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    os.environ.get('CLIENT_ORIGIN')
-]
+# CORS_ALLOWED_ORIGINS = [
+#     os.environ.get('CLIENT_ORIGIN')
+# ]
+
+# CORS_ALLOWED_ORIGINS = [
+#     "https://8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -98,10 +105,9 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

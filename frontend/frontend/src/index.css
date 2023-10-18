@@ -7,6 +7,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Text, labels, links, paragraphs*/
+
+h1,
+h2,
+h3,
+h4,
+a{
+  color:rgb(61, 44, 77);
+  font-family: 'Lugrasimo', cursive;
+
+}
+
+label,
+p{
+  color:rgb(61, 44, 77);
+  font-family: 'EB Garamond', serif;
+  font-size: larger;
+}
+
+.darkbacktext{
+  color:rgb(203, 154, 248);
+}
+
+
 #root > div > nav > div > button{
   margin-right: 112px;
 }
@@ -26,6 +50,7 @@ body {
 #first_row_strollers{
   display: flex;
   margin-top: 20px;
+  justify-content: center;
 }
 
 /* Strollers */
@@ -37,9 +62,6 @@ body {
   white-space: wrap;   
 }
 
-
-element.style {
-}
 .rounded {
     border-radius: var(--bs-border-radius)!important;
 }
@@ -75,15 +97,6 @@ img {
   margin-top: 200%;
   margin-left: 10px;
   border-color: black;
-}
-
-/* Emoji Picker styling */
-#root > div > div > div:nth-child(3) > aside.EmojiPickerReact{
-  --epr-emoji-size: 18px;
-  --epr-bg-color:  rgba(37, 94, 72, 0.739);
-  --epr-category-label-bg-color:  rgba(28, 44, 38, 0.739);
-  --epr-text-color: white;
-  --epr-hover-bg-color: rgba(28, 44, 38, 0.739);
 }
 
 /*Learn text column on learn.js page*/
@@ -140,9 +153,10 @@ height: 18px;
 }
 
 body{
-  background: #00bf8f;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #001510, #00bf8f);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #001510, #00bf8f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #D3CCE3;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .offcanvas-body{
