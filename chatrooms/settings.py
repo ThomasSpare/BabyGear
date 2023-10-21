@@ -48,30 +48,34 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io',
+    '8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io',
 ]
 
 # CORS_ALLOWED_ORIGINS = [
 #     os.environ.get('CLIENT_ORIGIN')
 # ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "https://8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
-# ]
-
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    'https://8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io',
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_HEADERS = (
-       'x-requested-with',
-       'content-type',
-       'accept',
-       'origin',
-       'authorization',
-       'x-csrftoken'
-   )
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io',
+                        'https://8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io']
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8080",
+    'https://8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io',
+    'https://8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io',
+]
+
+REST_USE_JWT = True
+JWT_AUTH_SECURE = True
+JWT_AUTH_COOKIE = 'my-app-auth'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+JWT_AUTH_SAMESITE = 'None'
 
 # Application definition
 
@@ -105,9 +109,9 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

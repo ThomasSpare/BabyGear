@@ -67,7 +67,7 @@ const NavBar = () => {
           { isAuthenticated ? authLinks : guestLinks }
           <li className="nav-item">
             <NavLink className='nav-link' to='/profile'> 
-            Coaches
+            Our Mission
             </NavLink>
           </li>
 

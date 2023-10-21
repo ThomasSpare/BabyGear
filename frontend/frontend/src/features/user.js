@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
+// import { getCookie } from '../utils/utils.js';
 
 export const register = createAsyncThunk(
 		"profiles/register",
@@ -39,9 +40,9 @@ export const register = createAsyncThunk(
 	);
 
 
-export const getUser = createAsyncThunk('', async (_, thunkAPI) => {
+export const getUser = createAsyncThunk('profiles/user', async (_, thunkAPI) => {
 	try {
-		const response = await axios.get("user");
+		const response = await axios.get("/profiles/user");
 		const { dispatch } = thunkAPI;
 		dispatch(getSelection);
 		return response.data;
@@ -87,19 +88,18 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 
 
 export const checkAuth = createAsyncThunk(
-	"token/verify/",
-	async (_, thunkAPI) => {
-	  try {
-		const token = localStorage.getItem('token');
-		const response = await axios.post("/token/verify", { token }, { withCredentials: true });
-		const { dispatch } = thunkAPI;
-		dispatch(getUser());
-		return response.data;
-	  } catch (error) {
-		return thunkAPI.rejectWithValue(error.response.data.error);
-	  }
-	}
-  );
+    "token/verify",
+    async (_, thunkAPI) => {
+        try {
+            const response = await axios.post("/token/verify", {}, { withCredentials: true });
+            const { dispatch } = thunkAPI;
+            dispatch(getUser());
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data.error);
+        }
+    }
+);
 
   export const refreshToken = createAsyncThunk(
 	"token/refresh",

@@ -31,7 +31,7 @@ axios.interceptors.response.use(
         .catch((error) => {
           refreshing = false;
           console.clear();
-          return Promise.reject("error");
+          return axios(error.config); // retry the original request even if the refresh request fails
         });
     } else {
       console.clear();
@@ -39,5 +39,6 @@ axios.interceptors.response.use(
     }
   }
 );
+
 
 export default baseUrl;

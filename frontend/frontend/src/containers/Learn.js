@@ -4,6 +4,7 @@ import stroller1 from '../assets/images/strollers/stroller200.jpg';
 import seats1 from '../assets/images/seats/seats200.jpg';
 import bottles1 from '../assets/images/bottles/bottles200.jpg';
 import toys1 from '../assets/images/toys/toys200.jpg';
+import safety1 from '../assets/images/safety/safety200.jpg';
 
 
 const Learn = () => {
@@ -33,9 +34,13 @@ const Learn = () => {
         <div>
         <Link className='navbar-brand' to='/'>
         <img src={toys1} className="rounded mx-auto d-block img-thumbnail" alt="Sensory toys"></img>
-        <center><h4>Sensory toys</h4></center>
+        <center><h4>Sensory</h4></center>
         </Link>
         </div>
+        <Link className='navbar-brand' to='/'>
+        <img src={safety1} className="rounded mx-auto d-block img-thumbnail" alt="Sensory toys"></img>
+        <center><h4>Child Safety</h4></center>
+        </Link>
         </div>
         </div>
         </Layout>

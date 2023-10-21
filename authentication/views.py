@@ -73,3 +73,23 @@ class LoginAPIView(APIView):
         response.status_code = status.HTTP_200_OK
 
         return response
+
+class UserAPIView(APIView):
+
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request):
+        user = request.user
+        if user is None:
+            return Response(
+                {"error": "You are not logged in"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        serializer = UserSerializer(user)
+        data = serializer.data
+        if user.avatar:
+            data["avatar"] = user.avatar.url
+        return Response(data, status=status.HTTP_200_OK)
+
+
+

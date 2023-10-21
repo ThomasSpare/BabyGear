@@ -17,7 +17,7 @@ const HomePage = () => {
         <img src={baby4} className="img-thumbnail" alt="baby shoe"></img>
     
         <p><br>
-        </br>Votes on baby Products from real parents</p><br>
+        </br>Votes on Child Products from Real Parents</p><br>
         </br>
         </Layout>
     );     
