@@ -20,7 +20,6 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from profiles.models import User
-base_url = settings.BASE_URL
 user = settings.AUTH_USER_MODEL
 
 
@@ -137,9 +136,3 @@ class VerifyTokenAPIView(APIView):
 
     def get(self, request):
         return Response({"success": True})
-
-
-
-
-
-

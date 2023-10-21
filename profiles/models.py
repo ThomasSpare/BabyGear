@@ -36,16 +36,16 @@ class UserManager(BaseUserManager):
             password=password,
         )
 
-        user.is_staff = True
+        user.set_password(password)
         user.is_superuser = True
+        user.is_staff = True
         user.save(using=self._db)
-
         return user
 
 
-class UserAccount(AbstractBaseUser, PermissionsMixin):
+class UserAccount(AbstractUser, PermissionsMixin):
     avatar = CloudinaryField(
-        "avatar", 
+        "avatar",
         folder="profile_pics",
         null=True,
         blank=True,

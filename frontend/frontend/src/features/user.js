@@ -11,22 +11,14 @@ export const register = createAsyncThunk(
 			email,
 			password,	
 		} = data;
-		console.log("register done");
 		try {
-			const config = {
-				method: 'POST',
-				headers: {
-				  'Content-Type': 'application/json',
-				}}
 			const response = await axios.post(
-				'/profiles/register', {
+				'/profiles/register/', {
 				first_name,
 				last_name,
 				email,
 				password,
-			}, config
-			);
-			
+			});	
 			return response.data;
 		}	catch (error) {
 			let errorsData = error.response.data;
@@ -42,7 +34,7 @@ export const register = createAsyncThunk(
 
 export const getUser = createAsyncThunk('profiles/user', async (_, thunkAPI) => {
 	try {
-		const response = await axios.get("/profiles/user");
+		const response = await axios.get("/profiles/user/");
 		const { dispatch } = thunkAPI;
 		dispatch(getSelection);
 		return response.data;
@@ -57,7 +49,7 @@ export const getUser = createAsyncThunk('profiles/user', async (_, thunkAPI) => 
 export const login = createAsyncThunk('profiles/login/', async (data, thunkAPI) => {
 		const { email, password } = data;
 	try {
-		const response = await axios.post('/profiles/login', { email, password });
+		const response = await axios.post('/profiles/login/', { email, password });
 		const { dispatch } = thunkAPI;
 		dispatch(getUser());
 		return response.data;
@@ -91,7 +83,7 @@ export const checkAuth = createAsyncThunk(
     "token/verify",
     async (_, thunkAPI) => {
         try {
-            const response = await axios.post("/token/verify", {}, { withCredentials: true });
+            const response = await axios.post("/token/verify/", {}, { withCredentials: true });
             const { dispatch } = thunkAPI;
             dispatch(getUser());
             return response.data;
@@ -105,7 +97,7 @@ export const checkAuth = createAsyncThunk(
 	"token/refresh",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.post("/token/refresh", { withCredentials: true });
+		const response = await axios.post("/token/refresh/", { withCredentials: true });
 		const { dispatch } = thunkAPI;
 		dispatch(checkAuth());
 		return response.data;

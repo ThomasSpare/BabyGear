@@ -45,7 +45,6 @@ JWT_AUTH_SAMESITE = 'None'
 # Application definition
 
 INSTALLED_APPS = [
-    # 'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,8 +60,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     "authentication",
     'rest_framework_simplejwt',
-    # "django_pdb",
-    # "channels",
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -143,8 +140,6 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-
-BASE_URL = os.environ.get("BASE_URL")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
