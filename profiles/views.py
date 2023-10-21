@@ -23,11 +23,3 @@ class ProfileList(APIView):
         )
         return Response(serializer.data)
 
-
-class RetrieveUserView(APIView):
-    authentication_classes = [JWTAuthentication]
-
-    def get(self, request):
-        user = request.user
-        user = UserSerializer(user)
-        return Response(user.data, status=status.HTTP_200_OK)

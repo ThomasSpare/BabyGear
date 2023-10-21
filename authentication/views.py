@@ -74,6 +74,7 @@ class LoginAPIView(APIView):
 
         return response
 
+
 class UserAPIView(APIView):
 
     authentication_classes = [JWTAuthentication]
@@ -87,9 +88,58 @@ class UserAPIView(APIView):
             )
         serializer = UserSerializer(user)
         data = serializer.data
-        if user.avatar:
-            data["avatar"] = user.avatar.url
         return Response(data, status=status.HTTP_200_OK)
+
+
+class RefreshTokenAPIView(APIView):
+    def post(self, request):
+        refresh_token = request.COOKIES.get("refresh_token")
+
+        if not refresh_token:
+            return Response(
+                {"error": "No refresh token"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        id = decode_refresh_token(refresh_token)
+
+        if not id:
+            return Response(
+                {"error": "Invalid refresh token"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        if not User.objects.filter(id=id).exists():
+            return Response(
+                {"error": "Invalid refresh token"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        access_token = create_access_token(id)
+
+        response = Response()
+
+        response.set_cookie(
+            key="access_token",
+            value=access_token,
+            httponly=True,
+            expires=datetime.datetime.utcnow() +
+            datetime.timedelta(seconds=600),
+        )
+
+        response.status_code = status.HTTP_200_OK
+
+        return response
+
+
+class VerifyTokenAPIView(APIView):
+    authentication_classes = (JWTAuthentication,)
+
+    def get(self, request):
+        return Response({"success": True})
+
+
+
 
 
 
