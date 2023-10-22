@@ -26,11 +26,13 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    os.environ.get("HOSTS")
-]
+# ALLOWED_HOSTS = [
+#     os.environ.get("HOSTS")
+# ]
 
-ALLOWED_HOSTS = "baby-gear-3dce8aa6c614.herokuapp.com"
+ALLOWED_HOSTS = [
+                "baby-gear-3dce8aa6c614.herokuapp.com"
+                ]
 
 CORS_ALLOW_CREDENTIALS = True
 
