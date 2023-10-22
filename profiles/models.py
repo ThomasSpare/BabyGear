@@ -6,7 +6,6 @@ from cloudinary.models import CloudinaryField
 from django.conf import settings
 
 
-
 class UserManager(BaseUserManager):
     """
     Creates and saves a User with the given email and password.
@@ -80,3 +79,4 @@ class UserAccount(AbstractUser, PermissionsMixin):
                 (self.birth_date.month, self.birth_date.day)
             )
         )
+

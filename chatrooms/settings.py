@@ -7,8 +7,6 @@ import dj_database_url
 if os.path.exists('env.py'):
     import env
 
-export DJANGO_SETTINGS_MODULE = 'chatrooms.settings'
-
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
@@ -54,6 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "cloudinary_storage",
     "django.contrib.staticfiles",
+    "profiles",
     "cloudinary",
     "rest_framework",
     "corsheaders",
@@ -67,7 +66,6 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "dj_rest_auth.registration",
     "chatapp",
-    "profiles",
 ]
 
 SITE_ID = 1

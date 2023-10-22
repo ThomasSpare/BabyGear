@@ -3,7 +3,7 @@ import datetime
 from rest_framework import status, exceptions
 from rest_framework.response import Response
 from rest_framework.authentication import BaseAuthentication
-from profiles.models import UserAccount as SOMEONE
+from chatrooms.settings import AUTH_USER_MODEL as User
 
 
 class JWTAuthentication(BaseAuthentication):
@@ -39,7 +39,7 @@ class JWTAuthentication(BaseAuthentication):
         if id is None:
             raise exceptions.AuthenticationFailed("Invalid access token")
 
-        user = SOMEONE.objects.get(id=id)
+        user = User.objects.get(id=id)
 
         if user is None:
             raise exceptions.AuthenticationFailed("User not found")

@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserSerializer, UserCreateSerializer
-from profiles.models import User
+from profiles.models import UserAccount as User
 from rest_framework import permissions, status
 from .authentication import (
     JWTAuthentication,
@@ -19,7 +19,6 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from profiles.models import User
 user = settings.AUTH_USER_MODEL
 
 
@@ -69,6 +68,41 @@ class LoginAPIView(APIView):
 
         response = Response()
 
+        response.status_code = status.HTTP_200_OK
+
+        return response
+
+
+class LogoutAPIView(APIView):
+    def post(self, request):
+
+        access_token = request.COOKIES.get("access_token")
+        refresh_token = request.COOKIES.get("refresh_token")
+
+        if not refresh_token:
+            return Response(
+                {"error": "No refresh token"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if not access_token:
+            return Response(
+                {"error": "No access token"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        id = decode_refresh_token(refresh_token)
+
+        if not id:
+            return Response(
+                {"error": "Invalid refresh token"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        response = Response()
+        response.delete_cookie("refresh_token")
+        response.delete_cookie("access_token")
+        response.data = {"success": True, "message": "Logged out"}
         response.status_code = status.HTTP_200_OK
 
         return response
