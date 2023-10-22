@@ -24,7 +24,7 @@ REST_FRAMEWORK = {
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = [
 #     os.environ.get("HOSTS")
