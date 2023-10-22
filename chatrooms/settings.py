@@ -30,6 +30,8 @@ ALLOWED_HOSTS = [
     os.environ.get("HOSTS")
 ]
 
+ALLOWED_HOSTS = "baby-gear-3dce8aa6c614.herokuapp.com"
+
 CORS_ALLOW_CREDENTIALS = True
 
 # CSRF_TRUSTED_ORIGINS = [
