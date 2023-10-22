@@ -7,6 +7,8 @@ import dj_database_url
 if os.path.exists('env.py'):
     import env
 
+export DJANGO_SETTINGS_MODULE = 'chatrooms.settings'
+
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
@@ -45,27 +47,27 @@ JWT_AUTH_SAMESITE = 'None'
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'cloudinary_storage',
-    'django.contrib.staticfiles',
-    'cloudinary',
-    'rest_framework',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "cloudinary_storage",
+    "django.contrib.staticfiles",
+    "cloudinary",
+    "rest_framework",
     "corsheaders",
-    'rest_framework.authtoken',
-    'dj_rest_auth',
-    'django.contrib.sites',
+    "rest_framework.authtoken",
+    "dj_rest_auth",
+    "django.contrib.sites",
     "authentication",
-    'rest_framework_simplejwt',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'dj_rest_auth.registration',
-    'chatapp',
-    'profiles',
+    "rest_framework_simplejwt",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
+    "chatapp",
+    "profiles",
 ]
 
 SITE_ID = 1

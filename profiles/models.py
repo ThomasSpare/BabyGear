@@ -1,8 +1,10 @@
+from django.core.management import call_command
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, AbstractUser, PermissionsMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth.base_user import BaseUserManager
 from cloudinary.models import CloudinaryField
 from django.conf import settings
+
 
 
 class UserManager(BaseUserManager):

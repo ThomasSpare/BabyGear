@@ -3,8 +3,7 @@ import datetime
 from rest_framework import status, exceptions
 from rest_framework.response import Response
 from rest_framework.authentication import BaseAuthentication
-from django.conf import settings
-from profiles.models import UserAccount as User
+from profiles.models import UserAccount as SOMEONE
 
 
 class JWTAuthentication(BaseAuthentication):
@@ -27,6 +26,25 @@ class JWTAuthentication(BaseAuthentication):
             raise exceptions.AuthenticationFailed("User not found")
 
         return (user, None)
+
+    def websocket_authenticate(scope):
+        """Authenticate websocket request"""
+        access_token = scope["cookies"].get("access_token")
+
+        if access_token is None:
+            raise exceptions.AuthenticationFailed("No access token")
+
+        id = decode_access_token(access_token)
+
+        if id is None:
+            raise exceptions.AuthenticationFailed("Invalid access token")
+
+        user = SOMEONE.objects.get(id=id)
+
+        if user is None:
+            raise exceptions.AuthenticationFailed("User not found")
+
+        return user
 
 
 def create_access_token(user_id):
