@@ -24,15 +24,31 @@ REST_FRAMEWORK = {
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = [
 #     os.environ.get("HOSTS")
 # ]
 
 ALLOWED_HOSTS = [
-                "baby-gear-3dce8aa6c614.herokuapp.com"
+                "localhost",
+                "baby-gear-3dce8aa6c614.herokuapp.com",
+                "8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
+                "8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
                 ]
+
+CORS_ORIGIN_WHITELIST = [
+    "https://8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
+    "baby-gear-3dce8aa6c614.herokuapp.com",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
+]
 
 CORS_ALLOW_CREDENTIALS = True
 

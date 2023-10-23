@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { login, resetRegistered } from "../features/user";
+import { login } from "../features/user";
 
 
 const LoginPage = () => {
@@ -15,10 +15,6 @@ const LoginPage = () => {
 		email: '',
 		password: '',
 	});
-
-	useEffect(() => {
-		if (registered) dispatch(resetRegistered());
-	}, [registered, dispatch]);
 
 	const { email, password } = formData;
 

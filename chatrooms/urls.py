@@ -6,8 +6,8 @@ from .views import root_route
 
 urlpatterns = [
     path('', root_route),
-    path('api/token/', TokenObtainPairView.as_view()),
-    path('api/token/refresh/', TokenRefreshView.as_view()),
+    path('api/token/', TokenObtainPairView.as_view(), name="token"),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name="refresh"),
     path('api/token/verify/', TokenVerifyView.as_view(), name="verify_token"),
     path('api/profiles/', include('profiles.urls')),
     path('admin/', admin.site.urls),

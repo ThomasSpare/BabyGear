@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
 // import { getCookie } from '../utils/utils.js';
 
-export const register = createAsyncThunk(
-		"profiles/register",
+export const registerUser = createAsyncThunk(
+		"auth/registerUser",
 		async (data, thunkAPI) => {
 		const {
 			first_name,
@@ -32,7 +32,7 @@ export const register = createAsyncThunk(
 	);
 
 
-export const getUser = createAsyncThunk('profiles/user', async (_, thunkAPI) => {
+export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
 	try {
 		const response = await axios.get("/profiles/user/");
 		const { dispatch } = thunkAPI;
@@ -46,7 +46,7 @@ export const getUser = createAsyncThunk('profiles/user', async (_, thunkAPI) => 
 });
 		
 
-export const login = createAsyncThunk('profiles/login/', async (data, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
 		const { email, password } = data;
 	try {
 		const response = await axios.post('/profiles/login/', { email, password });
@@ -62,25 +62,15 @@ export const login = createAsyncThunk('profiles/login/', async (data, thunkAPI) 
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 	try {
-	  const response = await axios.post("logout/", { withCredentials: true });
+	  const response = await axios.post("/logout/", { withCredentials: true });
 	  return response.data;
 	} catch (error) {
 	  return thunkAPI.rejectWithValue(error.response.data.error);
 	}
   });
 
-  const initialState = {
-	isAuthenticated: false,
-	user: null,
-	registered: false,
-	loading: null,
-	redirect: null,
-};
-
-
-
 export const checkAuth = createAsyncThunk(
-    "token/verify",
+    "auth/verify_token",
     async (_, thunkAPI) => {
         try {
             const response = await axios.post("/token/verify/", {}, { withCredentials: true });
@@ -94,7 +84,7 @@ export const checkAuth = createAsyncThunk(
 );
 
   export const refreshToken = createAsyncThunk(
-	"token/refresh",
+	"auth/refresh",
 	async (_, thunkAPI) => {
 	  try {
 		const response = await axios.post("/token/refresh/", { withCredentials: true });
@@ -109,25 +99,47 @@ export const checkAuth = createAsyncThunk(
   );
 
 const userSlice = createSlice({
-	name: 'user',
-	initialState,
-	reducers: {
-		resetRegistered: state => {
-			state.registered = false;
-		},
+	name: 'auth',
+	initialState: {
+		isAuthenticated: false,
+		user: null,
+		registerUser: false,
+		loading: null,
+		redirect: null,
 	},
+	reducers: {
+		resetRedirect: (state) => {
+		  state.redirect = false;
+		},
+		resetError: (state) => {
+		  state.error = null;
+		},
+		resetMessage: (state) => {
+		  state.message = null;
+		},
+		setError: (state, action) => {
+		  state.error = action.payload;
+		},
+		setMessage: (state, action) => {
+		  state.message = action.payload;
+		},
+		setUser: (state, action) => {
+		  state.user = action.payload;
+		},
+	  },
 
 
 	extraReducers: builder => {
 		builder
-			.addCase(register.pending, state => {
+			.addCase(registerUser.pending, state => {
 				state.loading = true;
 			})
-			.addCase(register.fulfilled, state => {
+			.addCase(registerUser.fulfilled, state => {
 				state.loading = false;
-				state.registered = true;
+				state.redirect = true;
+				state.registerUser = true;
 			})
-			.addCase(register.rejected, state => {
+			.addCase(registerUser.rejected, state => {
 				state.loading = false;
 			})
 			.addCase(login.pending, state => {
@@ -170,11 +182,22 @@ const userSlice = createSlice({
 			})
 			.addCase(logout.rejected, state => {
 				state.loading = false;
+			})
+			.addCase(refreshToken.pending, (state, action) => {
+				state.loading = true;
+			})
+			.addCase(refreshToken.fulfilled, (state, action) => {
+			state.loading = false;
+			state.isAuthenticated = true;
+			})
+			.addCase(refreshToken.rejected, (state, action) => {
+			state.loading = false;
+			state.isAuthenticated = false;
 			});
 	},
 });
 
-export const { resetRegistered, isAuthenticated, resetRedirect, resetError, resetMessage, setError, setMessage, setUser } = 
+export const { resetRedirect, resetError, resetMessage, setError, setMessage, setUser } = 
 userSlice.actions;
 
 export default userSlice.reducer;
