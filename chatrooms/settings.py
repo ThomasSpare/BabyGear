@@ -1,4 +1,5 @@
 import os
+import re
 from datetime import timedelta
 from pathlib import Path
 
@@ -24,37 +25,30 @@ REST_FRAMEWORK = {
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = True
+DEBUG = os.environ.get("DEBUG")
 
 # ALLOWED_HOSTS = [
 #     os.environ.get("HOSTS")
 # ]
 
 ALLOWED_HOSTS = [
-                "localhost",
-                "baby-gear-3dce8aa6c614.herokuapp.com",
-                "8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
-                "8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
-                ]
-
-CORS_ORIGIN_WHITELIST = [
-    "https://8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
-    "baby-gear-3dce8aa6c614.herokuapp.com",
+    os.environ.get("ALLOWED_HOST"),
+    "localhost",
+    "8000-thomasspare-babygear-h6nwfuvyzh7.ws-eu105.gitpod.io",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://8080-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
-]
+if "CLIENT_ORIGIN" in os.environ:
+    CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
-]
+if "CLIENT_ORIGIN_DEV" in os.environ:
+    match = re.match(r"^.+-", os.environ.get("CLIENT_ORIGIN_DEV", ""), re.IGNORECASE)
+    if match is not None:
+        extracted_url = match.group(0)
+        CORS_ALLOWED_ORIGIN_REGEXES = [
+            rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+        ]
 
 CORS_ALLOW_CREDENTIALS = True
-
-# CSRF_TRUSTED_ORIGINS = [
-#     os.environ.get("CSRF_TRUSTED_ORIGINS")
-# ]
 
 REST_USE_JWT = True
 JWT_AUTH_SECURE = False
