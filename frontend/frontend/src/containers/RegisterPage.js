@@ -39,7 +39,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <Layout title="Auth Site | Register" content="Register page">
+    <Layout title= 'Baby Gear' content='baby products, product comparison site, pregnant, newborn, smart gadgets'>
       <h1>Register for an Account</h1>
       <form className="mt-5" onSubmit={handleSubmit(submitForm)}>
         <div className="form-group">

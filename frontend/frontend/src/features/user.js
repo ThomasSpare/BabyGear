@@ -46,7 +46,7 @@ export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
 });
 		
 
-export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
+export const loginUser = createAsyncThunk('auth/loginUser', async (data, thunkAPI) => {
 		const { email, password } = data;
 	try {
 		const response = await axios.post('/profiles/login/', { email, password });
@@ -142,14 +142,14 @@ const userSlice = createSlice({
 			.addCase(registerUser.rejected, state => {
 				state.loading = false;
 			})
-			.addCase(login.pending, state => {
+			.addCase(loginUser.pending, state => {
 				state.loading = true;
 			})
-			.addCase(login.fulfilled, state => {
+			.addCase(loginUser.fulfilled, state => {
 				state.loading = false;
 				state.isAuthenticated = true;
 			})
-			.addCase(login.rejected, state => {
+			.addCase(loginUser.rejected, state => {
 				state.loading = false;
 			})
 			.addCase(getUser.pending, state => {

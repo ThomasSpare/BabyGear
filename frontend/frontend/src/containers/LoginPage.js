@@ -1,44 +1,36 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { login } from "../features/user";
+import { useNavigate } from "react-router-dom";
+import { loginUser, resetRedirect } from "../features/user";
 
 
 const LoginPage = () => {
 	const dispatch = useDispatch();
-	
-	const { loading, isAuthenticated, registered } = useSelector(state => state.user
-	);
+	const navigate = useNavigate();
 
-	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-	});
-
-	const { email, password } = formData;
-
-	const onChange = e => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
-
-	const onSubmit = async (data) => {
-    setFormData(data);
-    const payload = {
-      email: data.email,
-      password: data.password,
-    };
-    dispatch(login(payload));
-  };
-
-  if (isAuthenticated) {
-    return <Navigate to="/" />;
-  }
-
+	const { handleSubmit, register } = useForm();
+	const { loading, isAuthenticated } = useSelector(state => state.user
+		);
+			useEffect(() => {
+				// redirect user to login page if registration was successful
+				if (resetRedirect) dispatch(resetRedirect());
+				
+				if (isAuthenticated) navigate("/");
+				}, [navigate, isAuthenticated, dispatch]);
+		const submitForm = (data) => {
+			const payloadUser = {		  
+				email: data.email,
+				password: data.password,
+			};
+			  // dispatch register action with form data
+			  dispatch(loginUser(payloadUser));
+			};
 	return (
-		<Layout title='Auth Site | Login' content='Login page'>
+		<Layout title= 'Baby Gear' content='baby products, product comparison site, pregnant, newborn, smart gadgets'>
 			<h1>Log into your Account</h1>
-			<form className='mt-5' onSubmit={onSubmit}>
+			<form className='mt-5' onSubmit={handleSubmit(submitForm)}>
 				<div className='form-group'>
 					<label className='form-label' htmlFor='email'>
 						Email
@@ -47,9 +39,7 @@ const LoginPage = () => {
 						className='form-control'
 						type='email'
 						name='email'
-						onChange={onChange}
-						value={email}
-						required
+						{...register("email", { required: true })}
 					/>
 				</div>
 				<div className='form-group mt-3'>
@@ -60,9 +50,7 @@ const LoginPage = () => {
 						className='form-control'
 						type='password'
 						name='password'
-						onChange={onChange}
-						value={password}
-						required
+						{...register("password", { required: true })}
 					/>
 				</div>
 				{loading ? (
@@ -70,8 +58,13 @@ const LoginPage = () => {
 						<span className='visually-hidden'>Loading...</span>
 					</div>
 				) : (
-					<button className='btn btn-primary mt-4'>Login</button>
-				)}
+					<button
+            className="btn btn-primary mt-4"
+            type="submit"
+          	>
+         	 Login
+          	</button>
+        )}
 			</form>
 		</Layout>
 	);
