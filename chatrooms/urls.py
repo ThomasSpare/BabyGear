@@ -8,8 +8,8 @@ from .views import root_route
 urlpatterns = [
     path('', root_route),
     path('api/token/', TokenObtainPairView.as_view(), name="token"),
-    path('api/token/refresh/', RefreshTokenAPIView.as_view(), name="refresh"),
-    path('api/token/verify/', VerifyTokenAPIView.as_view(), name="verify_token"),
+    path('api/token/refresh', RefreshTokenAPIView.as_view(), name="refresh"),
+    path('api/token/verify', VerifyTokenAPIView.as_view(), name="verify_token"),
     path('api/profiles/', include('profiles.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),

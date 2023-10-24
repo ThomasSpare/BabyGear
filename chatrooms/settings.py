@@ -31,8 +31,14 @@ ALLOWED_HOSTS = [
     "localhost:8000",
     "baby-gear-3dce8aa6c614.herokuapp.com",
     "8000-thomasspare-babygear-h6nwfuvyzh7.ws-eu105.gitpod.io",
-    "8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io"
+    "8000-thomasspare-babygear-q6ncmhqqapz.ws-eu105.gitpod.io",
+    "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu105.gitpod.io",
+    "8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+                    "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu105.gitpod.io"
+                    ]
 
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [

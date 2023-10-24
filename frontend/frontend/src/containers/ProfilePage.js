@@ -56,7 +56,7 @@ const ProfilePage = () => {
         <div
           className="offcanvas offcanvas-start"
           data-bs-scroll="true"
-          tabindex="-1"
+          tabIndex="-1"
           id="coach1"
           aria-labelledby="offcanvasWithBothOptionsLabel"
         >

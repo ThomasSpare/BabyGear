@@ -21,8 +21,7 @@ const App = () => {
 
   useEffect(() =>{
    dispatch(checkAuth()); 
-  }, []);
-
+  }, [ dispatch ]);
 
   return (
     <div className="App">
