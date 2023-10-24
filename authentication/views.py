@@ -166,7 +166,7 @@ class RefreshTokenAPIView(APIView):
 
 
 class VerifyTokenAPIView(APIView):
-    authentication_classes = (JWTAuthentication,)
+    authentication_classes = [JWTAuthentication]
 
     def get(self, request):
         return Response({"success": True})

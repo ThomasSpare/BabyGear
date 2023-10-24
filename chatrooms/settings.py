@@ -25,18 +25,24 @@ REST_FRAMEWORK = {
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost:8000",
     "baby-gear-3dce8aa6c614.herokuapp.com",
+    "8000-thomasspare-babygear-h6nwfuvyzh7.ws-eu105.gitpod.io",
+    "8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io"
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://baby-gear-3dce8aa6c614.herokuapp.com',
-]
-
-CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -44,7 +50,7 @@ REST_USE_JWT = True
 JWT_AUTH_SECURE = False
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
-JWT_AUTH_SAMESITE = 'Lax'
+JWT_AUTH_SAMESITE = 'Same'
 
 # Application definition
 
