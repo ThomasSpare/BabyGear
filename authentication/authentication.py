@@ -3,7 +3,7 @@ import datetime
 from rest_framework import status, exceptions
 from rest_framework.response import Response
 from rest_framework.authentication import BaseAuthentication
-from chatrooms.settings import AUTH_USER_MODEL as User  # This still not correct
+from profiles.models import UserAccount as User  # This still not correct
 
 
 class JWTAuthentication(BaseAuthentication):

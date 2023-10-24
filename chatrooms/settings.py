@@ -66,10 +66,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "cloudinary_storage",
     "django.contrib.staticfiles",
-    "profiles",
+    "cloudinary_storage",
     "cloudinary",
+    "profiles",
     "rest_framework",
     "corsheaders",
     "rest_framework.authtoken",
@@ -87,9 +87,10 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -103,7 +104,7 @@ ROOT_URLCONF = 'chatrooms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": [os.path.join(BASE_DIR.parent, "frontend")],
+        "DIRS": [os.path.join(BASE_DIR, 'staticfiles', 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,7 +157,8 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+WHITENOISE_ROOT = BASE_DIR / 'staticfiles' / 'build'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SIMPLE_JWT = {

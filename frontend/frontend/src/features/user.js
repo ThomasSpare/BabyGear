@@ -13,7 +13,7 @@ export const registerUser = createAsyncThunk(
 		} = data;
 		try {
 			const response = await axios.post(
-				'/profiles/register', {
+				'profiles/register', {
 				first_name,
 				last_name,
 				email,
@@ -34,7 +34,7 @@ export const registerUser = createAsyncThunk(
 
 export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
 	try {
-		const response = await axios.get("/profiles/user");
+		const response = await axios.get("profiles/user");
 		const { dispatch } = thunkAPI;
 		dispatch(getSelection);
 		return response.data;
@@ -49,7 +49,7 @@ export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
 export const loginUser = createAsyncThunk('auth/loginUser', async (data, thunkAPI) => {
 		const { email, password } = data;
 	try {
-		const response = await axios.post('/profiles/login', { email, password });
+		const response = await axios.post('profiles/login', { email, password });
 		const { dispatch } = thunkAPI;
 		dispatch(getUser());
 		return response.data;
@@ -62,7 +62,7 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (data, thunkAP
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 	try {
-	  const response = await axios.post("/logout", { withCredentials: true });
+	  const response = await axios.post("logout", { withCredentials: true });
 	  return response.data;
 	} catch (error) {
 	  return thunkAPI.rejectWithValue(error.response.data.error);
@@ -70,10 +70,10 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   });
 
 export const checkAuth = createAsyncThunk(
-    "auth/verify_token",
+    "auth/checkAuth",
     async (_, thunkAPI) => {
         try {
-            const response = await axios.get("/token/verify", {}, { withCredentials: true });
+            const response = await axios.get("token/verify", {}, { withCredentials: true });
             const { dispatch } = thunkAPI;
             dispatch(getUser());
             return response.data;
@@ -84,10 +84,10 @@ export const checkAuth = createAsyncThunk(
 );
 
   export const refreshToken = createAsyncThunk(
-	"auth/refresh",
+	"auth/refreshToken",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.post("/token/refresh", { withCredentials: true });
+		const response = await axios.post("token/refresh", { withCredentials: true });
 		const { dispatch } = thunkAPI;
 		dispatch(checkAuth());
 		return response.data;
