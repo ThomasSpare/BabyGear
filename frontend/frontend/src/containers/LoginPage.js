@@ -20,12 +20,12 @@ const LoginPage = () => {
 				if (isAuthenticated) navigate("/");
 				}, [navigate, isAuthenticated, dispatch]);
 		const submitForm = (data) => {
-			const payloadUser = {		  
+			const payload = {		  
 				email: data.email,
 				password: data.password,
 			};
 			  // dispatch register action with form data
-			  dispatch(loginUser(payloadUser));
+			  dispatch(loginUser(payload));
 			};
 	return (
 		<Layout title= 'Baby Gear' content='baby products, product comparison site, pregnant, newborn, smart gadgets'>

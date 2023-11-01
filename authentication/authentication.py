@@ -83,3 +83,4 @@ def decode_refresh_token(token):
         return payload["user_id"]
     except jwt.exceptions.DecodeError:
         return None
+

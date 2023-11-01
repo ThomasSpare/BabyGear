@@ -23,7 +23,7 @@ axios.interceptors.response.use(
       }
       refreshing = true;
       return axios
-        .post("refresh", { withCredentials: true })
+        .post("token/refresh", { withCredentials: true })
         .then((response) => {
           refreshing = false;
           return axios(error.config);

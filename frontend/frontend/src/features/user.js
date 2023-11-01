@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
-// import { getCookie } from '../utils/utils.js';
 
 export const registerUser = createAsyncThunk(
 		"auth/registerUser",
@@ -36,7 +35,7 @@ export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
 	try {
 		const response = await axios.get("profiles/user");
 		const { dispatch } = thunkAPI;
-		dispatch(getSelection);
+		dispatch(getSelection());
 		return response.data;
 	} 	catch (error) {
 		const { dispatch } = thunkAPI;
@@ -97,6 +96,20 @@ export const checkAuth = createAsyncThunk(
 	  }
 	}
   );
+
+  export const getMembership = createAsyncThunk(
+	"auth/getMembership",
+	async (_, thunkAPI) => {
+	  try {
+		const response = await axios.get("profiles/user");
+		return response.data;
+	  } catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data.error);
+	  }
+	}
+  );
+
+
 
 const userSlice = createSlice({
 	name: 'auth',

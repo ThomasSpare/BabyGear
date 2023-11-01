@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager
 from cloudinary.models import CloudinaryField
 from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 
 class UserManager(BaseUserManager):
@@ -58,8 +59,7 @@ class UserAccount(AbstractUser, PermissionsMixin):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     country = models.CharField(max_length=100)
-    learning = models.CharField(max_length=50, null=True)
-    tutor_sessions = models.CharField(max_length=50, null=True, blank=True)
+    Parent = models.BooleanField(default=None, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]

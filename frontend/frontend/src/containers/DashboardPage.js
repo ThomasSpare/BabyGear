@@ -19,11 +19,11 @@ const DashboardPage = () => {
             <React.Fragment>
             <h1 className='mb-5'>Dashboard</h1>
             <p>User Details</p>
-            <ul>
-                <li>First Name: {user.first_name}</li>
-                <li>Last Name: {user.last_name}</li>
-                <li>Email: {user.email}</li>
-            </ul>            
+            
+                setFirstName(user.first_name);
+                setLastName(user.last_name);
+                setEmail(user.email);
+                       
             </React.Fragment>
         )}
         </Layout>

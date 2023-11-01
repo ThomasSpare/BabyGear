@@ -108,6 +108,13 @@ class LogoutAPIView(APIView):
         return response
 
 
+class VerifyTokenAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request):
+        return Response({"success": True})
+
+
 class UserAPIView(APIView):
 
     authentication_classes = [JWTAuthentication]
@@ -121,6 +128,8 @@ class UserAPIView(APIView):
             )
         serializer = UserSerializer(user)
         data = serializer.data
+        if user.avatar:
+            data["avatar"] = user.avatar.url
         return Response(data, status=status.HTTP_200_OK)
 
 
@@ -164,9 +173,3 @@ class RefreshTokenAPIView(APIView):
 
         return response
 
-
-class VerifyTokenAPIView(APIView):
-    authentication_classes = [JWTAuthentication]
-
-    def get(self, request):
-        return Response({"success": True})

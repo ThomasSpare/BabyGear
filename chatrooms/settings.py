@@ -13,7 +13,6 @@ CLOUDINARY_STORAGE = {
 }
 
 MEDIA_URL = '/media/'
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +24,7 @@ REST_FRAMEWORK = {
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost:8000",
@@ -67,14 +66,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "cloudinary_storage",
     "cloudinary",
     "profiles",
+    "subscription",
     "rest_framework",
     "corsheaders",
     "rest_framework.authtoken",
     "dj_rest_auth",
-    "django.contrib.sites",
     "authentication",
     "rest_framework_simplejwt",
     "allauth",
@@ -104,7 +104,7 @@ ROOT_URLCONF = 'chatrooms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": [os.path.join(BASE_DIR.parent, "frontend")],
+        "DIRS": [os.path.join(BASE_DIR, 'staticfiles', 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -157,18 +157,8 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR.parent, "frontend/build/static"),
-#     os.path.join(BASE_DIR.parent, "frontend/build"),
-# ]
-
-STATIC_ROOT = os.path.join(BASE_DIR.parent, "static")
-
-STATICFILES_STORAGE = (
-    "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
-)
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+WHITENOISE_ROOT = BASE_DIR / 'staticfiles' / 'build'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SIMPLE_JWT = {
