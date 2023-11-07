@@ -8,7 +8,8 @@ export const registerUser = createAsyncThunk(
 			first_name,
 			last_name,
 			email,
-			password,	
+			password,
+			password_confirm,	
 		} = data;
 		try {
 			const response = await axios.post(
@@ -17,6 +18,7 @@ export const registerUser = createAsyncThunk(
 				last_name,
 				email,
 				password,
+				password_confirm,
 			});	
 			return response.data;
 		}	catch (error) {
@@ -33,9 +35,9 @@ export const registerUser = createAsyncThunk(
 
 export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
 	try {
-		const response = await axios.get("profiles/user");
+		const response = await axios.get("profiles/user", { withCredentials: true });
 		const { dispatch } = thunkAPI;
-		dispatch(getSelection());
+		dispatch(getMembership());
 		return response.data;
 	} 	catch (error) {
 		const { dispatch } = thunkAPI;
@@ -86,12 +88,12 @@ export const checkAuth = createAsyncThunk(
 	"auth/refreshToken",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.post("token/refresh", { withCredentials: true });
+		const response = await axios.post("token/refresh", {}, { withCredentials: true });
 		const { dispatch } = thunkAPI;
 		dispatch(checkAuth());
 		return response.data;
 	  } catch (error) {
-		console.clear();
+		// console.clear();
 		return thunkAPI.rejectWithValue(error.response.data.error);
 	  }
 	}
@@ -101,15 +103,13 @@ export const checkAuth = createAsyncThunk(
 	"auth/getMembership",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.get("profiles/user");
+		const response = await axios.get("profiles/user", { withCredentials: true });
 		return response.data;
 	  } catch (error) {
 		return thunkAPI.rejectWithValue(error.response.data.error);
 	  }
 	}
   );
-
-
 
 const userSlice = createSlice({
 	name: 'auth',
@@ -119,6 +119,8 @@ const userSlice = createSlice({
 		registerUser: false,
 		loading: null,
 		redirect: null,
+		membership: null,
+  		membershipLoading: null,
 	},
 	reducers: {
 		resetRedirect: (state) => {
@@ -144,56 +146,60 @@ const userSlice = createSlice({
 
 	extraReducers: builder => {
 		builder
-			.addCase(registerUser.pending, state => {
+			.addCase(registerUser.pending, (state, action) => {
 				state.loading = true;
 			})
-			.addCase(registerUser.fulfilled, state => {
+			.addCase(registerUser.fulfilled, (state, action) => {
 				state.loading = false;
 				state.redirect = true;
-				state.registerUser = true;
 			})
-			.addCase(registerUser.rejected, state => {
+			.addCase(registerUser.rejected, (state, action) => {
 				state.loading = false;
 			})
-			.addCase(loginUser.pending, state => {
+			.addCase(loginUser.pending, (state, action) => {
 				state.loading = true;
 			})
-			.addCase(loginUser.fulfilled, state => {
-				state.loading = false;
+			.addCase(loginUser.fulfilled, (state, action) => {
 				state.isAuthenticated = true;
-			})
-			.addCase(loginUser.rejected, state => {
 				state.loading = false;
 			})
-			.addCase(getUser.pending, state => {
+			.addCase(loginUser.rejected, (state, action) => {
+				state.loading = false;
+				state.isAuthenticated = false;
+			})
+			.addCase(getUser.pending, (state, action) => {
 				state.loading = true;
 			})
 			.addCase(getUser.fulfilled, (state, action) => {
 				state.loading = false;
+				state.redirect = true;
+				state.isAuthenticated = true;
 				state.user = action.payload;
+
 			})
-			.addCase(getUser.rejected, state => {
+			.addCase(getUser.rejected, (state, action) => {
 				state.loading = false;
 			})
-			.addCase(checkAuth.pending, state => {
+			.addCase(checkAuth.pending, (state, action) => {
 				state.loading = true;
 			})
-			.addCase(checkAuth.fulfilled, state => {
+			.addCase(checkAuth.fulfilled, (state, action) => {
 				state.loading = false;
 				state.isAuthenticated = true;
 			})
-			.addCase(checkAuth.rejected, state => {
+			.addCase(checkAuth.rejected, (state, action) => {
 				state.loading = false;
+				state.isAuthenticated = false;
 			})
-			.addCase(logout.pending, state => {
+			.addCase(logout.pending, (state, action) => {
 				state.loading = true;
 			})
-			.addCase(logout.fulfilled, state => {
+			.addCase(logout.fulfilled, (state, action) => {
 				state.loading = false;
 				state.isAuthenticated = false;
 				state.user = null;
 			})
-			.addCase(logout.rejected, state => {
+			.addCase(logout.rejected, (state, action) => {
 				state.loading = false;
 			})
 			.addCase(refreshToken.pending, (state, action) => {
@@ -205,7 +211,18 @@ const userSlice = createSlice({
 			})
 			.addCase(refreshToken.rejected, (state, action) => {
 			state.loading = false;
-			state.isAuthenticated = false;
+			state.isAuthenticated = false;   // change to False when refreshToken works
+			})
+			.addCase(getMembership.pending, (state, action) => {
+			state.membershipLoading = true;
+			})
+			.addCase(getMembership.fulfilled, (state, action) => {
+			state.membershipLoading = false;
+			state.membership = action.payload;
+			})
+			.addCase(getMembership.rejected, (state, action) => {
+			state.membershipLoading = false;
+			state.error = action.payload;
 			});
 	},
 });

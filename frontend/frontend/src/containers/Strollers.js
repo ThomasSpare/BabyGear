@@ -18,7 +18,7 @@ const Strollers = () => {
         <center><h4 className="center darkbacktext">Beemoo Activity Go</h4></center>
         </div>
         <div className="flex" id="first_row_strollers">
-        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
         <div className="carousel-item active" data-bs-interval="4000">
         <img src={beemoo1} class="d-block w-75" alt="beemoo activity go"></img>
@@ -30,11 +30,11 @@ const Strollers = () => {
         <img src={beemoo3} className="d-block w-75" alt="beemoo activity go"></img>
         </div>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <button className="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Previous</span>
         </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <button className="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
         </button>
@@ -48,11 +48,13 @@ const Strollers = () => {
         </div>
         </div>
         </div>
-        <div>    
+        </div>
+        <div>
+        <div className="row" id="row-learn">    
         <center><h4 className="center darkbacktext">Beemoo Activity Go</h4></center>
         </div>
         <div className="flex" id="second_row_strollers">
-        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div id="carousel2" class="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
         <div className="carousel-item active" data-bs-interval="4000">
         <img src={beemoo1} class="d-block w-75" alt="beemoo activity go"></img>
@@ -64,11 +66,11 @@ const Strollers = () => {
         <img src={beemoo3} className="d-block w-75" alt="beemoo activity go"></img>
         </div>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <button className="carousel-control-prev" type="button" data-bs-target="#carousel2" data-bs-slide="prev">
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Previous</span>
         </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <button className="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
         </button>

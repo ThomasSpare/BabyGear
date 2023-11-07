@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import ProfileSerializer
 from .models import UserAccount
 from django.conf import settings
-User = settings.AUTH_USER_MODEL
+from profiles.models import UserAccount as User
 
 
 class ProfileList(APIView):
@@ -17,7 +17,7 @@ class ProfileList(APIView):
     No Create view (post method), as profile creation handled by django signals
     """
     def get(self, request):
-        profiles = UserAccount.objects.all()
+        profiles = User.objects.all()
         serializer = ProfileSerializer(
             profiles, many=True, context={'request': request}
         )

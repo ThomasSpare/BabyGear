@@ -5,23 +5,17 @@ from rest_framework.serializers import ModelSerializer
 from .models import UserAccount
 from django.conf import settings
 from pdb import set_trace
-User = settings.AUTH_USER_MODEL
+from .models import UserAccount as User
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-    is_owner = serializers.SerializerMethodField()
-
-    def get_is_owner(self, obj):
-        request = self.context['request']
-        return request.user == obj.owner
-
+class ProfileSerializer(ModelSerializer):
     class Meta:
-        model = UserAccount
+        model = User
         fields = [
-            'first_name',
-            'last_name',
-            'email',
-            'password',
+            "avatar",
+            "first_name",
+            "last_name",
+            "email",
+            "birth_date",
+            "country",
         ]
-

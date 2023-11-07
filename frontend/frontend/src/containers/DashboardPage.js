@@ -1,34 +1,35 @@
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState, useRef} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { resetRedirect, setUser } from "../features/user.js";
 import Layout from '../components/Layout';
 import { Navigate } from 'react-router-dom';
-import React from 'react';
+// import { Toast } from "primereact/toast";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const DashboardPage = () => {
-    const { isAuthenticated, user, loading } = useSelector(state => state.user);
 
-    if (!isAuthenticated && !loading && user === null)
-        return <Navigate to='/login' />;
+function DashboardPage() {
 
-    return (
-        <Layout title= 'Code Coach | Dashboard' content='learn to code, javascript, python'>
-        {loading || user === null ? (
-        <div className="spinner-grow" role="status">
-        <span className="sr-only"></span>
-        </div>
-        ): (
-            <React.Fragment>
-            <h1 className='mb-5'>Dashboard</h1>
-            <p>User Details</p>
-            
-                setFirstName(user.first_name);
-                setLastName(user.last_name);
-                setEmail(user.email);
-                       
-            </React.Fragment>
-        )}
-        </Layout>
-    );     
-    };
+  return(
+    <Layout title= 'Baby Gear' content='baby products, product comparison site, pregnant, newborn, smart gadgets'>
+    <div>
+      <h1> Profile Page </h1>
+      <center style={{ "align-items": "center", "display": "flex", "margin-left": "38vw" }}>
+      <iframe title="user" height="200" src="https://res.cloudinary.com/djunroohl/image/upload/v1698924790/BabyGear_PP5/jeixdfirdetfdbv3o6m3.png">
+      </iframe>
+      </center>
+      <button>Upload Photo</button>
+      
+      <br></br>
+      <p>Name:</p>
+      <p>Email:</p>
+      <p>Parent:</p>
+      <button>Edit</button>
+    </div>
+    </Layout>
+  )
+}
+
 
 export default DashboardPage;
 

@@ -1,7 +1,6 @@
 from django.db import models
-from profiles.models import UserAccount as User
 from django.conf import settings
-User = settings.AUTH_USER_MODEL
+from profiles.models import UserAccount as User
 
 
 class Subscription(models.Model):
@@ -15,6 +14,11 @@ class Subscription(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        name = (User.first_name + " ", User.last_name)
+
+        super().save(*args, **kwargs)
 
 
 class Membership(models.Model):

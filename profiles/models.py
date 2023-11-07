@@ -1,6 +1,6 @@
 from django.core.management import call_command
 from django.db import models
-from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from cloudinary.models import CloudinaryField
 from django.conf import settings
@@ -45,21 +45,20 @@ class UserManager(BaseUserManager):
         return user
 
 
-class UserAccount(AbstractUser, PermissionsMixin):
+class UserAccount(AbstractUser):
     avatar = CloudinaryField(
         "avatar",
         folder="profile_pics",
         null=True,
         blank=True,
     )
-    owner = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     email = models.EmailField(unique=True, max_length=254)
     username = None
     birth_date = models.DateField(unique=True, null=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     country = models.CharField(max_length=100)
-    Parent = models.BooleanField(default=None, null=True)
+    parent = models.BooleanField(default=None, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]

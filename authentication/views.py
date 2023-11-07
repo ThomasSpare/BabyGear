@@ -14,12 +14,13 @@ from .authentication import (
     decode_access_token,
     decode_refresh_token,
 )
+import logging
 from .models import ForgotPasswordToken
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-user = settings.AUTH_USER_MODEL
+logger = logging.getLogger(__name__)
 
 
 class RegisterView(APIView):
@@ -58,7 +59,7 @@ class LoginAPIView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # user = User.objects.filter(email=email).first()
+        user = User.objects.filter(email=email).first()
 
         if user is None:
             return Response(
@@ -135,6 +136,7 @@ class UserAPIView(APIView):
 
 class RefreshTokenAPIView(APIView):
     def post(self, request):
+        logger.info('Processing request')
         refresh_token = request.COOKIES.get("refresh_token")
 
         if not refresh_token:

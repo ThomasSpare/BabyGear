@@ -4,6 +4,8 @@ const baseUrl = "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu105.gitpod.i
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 axios.defaults.baseURL = baseUrl + "/api/";
 
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
 // if response is 401 try to refresh token
@@ -13,10 +15,6 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 500) {
-      window.location.href = "/500";
-      return;
-    }
     if (error.response.status === 401) {
       if (refreshing) {
         return;
@@ -30,12 +28,10 @@ axios.interceptors.response.use(
         })
         .catch((error) => {
           refreshing = false;
-          console.clear();
-          return axios(error.config); // retry the original request even if the refresh request fails
+          return Promise.reject(error);
         });
     } else {
-      console.clear();
-      return Promise.reject("error");
+      return Promise.reject(error);
     }
   }
 );

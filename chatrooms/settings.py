@@ -12,19 +12,51 @@ CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
 
+BASE_URL = [
+        "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu105.gitpod.io",
+]
+
 MEDIA_URL = '/media/'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    "EXCEPTION_HANDLER": "authentication.exceptions.status_code_handler",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
 }
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost:8000",
@@ -126,6 +158,12 @@ AUTHENTICATION_BACKENDS = [
 
 # set username field to email
 AUTH_USER_MODEL_USERNAME_FIELD = "email"
+
+
+STATICFILES_STORAGE = (
+    "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
+)
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 DATABASES = {'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 

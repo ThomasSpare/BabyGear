@@ -3,7 +3,7 @@ import datetime
 from rest_framework import status, exceptions
 from rest_framework.response import Response
 from rest_framework.authentication import BaseAuthentication
-from profiles.models import UserAccount as User  # This still not correct
+from profiles.models import UserAccount
 
 
 class JWTAuthentication(BaseAuthentication):
@@ -20,17 +20,31 @@ class JWTAuthentication(BaseAuthentication):
         if id is None:
             raise exceptions.AuthenticationFailed("Invalid access token")
 
-        user = User.objects.get(id=id)
+        user = UserAccount.objects.get(id=id)
 
         if user is None:
             raise exceptions.AuthenticationFailed("User not found")
 
         return (user, None)
 
-        if user is None:
-            raise exceptions.AuthenticationFailed("User not found")
+        def websocket_authenticate(scope):
+            """Authenticate websocket request"""
+            access_token = scope["cookies"].get("access_token")
 
-        return user
+            if access_token is None:
+                raise exceptions.AuthenticationFailed("No access token")
+
+            id = decode_access_token(access_token)
+
+            if id is None:
+                raise exceptions.AuthenticationFailed("Invalid access token")
+
+            user = UserAccount.objects.get(id=id)
+
+            if user is None:
+                raise exceptions.AuthenticationFailed("User not found")
+
+            return user
 
 
 def create_access_token(user_id):
@@ -83,4 +97,3 @@ def decode_refresh_token(token):
         return payload["user_id"]
     except jwt.exceptions.DecodeError:
         return None
-

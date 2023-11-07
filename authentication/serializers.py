@@ -4,7 +4,7 @@ from rest_framework import serializers
 from django.core import exceptions
 from django.conf import settings
 from django.contrib.auth import get_user_model
-User = get_user_model()
+from profiles.models import UserAccount as User
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
@@ -20,9 +20,9 @@ class UserCreateSerializer(serializers.ModelSerializer):
             validate_password(password, user)
         except exceptions.ValidationError as e:
             serializer_errors = serializers.as_serializer_error(e)
-        # raise exceptions.ValidationError(
-        #     {"password": serializer_errors["non_field_errors"]}
-        # )
+            raise exceptions.ValidationError(
+                {"password": serializer_errors["non_field_errors"]}
+            )
         return data
 
     def create(self, validated_data):
@@ -41,10 +41,15 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = [
+            "id",
             "first_name",
             "last_name",
             "email",
+            "country",
+            "birth_date",
             "password",
+            "avatar",
+            "parent",
         ]
         extra_kwargs = {
             "password": {"write_only": True},
