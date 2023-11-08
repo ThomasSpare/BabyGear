@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from authentication.authentication import JWTAuthentication
 from django.conf import settings
-User = settings.AUTH_USER_MODEL
+from profiles.models import UserAccount as User
 
 
 class GetUsersSubscriptionPlanAPIView(APIView):
@@ -19,9 +19,8 @@ class GetUsersSubscriptionPlanAPIView(APIView):
                 {"error": "You are not logged in"},
                 status=status.HTTP_401_UNAUTHORIZED,
             )
-        membership = Membership.objects.get_or_create(user=user)[0]
-        plan = membership.type
-        serializer = MembershipSerializer(plan)
+        membership = User.objects.get(user=user)
+        serializer = MembershipSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 

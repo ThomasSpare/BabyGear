@@ -27,9 +27,10 @@ p{
 }
 
 .darkbacktext{
-  color:rgb(203, 154, 248);
+  text-shadow: -3px 2px 5px #0000006e;
+  text-decoration-style: solid;
+  color: rgb(130 61 193);
 }
-
 
 #root > div > nav > div > button{
   margin-right: 112px;
@@ -47,15 +48,18 @@ p{
     margin-top: 20px;
   }
 
-#first_row_strollers{
+/* #first_row_strollers{
   display: flex;
   margin-top: 20px;
   justify-content: center;
-}
+} */
 
 /* Strollers */
 .w-75 {
-  width: 650px!important;
+  width: 534px!important;}
+
+.btn{
+  margin-inline: 36px;
 }
 
 .navbar-brand {
@@ -99,15 +103,15 @@ img {
   border-color: black;
 }
 
-/*Learn text column on learn.js page*/
+/* Stroller page*/
 #learn{
-  
   color: rgb(219, 219, 219);
-  background-color: rgb(2, 38, 53);
-  font-family: 'Kanit', sans-serif;
-  text-align: left;
   padding: 9px;
   border-radius: 6px;
+}
+
+#row-learn > center > h4{
+  margin: 30px;
 }
 
 #navbarNavDropdown > ul > div > ul{

@@ -4,6 +4,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import dj_database_url
+import django_heroku
 
 if os.path.exists('env.py'):
     import env
@@ -83,12 +84,6 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 
 CORS_ALLOW_CREDENTIALS = True
 
-REST_USE_JWT = True
-JWT_AUTH_SECURE = False
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
-JWT_AUTH_SAMESITE = 'Same'
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -108,10 +103,6 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "dj_rest_auth",
     "authentication",
-    "rest_framework_simplejwt",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
     "dj_rest_auth.registration",
     "chatapp",
 ]
@@ -165,7 +156,15 @@ STATICFILES_STORAGE = (
 )
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
+BASE_URL = os.environ.get("BASE_URL")
+
 DATABASES = {'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+
+DATABASES = {
+   'default': {
+       'CONN_MAX_AGE': 500
+   }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -199,8 +198,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 WHITENOISE_ROOT = BASE_DIR / 'staticfiles' / 'build'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFTETIME': timedelta(minutes=30),
-}
 
 AUTH_USER_MODEL = "profiles.UserAccount"
+
+django_heroku.settings(locals())

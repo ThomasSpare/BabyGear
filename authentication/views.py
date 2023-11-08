@@ -3,10 +3,9 @@ import random
 import string
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, permissions
 from .serializers import UserSerializer, UserCreateSerializer
 from profiles.models import UserAccount as User
-from rest_framework import permissions, status
 from .authentication import (
     JWTAuthentication,
     create_access_token,
@@ -21,6 +20,8 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 logger = logging.getLogger(__name__)
+
+base_url = settings.BASE_URL
 
 
 class RegisterView(APIView):

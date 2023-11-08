@@ -24,12 +24,16 @@ const Learn = () => {
         </Link>
         </div>
         <div> 
+        <Link className='navbar-brand' to='/seats'>  
         <img src={seats1} className="rounded mx-auto d-block img-thumbnail" alt="Baby chairs"></img>
-        <center><h4>Chairs</h4></center>
+        <center><h4>Seats</h4></center>
+        </Link>
         </div>
-        <div> 
+        <div>
+        <Link className='navbar-brand' to='/bottles'>
         <img src={bottles1} className="rounded mx-auto d-block img-thumbnail" alt="Bottle"></img>
         <center><h4>Bottles</h4></center>
+        </Link>
         </div>
         <div>
         <Link className='navbar-brand' to='/'>

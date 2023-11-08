@@ -6,8 +6,7 @@ class MembershipSerializer(ModelSerializer):
     class Meta:
         model = Membership
         fields = [
-            "name",
-            "parent",
-            "to_be_parent"
-            "can_make_posts",
+            "first_name",
+            "last_name",
+            "email",
         ]

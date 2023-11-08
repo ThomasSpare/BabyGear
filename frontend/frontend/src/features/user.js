@@ -103,7 +103,7 @@ export const checkAuth = createAsyncThunk(
 	"auth/getMembership",
 	async (_, thunkAPI) => {
 	  try {
-		const response = await axios.get("profiles/user", { withCredentials: true });
+		const response = await axios.get("profiles/membership", { withCredentials: true });
 		return response.data;
 	  } catch (error) {
 		return thunkAPI.rejectWithValue(error.response.data.error);

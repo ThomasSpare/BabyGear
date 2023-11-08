@@ -11,8 +11,10 @@ import ProfilePage from "./containers/ProfilePage";
 import Learn from "./containers/Learn";
 import "./App.css";
 import Strollers from "./containers/Strollers";
-
-
+import LogoutPage from "./containers/LogoutPage";
+import Seats from "./containers/Seats";
+import Bottles from "./containers/Bottles";
+import Reviews from "./containers/Reviews";
 
 
 
@@ -31,10 +33,14 @@ const App = () => {
                   <Route path='/coaching' element={<CoachArea />} />
                   <Route path='/dashboard' element={<DashboardPage />} />
                   <Route path='/login' element={<LoginPage />} />
+                  <Route path='/logout' element={<LogoutPage />} />
                   <Route path='/register' element={<RegisterPage />} />
                   <Route path='/profile' element={<ProfilePage />} />
                   <Route path='/learn' element={<Learn />} />
                   <Route path='/strollers' element={<Strollers />} />
+                  <Route path='/seats' element={<Seats />} />
+                  <Route path='/bottles' element={<Bottles />} />
+                  <Route path='/reviews' element={<Reviews />} />
               </Routes>
         </Router> 
     </div>
