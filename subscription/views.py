@@ -4,13 +4,13 @@ from .serializers import MembershipSerializer
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from authentication.authentication import JWTAuthentication
 from django.conf import settings
 from profiles.models import UserAccount as User
+from reviews.permissions import (AdminOrReadOnly, IsAdminOrStaffPermission, IsAuthorOrModerPermission, IsUserForSelfPermission)
 
 
 class GetUsersSubscriptionPlanAPIView(APIView):
-    authentication_classes = [JWTAuthentication]
+    authentication_classes = [AdminOrReadOnly, IsAdminOrStaffPermission]
 
     def get(self, request):
         user = request.user
@@ -25,7 +25,7 @@ class GetUsersSubscriptionPlanAPIView(APIView):
 
 
 class GetMembershipInfoAPIView(APIView):
-    authentication_classes = [JWTAuthentication]
+    authentication_classes = [AdminOrReadOnly, IsAdminOrStaffPermission, IsAuthorOrModerPermission, IsUserForSelfPermission]
 
     def get(self, request):
         user = request.user

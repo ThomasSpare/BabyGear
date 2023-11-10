@@ -3,10 +3,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import permissions, status
 from django.contrib.auth import get_user_model
-from authentication.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ProfileSerializer
-from .models import UserAccount
+from .serializers import (ProfileSerializer, UserCreateSerializer,
+                          UserSerializer)
 from django.conf import settings
 from profiles.models import UserAccount as User
 
@@ -22,4 +21,63 @@ class ProfileList(APIView):
             profiles, many=True, context={'request': request}
         )
         return Response(serializer.data)
+
+
+class RegisterView(APIView):
+    def post(self, request):
+        data = request.data
+
+        serializer = UserCreateSerializer(data=data)
+
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        user = serializer.create(serializer.validated_data)
+        user = UserSerializer(user)
+
+        return Response(user.data, status=status.HTTP_201_CREATED)
+
+
+class LoginAPIView(APIView):
+    def post(self, request):
+        profiles = User.objects.all()
+        email = request.data["email"]
+        password = request.data["password"]
+        serializer = ProfileSerializer(
+            profiles, many=True, context={'email': email, 'password': password}
+        )
+
+        if email is None or password is None:
+            return Response(
+                {"error": "Please provide both email and password"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        user = User.objects.filter(email=email).first()
+
+        if user is None:
+            return Response(
+                {"error": "Invalid email or password"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        response = Response()
+
+        response.status_code = status.HTTP_200_OK
+
+        return Response(user, status=status.HTTP_202_ACCEPTED)
+
+
+class LogoutAPIView(APIView):
+    def post(self, request):
+
+        response = Response()
+        response.delete_cookie("refresh_token")
+        response.delete_cookie("access_token")
+        response.data = {"success": True, "message": "Logged out"}
+        response.status_code = status.HTTP_200_OK
+
+        return response
+
+
 

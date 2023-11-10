@@ -28,34 +28,12 @@ REST_FRAMEWORK = {
     ],
 }
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': 'DEBUG',
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-    },
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-    },
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+PASSWORD = os.environ.get("PASSWORD")
 
 DEBUG = True
 
@@ -64,17 +42,20 @@ ALLOWED_HOSTS = [
     "baby-gear-3dce8aa6c614.herokuapp.com",
     "8000-thomasspare-babygear-h6nwfuvyzh7.ws-eu105.gitpod.io",
     "8000-thomasspare-babygear-q6ncmhqqapz.ws-eu105.gitpod.io",
-    "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu105.gitpod.io",
+    "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu106.gitpod.io",
     "8000-thomasspare-codecoach-9114q8n9hts.ws-eu105.gitpod.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-                    "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu105.gitpod.io"
+                    "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu106.gitpod.io"
                     ]
 
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.environ.get('CLIENT_ORIGIN')
+    ]
+    CORS_ORIGIN_WHITELIST = [
+        os.environ.get('CLIENT_ORIGIN'),
     ]
 if 'CLIENT_ORIGIN_DEV' in os.environ:
     extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
@@ -83,6 +64,7 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
     ]
 
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_HEADERS = True
 
 # Application definition
 
@@ -96,13 +78,17 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "cloudinary_storage",
     "cloudinary",
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     "profiles",
+    "reviews",
     "subscription",
     "rest_framework",
     "corsheaders",
     "rest_framework.authtoken",
+    "django_filters",
     "dj_rest_auth",
-    "authentication",
     "dj_rest_auth.registration",
     "chatapp",
 ]
@@ -159,12 +145,6 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 BASE_URL = os.environ.get("BASE_URL")
 
 DATABASES = {'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))}
-
-DATABASES = {
-   'default': {
-       'CONN_MAX_AGE': 500
-   }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {

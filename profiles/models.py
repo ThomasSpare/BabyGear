@@ -53,7 +53,7 @@ class UserAccount(AbstractUser):
         blank=True,
     )
     email = models.EmailField(unique=True, max_length=254)
-    username = None
+    username = models.CharField(max_length=50)
     birth_date = models.DateField(unique=True, null=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

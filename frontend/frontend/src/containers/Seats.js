@@ -1,6 +1,5 @@
 import Layout from '../components/Layout';
-import { Link, NavLink } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import beemoo_care1 from '../assets/images/seats/beemoo_care/beemoo_care1.jpg';
 import beemoo_care2 from '../assets/images/seats/beemoo_care/beemoo_care2.jpg';
 import beemoo_care3 from '../assets/images/seats/beemoo_care/beemoo_care3.jpg';
@@ -47,10 +46,10 @@ const Seats = () => {
         <h5 class="card-header">Featured</h5>
         <div class="card-body">
         <h5 class="card-title">Parents comments on Beemoo Care</h5>
-        <a href="#"><p class="card-text">Read Latest review by Angela</p></a>
+        <a href="/readreviews"><p class="card-text">Read Latest review by Angela</p></a>
         <p class="quote">I like the big wheels on this stroller...</p>
-        <a Link="" class="btn btn-light">Read reviews</a>
-        <a href="#" class="btn btn-light">Write a review</a>
+        <a href="/readreviews" class="btn btn-light">Read reviews</a>
+        <a href="/api/reviews" class="btn btn-light">Write a review</a>
         </div>
         </div>
         </div>
@@ -85,11 +84,15 @@ const Seats = () => {
         <h5 class="card-header">Featured</h5>
         <div class="card-body">
         <h5 class="card-title">Parents comments on Stokke Tripp Trapp</h5>
-        <a href="#"><p class="card-text">Read Latest review by Tom</p></a>
+        <a href="/readreviews"><p class="card-text">Read Latest review by Tom</p></a>
         <p class="quote">Very happy about this stroller. The best feature I think is
         the large storage compartment underneath...</p>
-        <a href="/reviews" class="btn btn-light">Read reviews</a>
-        <a href="#" class="btn btn-light">Write a review</a>
+        <Link to="/readreviews">
+        <a href="/readreviews" class="btn btn-light">Read reviews</a>
+        </Link>
+        <Link to="/api/reviews">
+        <a href="/api/reviews" class="btn btn-light">Write a review</a>
+        </Link>
         </div>
         </div>
         </div>

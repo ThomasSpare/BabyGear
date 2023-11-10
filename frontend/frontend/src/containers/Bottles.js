@@ -1,4 +1,5 @@
 import Layout from '../components/Layout';
+import { Link } from "react-router-dom";
 import nuk1 from '../assets/images/bottles/nuk/nuk1.jpg';
 import nuk2 from '../assets/images/bottles/nuk/nuk2.jpg';
 import phillips_avent1 from '../assets/images/bottles/phillips_avent/phillips_avent1.jpg';
@@ -40,10 +41,14 @@ const Bottles = () => {
         <h5 class="card-header">Featured</h5>
         <div class="card-body">
         <h5 class="card-title">Parents comments on Beemoo Care</h5>
-        <a href="#"><p class="card-text">Read Latest review by Angela</p></a>
+        <a href="/readreviews"><p class="card-text">Read Latest review by Angela</p></a>
         <p class="quote">I like the big wheels on this stroller...</p>
-        <a href="#" class="btn btn-light">Read reviews</a>
-        <a href="#" class="btn btn-light">Write a review</a>
+        <Link to="/readreviews">
+        <a href="/readreviews" class="btn btn-light">Read reviews</a>
+        </Link>
+        <Link to="/reviews">
+        <a href="/reviews" class="btn btn-light">Write a review</a>
+        </Link>
         </div>
         </div>
         </div>
@@ -78,11 +83,15 @@ const Bottles = () => {
         <h5 class="card-header">Featured</h5>
         <div class="card-body">
         <h5 class="card-title">Parents comments on Philips Avent</h5>
-        <a href="#"><p class="card-text">Read Latest review by Tom</p></a>
-        <p class="quote">Very happy about this stroller. The best feature I think is
+        <a href="/readreviews"><p class="card-text">Read Latest review by Tom</p></a>
+        <p class="/readreviews">Very happy about this stroller. The best feature I think is
         the large storage compartment underneath...</p>
-        <a href="#" class="btn btn-light">Read reviews</a>
-        <a href="#" class="btn btn-light">Write a review</a>
+        <Link to="/readreviews">
+        <a href="/readreviews" class="btn btn-light">Read reviews</a>
+        </Link>
+        <Link to="/reviews">
+        <a href="/reviews" class="btn btn-light">Write a review</a>
+        </Link>
         </div>
         </div>
         </div>
