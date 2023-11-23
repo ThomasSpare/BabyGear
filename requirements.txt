@@ -5,12 +5,9 @@
 # cloudinary==1.32.0
 # constantly==15.1.0
 # dj-database-url==0.5.0
-# dj-rest-auth==2.1.9
 # Django==4.2.2
-# django-allauth==0.54.0
 # django-cloudinary-storage==0.3.0
 # django-cors-headers==3.13.0
-# django-filter==2.4.0
 # djangorestframework==3.14.0
 # gunicorn==20.1.0
 # hyperlink==21.0.0
@@ -57,7 +54,10 @@ django-channels==0.7.0
 django-cors-headers==3.13.0
 django-countries==7.3.2
 django-heroku==0.3.1
+django-filter==2.4.0
 django-rest-auth==0.9.5
+dj-rest-auth==2.1.9
+django-allauth==0.54.0
 djangorestframework==3.13.1
 hiredis==2.0.0
 hyperlink==21.0.0

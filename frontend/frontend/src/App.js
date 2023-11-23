@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { checkAuth } from "./features/user";
+import "./api/axiosDefaults"
 import HomePage from "./containers/HomePage";
 import CoachArea from "./containers/CoachArea";
 import RegisterPage from "./containers/RegisterPage";
@@ -15,24 +15,20 @@ import LogoutPage from "./containers/LogoutPage";
 import Seats from "./containers/Seats";
 import Bottles from "./containers/Bottles";
 import Reviews from "./containers/Reviews";
+import SignUpForm from "./pages/auth/SignUpForm";
+import styles from "../src/styles/App.module.css"
 
 
 
-const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() =>{
-   dispatch(checkAuth()); 
-  }, [ dispatch ]);
-
+function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
         <Router>          
               <Routes>
                   <Route exact path='/' element={<HomePage />} />
                   <Route path='/coaching' element={<CoachArea />} />
                   <Route path='/dashboard' element={<DashboardPage />} />
-                  <Route path='/login' element={<LoginPage />} />
+                  <Route path='/signup' element={<SignUpForm />} />
                   <Route path='/logout' element={<LogoutPage />} />
                   <Route path='/register' element={<RegisterPage />} />
                   <Route path='/profile' element={<ProfilePage />} />
