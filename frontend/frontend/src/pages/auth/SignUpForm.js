@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import styles from "../../styles/SignInUpForm.module.css";
+import styles from "../../styles/SignUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
+import appStyles from "../../styles/App.module.css";
 import axios from "axios";
 
 
-import { Form, Button, Image, Col, Row, Container } from "react-bootstrap";
+import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
 
 const SignUpForm = () => {
   const [ signUpData, setSignUpData ] = useState({
@@ -17,7 +17,8 @@ const SignUpForm = () => {
   })
 
   const { username, password1, password2 } = signUpData;
-  const history = useHistory()
+  const [ errors, setErrors ] = useState({});
+  const history = useNavigate()
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
@@ -31,6 +32,7 @@ const SignUpForm = () => {
       await axios.post('/dj-rest-auth/registration/', signUpData)
       history.push('/signin')
     }catch(err){
+      setErrors(err.response?.data)
     }
   };
 
@@ -64,7 +66,9 @@ const SignUpForm = () => {
           onChange={handleChange}
           />
         </Form.Group>
-
+        {errors.username?.map((message, idx) =>
+        <Alert variant="warning" key={idx}>{ message }</Alert>
+        )}
         <Form.Group controlId="password2">
           <Form.Label className="d-none">Confirm password</Form.Label>
           <Form.Control

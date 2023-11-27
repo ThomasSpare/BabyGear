@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export const useRedirect = (userAuthStatus) => {
-  const history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     const handleMount = async () => {

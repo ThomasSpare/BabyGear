@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef} from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Layout from '../components/Layout';
 import { Navigate } from 'react-router-dom';
 // import { Toast } from "primereact/toast";
@@ -7,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
-function DashboardPage() {
+const DashboardPage = () => {
 
   return(
     <Layout title= 'Baby Gear' content='baby products, product comparison site, pregnant, newborn, smart gadgets'>

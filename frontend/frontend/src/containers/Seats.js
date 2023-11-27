@@ -14,7 +14,7 @@ const Seats = () => {
         <div className="container" id="learn">
         <div className="row" id="row-learn">
         <div className="col-md-6 offset-md-3">
-        <h1 className="darkbacktext">Baby Products</h1>
+        <h1 className="darkbacktext">Baby Seats</h1>
         </div>
         </div>
         <div>    

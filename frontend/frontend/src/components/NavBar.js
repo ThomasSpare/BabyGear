@@ -1,11 +1,9 @@
 
 import React from "react";
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/images/babygear_BRAND/BGMEDIUMlogo2.png";
 
 const NavBar = () => {
-  const { isAuthenticated } = useSelector(state => state.user);
 
 
   const authLinks = (
@@ -64,7 +62,7 @@ const NavBar = () => {
             Babyproducts
             </NavLink>
           </li>
-          { isAuthenticated ? authLinks : guestLinks }
+          {/* { isAuthenticated ? authLinks : guestLinks } */}
           <li className="nav-item">
             <NavLink className='nav-link' to='/profile'> 
             Our Mission

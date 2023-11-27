@@ -3,18 +3,15 @@ import ReactDOM from "react-dom/client";
 import './index.css';
 import App from './App.js';
 import reportWebVitals from './reportWebVitals';
-import "./api/axiosDefault";
-import { CurrentUserProvider } from "./contexts/CurrentUserContext";
+import "./api/axiosDefaults";
 
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-<React.StrictMode>
-  <CurrentUserProvider>
+  <React.StrictMode>
       <App />
-  </CurrentUserProvider>
-</React.StrictMode>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
