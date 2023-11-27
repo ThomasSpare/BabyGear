@@ -44,7 +44,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-                    "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu106.gitpod.io"
+                    "https://8000-thomasspare-babygear-vcpagz97del.ws-eu106.gitpod.io"
                     ]
 
 if 'CLIENT_ORIGIN' in os.environ:

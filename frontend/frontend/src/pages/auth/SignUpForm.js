@@ -16,7 +16,7 @@ const SignUpForm = () => {
     password2: ''
   })
 
-  const { username1, password1, password2 } = signUpData;
+  const { username, password1, password2 } = signUpData;
   const [ errors, setErrors ] = useState({});
   const history = useNavigate()
   const handleChange = (event) => {
@@ -43,14 +43,14 @@ const SignUpForm = () => {
         <Container className={`${appStyles.Content} p-4 `}>
           <h1 className={styles.Header}>sign up</h1>
           <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="username1">
+        <Form.Group controlId="username">
           <Form.Label className="d-none">username</Form.Label>
           <Form.Control
           className={styles.input} 
           type="text" 
           placeholder="Username" 
-          name="username1"
-          value={username1}
+          name="username"
+          value={username}
           onChange={handleChange}
           />
         </Form.Group>

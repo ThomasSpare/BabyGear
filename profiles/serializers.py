@@ -5,8 +5,8 @@ from rest_framework.serializers import ModelSerializer
 from .models import UserAccount
 from django.conf import settings
 from pdb import set_trace
-from .models import UserAccount as User
-User = settings.AUTH_USER_MODEL
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class ProfileSerializer(ModelSerializer):
@@ -14,6 +14,7 @@ class ProfileSerializer(ModelSerializer):
         model = User
         fields = [
             "avatar",
+            "username",
             "first_name",
             "last_name",
             "email",
@@ -26,7 +27,11 @@ class ProfileSerializer(ModelSerializer):
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('__all__')
+        fields = ('username', 'password1', 'password2')
+
+        extra_kwargs = {
+            "password1": {"write_only": True},
+        }
 
     def validate(self, data):
         user = User(**data)
@@ -43,7 +48,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create_user(
-            username=validated_data["username1"],
+            username=validated_data["username"],
             password=validated_data["password1"],
         )
         return user
@@ -56,7 +61,7 @@ class UserSerializer(ModelSerializer):
         model = User
         fields = [
             "id",
-            "username1",
+            "username",
             "first_name",
             "last_name",
             "email",
@@ -72,9 +77,9 @@ class UserSerializer(ModelSerializer):
         }
 
     def create(self, validated_data):
-        password1 = validated_data.pop("password1", None)
+        password = validated_data.pop("password1", None)
         instance = self.Meta.model(**validated_data)
-        if password1 is not None:
-            instance.set_password(password1)
+        if password is not None:
+            instance.set_password(password)
         instance.save()
         return instance

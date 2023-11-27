@@ -6,7 +6,11 @@ from .models import UserAccount
 class AdminUser(admin.ModelAdmin):
     list_display = (
         "id",
+        "username",
+        "password1",
         "email",
+        "parent",
+        "country",
         "first_name",
         "last_name",
         "is_staff",
