@@ -6,6 +6,7 @@ from .models import UserAccount
 from django.conf import settings
 from pdb import set_trace
 from .models import UserAccount as User
+User = settings.AUTH_USER_MODEL
 
 
 class ProfileSerializer(ModelSerializer):
@@ -18,33 +19,32 @@ class ProfileSerializer(ModelSerializer):
             "email",
             "birth_date",
             "country",
+            "password1",
         ]
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "email", "password")
+        fields = ('__all__')
 
     def validate(self, data):
         user = User(**data)
-        password = data.get("password")
+        password = data.get("password1")
 
         try:
             validate_password(password, user)
         except exceptions.ValidationError as e:
             serializer_errors = serializers.as_serializer_error(e)
             raise exceptions.ValidationError(
-                {"password": serializer_errors["non_field_errors"]}
+                {"password1": serializer_errors["non_field_errors"]}
             )
         return data
 
     def create(self, validated_data):
         user = User.objects.create_user(
-            first_name=validated_data["first_name"],
-            last_name=validated_data["last_name"],
-            email=validated_data["email"],
-            password=validated_data["password"],
+            username=validated_data["username1"],
+            password=validated_data["password1"],
         )
         return user
 
@@ -56,24 +56,25 @@ class UserSerializer(ModelSerializer):
         model = User
         fields = [
             "id",
+            "username1",
             "first_name",
             "last_name",
             "email",
             "country",
             "birth_date",
-            "password",
+            "password1",
             "avatar",
             "parent",
         ]
         extra_kwargs = {
-            "password": {"write_only": True},
+            "password1": {"write_only": True},
             "avatar": {"required": False},
         }
 
     def create(self, validated_data):
-        password = validated_data.pop("password", None)
+        password1 = validated_data.pop("password1", None)
         instance = self.Meta.model(**validated_data)
-        if password is not None:
-            instance.set_password(password)
+        if password1 is not None:
+            instance.set_password(password1)
         instance.save()
         return instance

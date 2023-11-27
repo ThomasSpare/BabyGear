@@ -16,7 +16,7 @@ const SignUpForm = () => {
     password2: ''
   })
 
-  const { username, password1, password2 } = signUpData;
+  const { username1, password1, password2 } = signUpData;
   const [ errors, setErrors ] = useState({});
   const history = useNavigate()
   const handleChange = (event) => {
@@ -29,8 +29,8 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try{
-      await axios.post('/dj-rest-auth/registration/', signUpData)
-      history.push('/signin')
+      await axios.post("profiles/register", signUpData)
+      history.push('/signup')
     }catch(err){
       setErrors(err.response?.data)
     }
@@ -43,14 +43,14 @@ const SignUpForm = () => {
         <Container className={`${appStyles.Content} p-4 `}>
           <h1 className={styles.Header}>sign up</h1>
           <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="username">
+        <Form.Group controlId="username1">
           <Form.Label className="d-none">username</Form.Label>
           <Form.Control
           className={styles.input} 
           type="text" 
           placeholder="Username" 
-          name="username"
-          value={username}
+          name="username1"
+          value={username1}
           onChange={handleChange}
           />
         </Form.Group>
@@ -66,9 +66,9 @@ const SignUpForm = () => {
           onChange={handleChange}
           />
         </Form.Group>
-        {errors.username?.map((message, idx) =>
+        {/* {errors.username1?.map((message, idx) =>
         <Alert variant="warning" key={idx}>{ message }</Alert>
-        )}
+        )} */}
         <Form.Group controlId="password2">
           <Form.Label className="d-none">Confirm password</Form.Label>
           <Form.Control

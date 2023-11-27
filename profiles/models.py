@@ -16,29 +16,24 @@ class UserManager(BaseUserManager):
         first_name=None,
         last_name=None,
         email=None,
-        password=None,
     ):
         user = self.model(
             first_name=first_name,
             last_name=last_name,
             email=self.normalize_email(email),
-            password=password,
         )
-        user.set_password(password)
         user.save(using=self._db)
         user.is_staff = False
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, first_name, last_name, email, password=None):
+    def create_superuser(self, first_name, last_name, email):
         user = self.create_user(
             first_name=first_name,
             last_name=last_name,
             email=email,
-            password=password,
         )
 
-        user.set_password(password)
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
@@ -53,15 +48,15 @@ class UserAccount(AbstractUser):
         blank=True,
     )
     email = models.EmailField(unique=True, max_length=254)
-    username = models.CharField(max_length=50)
     birth_date = models.DateField(unique=True, null=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     country = models.CharField(max_length=100)
     parent = models.BooleanField(default=None, null=True)
+    username1 = models.CharField(default=None, null=True, max_length=50)
+    password1 = models.CharField(default=None, null=True, max_length=50)
 
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name", "last_name"]
+    REQUIRED_FIELDS = ["username1", "password1"]
 
     objects = UserManager()
 
