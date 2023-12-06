@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import styles from "../../styles/SignUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -18,7 +18,7 @@ const SignUpForm = () => {
 
   const { username, password1, password2 } = signUpData;
   const [ errors, setErrors ] = useState({});
-  const history = useNavigate()
+  const history = useHistory()
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
@@ -88,7 +88,7 @@ const SignUpForm = () => {
 
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
-          <Link className={styles.Link} to="/signin">
+          <Link className={styles.Link} to="/login">
             Already have an account? <span>Sign in</span>
           </Link>
         </Container>
