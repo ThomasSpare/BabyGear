@@ -9,7 +9,7 @@ admin.site.register(Title)
 class CategoryGenreAdmin(admin.ModelAdmin):
     list_display = (
         'slug',
-        'product'
+        'Product Type'
     )
     search_fields = ('slug',)
     list_filter = ('slug',)

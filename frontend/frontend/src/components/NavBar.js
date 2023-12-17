@@ -30,7 +30,7 @@ const NavBar = () => {
     <li className="nav-item">
       <NavLink
         className='nav-item'
-        to={`/profiles/${currentUser?.profile_id}`}
+        to={`followers/${currentUser?.id}`}
         >
         <Avatar src={currentUser?.avatar} text="Profile" height={40} />
       </NavLink>

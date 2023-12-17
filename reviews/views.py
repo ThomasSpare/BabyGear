@@ -24,16 +24,16 @@ class CategoryViewSet(CreateListDestroyViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-        IsAuthorOrModerPermission]
+    permissions.IsAuthenticatedOrReadOnly,
+    IsAuthorOrModerPermission]
 
     def perform_create(self, serializer):
-        title_id = self.kwargs.get('title_id')
+        title_id = self.kwargs.get('title')
         productname = get_object_or_404(Title, id=title_id)
         serializer.save(author=self.request.user, productname=productname)
 
     def get_queryset(self):
-        title_id = self.kwargs.get('title_id')
+        title_id = self.kwargs.get('title')
         productname = get_object_or_404(Title, id=title_id)
         return productname.reviews.all()
 
@@ -46,6 +46,6 @@ class TitleViewSet(viewsets.ModelViewSet):
     permission_classes = (AdminOrReadOnly,)
 
     def get_serializer_class(self):
-        if self.action in ['create', 'update', 'partial_update']:
+        if self.action in ['create', 'product_type', 'name_of_product', 'update', 'partial_update']:
             return TitleSerializer
-        return ReadTitleSerializer
+        return TitleSerializer

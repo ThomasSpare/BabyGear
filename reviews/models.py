@@ -12,7 +12,7 @@ class Category(models.Model):
     )
     slug = models.SlugField(
         unique=True,
-        verbose_name='product'
+        verbose_name='Product Type'
     )
 
     class Meta:
@@ -24,32 +24,34 @@ class Category(models.Model):
 
 
 class Title(models.Model):
-    name_of_product = models.CharField(
-        max_length=256,
+        name_of_product = models.CharField(
+        max_length=200,
         verbose_name='Product Name'
     )
-    release_year = models.SmallIntegerField(
+        release_year = models.SmallIntegerField(
         validators=[year_validator],
         verbose_name='Release year'
     )
-    description = models.TextField(
+        description = models.TextField(
         blank=True,
         null=True,
         verbose_name='Description'
     )
-    category = models.ForeignKey(
+        category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
     )
+        slug = models.SlugField(max_length=200, unique=True, blank=True)
 
-    class Meta:
-        verbose_name = "Description"
-        verbose_name_plural = "Descriptions"
 
-    def __str__(self):
-        return self.name_of_product
+        class Meta:
+            verbose_name = "Description"
+            verbose_name_plural = "Descriptions"
+
+            def __str__(self):
+                return self.name_of_product
 
 
 class Review(models.Model):

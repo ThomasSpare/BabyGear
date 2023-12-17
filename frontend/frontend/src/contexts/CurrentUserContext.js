@@ -18,6 +18,8 @@ export const CurrentUserProvider = ({ children }) => {
     try {
       const { data } = await axiosRes.get("profiles/user");
       setCurrentUser(data);
+      console.log(setCurrentUser);
+      console.log(setCurrentUser(data));
     } catch (err) {
       // console.log(err);
     }
