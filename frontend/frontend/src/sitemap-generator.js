@@ -7,7 +7,7 @@ require("babel-register")({
   
   function generateSitemap() {
     return new Sitemap(router)
-      .build("https://codecoach.com/")
+      .build("https://babygear.com/")
       .save("./public/sitemap.xml");
   }
   

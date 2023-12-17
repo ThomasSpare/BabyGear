@@ -95,6 +95,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     "profiles",
+    "followers",
     "reviews",
     "subscription",
     "rest_framework",
