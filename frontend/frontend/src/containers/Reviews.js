@@ -1,9 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
 import Layout from '../components/Layout';
-import { Navigate } from 'react-router-dom';
-// import { Toast } from "primereact/toast";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 
 const Reviews = () => {

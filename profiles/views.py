@@ -1,25 +1,37 @@
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
 from rest_framework.permissions import IsAuthenticated
 from .serializers import (ProfileSerializer, UserCreateSerializer,
                           UserSerializer)
 from django.conf import settings
 from profiles.models import UserAccount as User
+from rest_framework import viewsets
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user_model
+
+
+
 
 
 class ProfileList(APIView):
     """
-    List all profiles
-    No Create view (post method), as profile creation handled by django signals
+    List all profiles Only GET Allowed
     """
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         profiles = User.objects.all()
-        serializer = ProfileSerializer(
-            profiles, many=True, context={'request': request}
-        )
+        serializer = ProfileSerializer(profiles, many=True)
         return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = get_object_or_404(User, username=username)
+        if not user.check_password(password):
+            return Response({"error": "Invalid username or password"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
 
 
 class RegisterView(APIView):
@@ -41,32 +53,26 @@ class RegisterView(APIView):
 
 class LoginAPIView(APIView):
     def post(self, request):
-        profiles = User.objects.all()
-        email = request.data["email"]
-        password = request.data["password"]
-        serializer = ProfileSerializer(
-            profiles, many=True, context={'email': email, 'password': password}
-        )
+        username = request.data.get('username')
+        password = request.data.get("password")
 
-        if email is None or password is None:
+        if not username or not password:
             return Response(
-                {"error": "Please provide both email and password"},
+                {"error": "Please provide both Username and Password"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        user = User.objects.filter(email=email).first()
+        user = authenticate(request, username=username, password=password)
 
         if user is None:
             return Response(
-                {"error": "Invalid email or password"},
+                {"error": "Invalid username or password"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        response = Response()
-
-        response.status_code = status.HTTP_200_OK
-
-        return Response(user, status=status.HTTP_202_ACCEPTED)
+        login(request, user)
+        serializer = ProfileSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class LogoutAPIView(APIView):

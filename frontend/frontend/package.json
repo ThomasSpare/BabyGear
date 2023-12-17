@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.2",
+    "hover.css": "^2.3.2",
     "install": "^0.13.0",
     "jwt-decode": "^4.0.0",
     "npm": "^9.7.2",

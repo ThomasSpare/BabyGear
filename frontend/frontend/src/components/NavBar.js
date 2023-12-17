@@ -1,40 +1,63 @@
 
 import React from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../contexts/CurrentUserContext";
 import logo from "../assets/images/babygear_BRAND/BGMEDIUMlogo2.png";
+import Avatar from "./Avatar";
+import { removeTokenTimestamp} from "../utils/utils";
+
 
 const NavBar = () => {
+  const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
 
+  const handleLogOut = async () => {
+    try {
+      await axios.post("profiles/logout");
+      setCurrentUser(null);
+      removeTokenTimestamp();
+    } catch (err) {
+      // console.log(err)
+    }
+  };
 
   const authLinks = (
-		<React.Fragment>
-			<li className='nav-item'>
-				<NavLink className='nav-link' to='/dashboard'>
-					Dashboard
-				</NavLink>
-			</li>
-			<li className='nav-item'>
-				<a className='nav-link' href='/logout'>
-					Logout
-				</a>
-			</li>
-      </React.Fragment>
+      <>
+    <li className="nav-item">
+      <NavLink
+        className='nav-item'
+        to={`/profiles/${currentUser?.profile_id}`}
+        >
+        <Avatar src={currentUser?.avatar} text="Profile" height={40} />
+      </NavLink>
+      </li>
+      <li className="nav-item">
+      <NavLink className='nav-item' to="/" onClick={handleLogOut}>
+      <i className="fas fa-sign-out-alt"></i>Logout
+      </NavLink>
+      </li>
+      </>
 	);
 
   const guestLinks = (
-    <React.Fragment>
-			<li className='nav-item'>
-				<NavLink className='nav-link' to='/login'>
-					Login
-				</NavLink>
-			</li>
-			<li className='nav-item'>
-				<NavLink className='nav-link' to='/register'>
-					Register
-				</NavLink>
-			</li>
-    </React.Fragment>
-	);
+    <>
+    <li>
+    <NavLink className='nav-link' to="/signup">
+      Sign up
+    </NavLink>
+    </li>
+    <li>
+    <NavLink className='nav-link' to="/login">
+      Login
+    </NavLink>
+    </li>
+    </>
+);
+
   
   return (  
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -62,19 +85,12 @@ const NavBar = () => {
             Babyproducts
             </NavLink>
           </li>
-          {/* { isAuthenticated ? authLinks : guestLinks } */}
           <li className="nav-item">
             <NavLink className='nav-link' to='/profile'> 
             Our Mission
             </NavLink>
             </li>
-            <li className="nav-item">
-            <NavLink className='nav-link'
-              to="/signup"
-            >
-            Sign up
-            </NavLink>
-          </li>
+          {currentUser ? authLinks : guestLinks }
 
         </ul>
       </div>

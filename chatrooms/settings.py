@@ -14,7 +14,7 @@ CLOUDINARY_STORAGE = {
 }
 
 BASE_URL = [
-        "https://8000-thomasspare-babygear-q6ncmhqqapz.ws-eu105.gitpod.io",
+        "https://8000-thomasspare-babygear-vcpagz97del.ws-eu107.gitpod.io",
 ]
 
 MEDIA_URL = '/media/'
@@ -22,11 +22,11 @@ MEDIA_URL = '/media/'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 REST_FRAMEWORK = {
-    "EXCEPTION_HANDLER": "authentication.exceptions.status_code_handler",
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
-    ],
+   'DEFAULT_AUTHENTICATION_CLASSES': [
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
+   ],
 }
+
 
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
@@ -50,27 +50,33 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost:8000",
     "baby-gear-3dce8aa6c614.herokuapp.com",
-    "https://8000-thomasspare-babygear-vcpagz97del.ws-eu106.gitpod.io"
+    "https://8000-thomasspare-babygear-vcpagz97del.ws-eu107.gitpod.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-                    "https://8000-thomasspare-babygear-vcpagz97del.ws-eu106.gitpod.io"
+                    "https://8000-thomasspare-babygear-vcpagz97del.ws-eu107.gitpod.io",
+                    "https://8080-thomasspare-babygear-vcpagz97del.ws-eu107.gitpod.io",
                     ]
 
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
-    CORS_ORIGIN_WHITELIST = [
-        os.environ.get('CLIENT_ORIGIN'),
-    ]
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]
-
 CORS_ALLOW_CREDENTIALS = True
+
+if 'CLIENT_ORIGIN' in os.environ:
+   CORS_ALLOWED_ORIGINS = [
+       os.environ.get('CLIENT_ORIGIN')
+   ]
+   CORS_ORIGIN_WHITELIST = [
+       os.environ.get('CLIENT_ORIGIN'),
+   ]
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+   extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+   CORS_ALLOWED_ORIGIN_REGEXES = [
+       rf"{extracted_url}\.gitpod\.io$",
+   ]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+       rf"{extracted_url}\.gitpod\.io$",
+   ]
+
 CORS_ALLOW_ALL_HEADERS = True
 
 # Application definition

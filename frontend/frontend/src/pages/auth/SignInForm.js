@@ -35,7 +35,10 @@ function SignInForm() {
     event.preventDefault();
 
     try {
+      console.log(username);
+      console.log(password);
       const { data } = await axios.post("profiles/login", signInData);
+      console.log(data);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
       history.goBack();
@@ -49,6 +52,7 @@ function SignInForm() {
       ...signInData,
       [event.target.name]: event.target.value,
     });
+    console.log(signInData);
   };
 
   return (
@@ -115,7 +119,7 @@ function SignInForm() {
       >
         <Image
           className={`${appStyles.FillerImage}`}
-          src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"}
+          src={"https://res.cloudinary.com/djunroohl/image/upload/v1702741842/BabyGear_PP5/r6nra2wc1paed500tpez.jpg"}
         />
       </Col>
     </Row>
