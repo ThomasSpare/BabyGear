@@ -7,7 +7,7 @@ class TitleFilter(django_filters.FilterSet):
     release_year = django_filters.CharFilter(field_name='release_year__slug')
     category = django_filters.CharFilter(
         field_name='category',
-        lookup_expr='icontains'
+        lookup_expr='Product Name'
     )
     year = django_filters.NumberFilter(field_name='release_year')
 

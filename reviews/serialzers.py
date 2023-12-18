@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
-from reviews.models import Category, Review, Title
+from reviews.models import Category, Review, Title, ProductType
 from profiles.models import UserAccount as User
 from .utils import CurrentTitleDefault
 
@@ -11,18 +11,36 @@ class CategorySerializer(serializers.ModelSerializer):
         exclude = ('id',)
 
 
+class ProductSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductType
+        exclude = ('id',)
+
+
 class TitleSerializer(serializers.ModelSerializer):
         product_type = serializers.SlugRelatedField(
-        queryset=Category.objects.all(), slug_field='product_type', many=True
+        queryset=Category.objects.all(), slug_field='slug', many=True
     )
         name_of_product = serializers.SlugRelatedField(
-        queryset=Title.objects.all(), slug_field='name_of_product'
+        queryset=Title.objects.all(), slug_field='slug'
     )
 
         class Meta:
             model = Title
-            fields = ('id', 'name_of_product', 'product_type', 'release_year', 'description',
+            fields = ('profile_id', 'name_of_product', 'product_type', 'release_year', 'description',
                     'category', 'slug')
+
+
+class ReadTitleSerializer(serializers.ModelSerializer):
+    score = serializers.IntegerField(read_only=True)
+    product_type = ProductSerializer(read_only=True, many=True)
+    category = CategorySerializer(read_only=True)
+
+    class Meta:
+        model = Title
+        fields = ('id', 'name_of_product', 'release_year', 'product_type', 'description',
+                    'category', 'score',)
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -35,7 +53,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             default=CurrentTitleDefault())
 
         class Meta:
-            fields = ('id', 'review', 'title', 'author', 'score', 'pub_date')
+            fields = ('profile_id', 'review', 'title', 'author', 'score', 'pub_date')
             model = Review
             validators = [
                 UniqueTogetherValidator(

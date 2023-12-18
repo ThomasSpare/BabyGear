@@ -23,6 +23,24 @@ class Category(models.Model):
         return self.product_type
 
 
+class ProductType(models.Model):
+    product_type = models.CharField(
+        max_length=256,
+        verbose_name='Product Type'
+    )
+    slug = models.SlugField(
+        unique=True,
+        verbose_name='Type'
+    )
+
+    class Meta:
+        verbose_name = "Type"
+        verbose_name_plural = "Types"
+
+    def __str__(self):
+        return self.product_type
+
+
 class Title(models.Model):
         name_of_product = models.CharField(
         max_length=200,
@@ -47,8 +65,8 @@ class Title(models.Model):
 
 
         class Meta:
-            verbose_name = "Description"
-            verbose_name_plural = "Descriptions"
+            verbose_name = "Product Name"
+            verbose_name_plural = "Product Names"
 
             def __str__(self):
                 return self.name_of_product
