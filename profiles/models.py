@@ -49,6 +49,7 @@ class UserAccount(AbstractUser):
        null=True,
        blank=True,
    )
+   owner = models.OneToOneField(User, on_delete=models.CASCADE)
    email = models.EmailField(default=None, null=True, max_length=254)
    date_joined = models.DateTimeField(unique=True, null=True)
    birth_date = models.DateField(unique=True, null=True)

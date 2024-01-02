@@ -31,7 +31,7 @@ function ProfilePage() {
   const [profilePosts, setProfilePosts] = useState({ results: [] });
 
   const currentUser = useCurrentUser();
-  const { id } = useParams();
+  const { username } = useParams();
 
   const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
@@ -44,8 +44,8 @@ function ProfilePage() {
       try {
         const [{ data: pageProfile }, { data: profilePosts }] =
           await Promise.all([
-            axiosReq.get(`/profiles/${id}/`),
-            axiosReq.get(`/reviews/?owner__profile=${id}`),
+            axiosReq.get(`/profiles/profiles/${username}/`),
+            axiosReq.get(`/reviews/?owner__profile=${username}`),
           ]);
         setProfileData((prevState) => ({
           ...prevState,
@@ -62,7 +62,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+      {profile?.is_owner && <ProfileEditDropdown id={profile?.username} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image

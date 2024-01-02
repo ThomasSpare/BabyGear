@@ -16,7 +16,7 @@ export const CurrentUserProvider = ({ children }) => {
 
   const handleMount = async () => {
     try {
-      const { data } = await axiosRes.get("profiles/user");
+      const { data } = await axiosRes.get("profiles/profiles");
       setCurrentUser(data);
     } catch (err) {
       // console.log(err);

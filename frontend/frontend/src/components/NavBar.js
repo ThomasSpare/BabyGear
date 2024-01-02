@@ -6,7 +6,7 @@ import {
   useSetCurrentUser,
 } from "../contexts/CurrentUserContext";
 import logo from "../assets/images/babygear_BRAND/BGMEDIUMlogo2.png";
-import Avatar from "./Avatar";
+import Avatar from "../components/Avatar";
 import { removeTokenTimestamp} from "../utils/utils";
 
 
@@ -31,7 +31,7 @@ const NavBar = () => {
     <li className="nav-item">
       <NavLink
         className='nav-item'
-        to={`/profiles/${currentUser?.profile_id}`}
+        to={`/profiles/profiles/${currentUser?.username}`}
         >
         <Avatar src={currentUser?.avatar} text="Profile" height={40} />
       </NavLink>
