@@ -9,37 +9,38 @@ User = settings.AUTH_USER_MODEL
 
 
 class UserManager(BaseUserManager):
-   """
-   Admin Create and saves a User with the given username, email and password.
-   """
+    """
+    Admin Create and saves a User with the given username, email and password.
+    """
+    def create_user(
+            self,
+            username=None,
+            email=None,
+            password=None,
+        ):
+            user = self.model(
+                username=username,
+                email=self.normalize_email(email),
+            )
+            user.set_password(password)
+            user.save(using=self._db)
+            user.is_staff = False
+            user.save(using=self._db)
+            return user
 
-   def create_user(
-       self,
-       username=None,
-       email=None,
-       password=None,
-   ):
-       user = self.model(
-           username=username,
-           email=self.normalize_email(email),
-       )
-       user.set_password(password)
-       user.save(using=self._db)
-       user.is_staff = False
-       user.save(using=self._db)
-       return user
+    def create_superuser(self, username, email, password):
+        owner = Owner.objects.create(name='User')
+        user = self.create_user(
+            username=username,
+            email=email,
+            password=password,
+            owner = owner,
+        )
 
-   def create_superuser(self, username, email, password):
-       user = self.create_user(
-           username=username,
-           email=email,
-           password=password,
-       )
-
-       user.is_superuser = True
-       user.is_staff = True
-       user.save(using=self._db)
-       return user
+        user.is_superuser = True
+        user.is_staff = True
+        user.save(using=self._db)
+        return user
 
 
 class UserAccount(AbstractUser):
@@ -49,7 +50,7 @@ class UserAccount(AbstractUser):
        null=True,
        blank=True,
    )
-   owner = models.OneToOneField(User, on_delete=models.CASCADE)
+   owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
    email = models.EmailField(default=None, null=True, max_length=254)
    date_joined = models.DateTimeField(unique=True, null=True)
    birth_date = models.DateField(unique=True, null=True)
