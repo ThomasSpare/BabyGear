@@ -22,6 +22,24 @@ class ProfileSerializer(serializers.ModelSerializer):
            'birth_date', 'country', 'password', 'date_joined', 'parent'
        ]
 
+       def get_following_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            following = Follower.objects.filter(
+                owner=user, followed=obj.owner
+            ).first()
+            # print(following)
+            return following.id if following else None
+        return None
+
+class Meta:
+    model = UserAccount
+    fields = [
+        'id', 'date_joined', 'birth_date', 'username',
+        'country', 'avatar', 'following_id',
+        'posts_count', 'followers_count', 'following_count',
+    ]
+
 
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:

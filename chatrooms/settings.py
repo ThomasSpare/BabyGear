@@ -27,7 +27,6 @@ REST_FRAMEWORK = {
    ],
 }
 
-
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = 'my-app-auth'
@@ -97,6 +96,7 @@ INSTALLED_APPS = [
     "profiles",
     "followers",
     "reviews",
+    "comments",
     "subscription",
     "rest_framework",
     "corsheaders",

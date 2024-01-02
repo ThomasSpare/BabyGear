@@ -25,7 +25,7 @@ class ProductViewSet(CreateListDestroyViewSet):
     queryset = ProductType.objects.all()
     serializer_class = ProductSerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('Product Type',)
+    search_fields = ('product_type',)
     lookup_field = 'slug'
     permission_classes = (AdminOrReadOnly,)
 
@@ -37,14 +37,14 @@ class ReviewViewSet(viewsets.ModelViewSet):
     IsAuthorOrModerPermission]
 
     def perform_create(self, serializer):
-        title_id = self.kwargs.get('title_id')
+        title = self.kwargs.get('title')
         name_of_product = get_object_or_404(Title, id=id)
         serializer.save(author=self.request.user, name_of_product=name_of_product)
 
     def get_queryset(self):
-        title_id = self.kwargs.get('title_id')
-        productname = get_object_or_404(Title, id=id)
-        return productname.reviews.all()
+        title_str = self.kwargs.get('title')
+        title = get_object_or_404(Title, name=title_str)
+        return Review.objects.filter(title=title)
 
 
 class TitleViewSet(viewsets.ModelViewSet):

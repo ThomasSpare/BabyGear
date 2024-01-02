@@ -1,4 +1,3 @@
-
 import React from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
@@ -11,15 +10,17 @@ import Avatar from "./Avatar";
 import { removeTokenTimestamp} from "../utils/utils";
 
 
+
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-
-  const handleLogOut = async () => {
-    try {
-      await axios.post("profiles/logout");
-      setCurrentUser(null);
-      removeTokenTimestamp();
+  
+      const handleSignOut = async () => {
+        try{
+          await axios.post("profiles/logout");
+          setCurrentUser(null);
+          removeTokenTimestamp();
+          window.location.href = "/";
     } catch (err) {
       // console.log(err)
     }
@@ -30,13 +31,13 @@ const NavBar = () => {
     <li className="nav-item">
       <NavLink
         className='nav-item'
-        to={`followers/${currentUser?.id}`}
+        to={`/profiles/${currentUser?.profile_id}`}
         >
         <Avatar src={currentUser?.avatar} text="Profile" height={40} />
       </NavLink>
       </li>
       <li className="nav-item">
-      <NavLink className='nav-item' to="/" onClick={handleLogOut}>
+      <NavLink className='nav-item' to="/login" onClick={handleSignOut}>
       <i className="fas fa-sign-out-alt"></i>Logout
       </NavLink>
       </li>
@@ -86,7 +87,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className='nav-link' to='/profile'> 
+            <NavLink className='nav-link' to='/mission'> 
             Our Mission
             </NavLink>
             </li>

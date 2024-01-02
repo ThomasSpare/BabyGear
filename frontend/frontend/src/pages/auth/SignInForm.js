@@ -47,6 +47,10 @@ function SignInForm() {
     }
   };
 
+  function handleClick() {
+    history.push("/");
+  }
+
   const handleChange = (event) => {
     setSignInData({
       ...signInData,
@@ -97,6 +101,7 @@ function SignInForm() {
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
               type="submit"
+              onClick={handleClick}
             >
               Sign in
             </Button>

@@ -1,6 +1,5 @@
 from django.urls import path
-from profiles.views import ProfileList, RegisterView, LoginAPIView, LogoutAPIView
-from subscription import views
+from profiles.views import ProfileList, ProfileDetail, RegisterView, LoginAPIView, LogoutAPIView
 
 
 urlpatterns = [    
@@ -8,5 +7,7 @@ urlpatterns = [
     path("register", RegisterView.as_view(), name="register"),
     path("login", LoginAPIView.as_view(), name="login"),
     path("logout", LogoutAPIView.as_view(), name="logout"),
-    path("membership", views.GetUsersSubscriptionPlanAPIView.as_view(), name="membership"),
+    # path("membership", views.GetUsersSubscriptionPlanAPIView.as_view(), name="membership"),
+    path('profiles/', ProfileList.as_view(), name="profiles"),
+    path('profiles/<int:pk>/', ProfileDetail.as_view()),
 ]

@@ -1,6 +1,6 @@
 import Layout from '../components/Layout';
 
-const ProfilePage = () => {
+const MissionPage = () => {
     return (
       <Layout
         title="Baby Gear"
@@ -183,4 +183,4 @@ const ProfilePage = () => {
     );     
     };
 
-    export default ProfilePage;
+    export default MissionPage;

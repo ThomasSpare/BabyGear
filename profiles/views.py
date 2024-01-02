@@ -1,19 +1,22 @@
 from rest_framework.views import APIView
+from django.db.models import Count
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
+from .permissions import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 from .serializers import (ProfileSerializer, UserCreateSerializer,
                           UserSerializer)
 from django.conf import settings
 from profiles.models import UserAccount as User
-from rest_framework import viewsets
+from rest_framework import viewsets, filters, generics
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
-
-
-
+from chatrooms.settings import (
+    JWT_AUTH_COOKIE, JWT_AUTH_REFRESH_COOKIE, JWT_AUTH_SAMESITE,
+    JWT_AUTH_SECURE,
+)
 
 
 class ProfileList(APIView):
@@ -32,6 +35,19 @@ class ProfileList(APIView):
         if not user.check_password(password):
             return Response({"error": "Invalid username or password"}, status=status.HTTP_400_BAD_REQUEST)
         return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+
+
+class ProfileDetail(generics.RetrieveUpdateAPIView):
+    """
+    Retrieve or update a profile if you're the owner.
+    """
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = User.objects.annotate(
+        posts_count=Count('author', distinct=True),
+        followers_count=Count('author', distinct=True),
+        following_count=Count('author', distinct=True)
+    ).order_by('-date_joined')
+    serializer_class = ProfileSerializer
 
 
 class RegisterView(APIView):
@@ -79,12 +95,25 @@ class LogoutAPIView(APIView):
     def post(self, request):
 
         response = Response()
-        response.delete_cookie("refresh_token")
-        response.delete_cookie("access_token")
+        response.set_cookie(
+        key=JWT_AUTH_COOKIE,
+        value='',
+        httponly=True,
+        expires='Thu, 01 Jan 1970 00:00:00 GMT',
+        max_age=0,
+        samesite=JWT_AUTH_SAMESITE,
+        secure=JWT_AUTH_SECURE,
+    )
+        response.set_cookie(
+        key=JWT_AUTH_REFRESH_COOKIE,
+        value='',
+        httponly=True,
+        expires='Thu, 01 Jan 1970 00:00:00 GMT',
+        max_age=0,
+        samesite=JWT_AUTH_SAMESITE,
+        secure=JWT_AUTH_SECURE,
+    )
         response.data = {"success": True, "message": "Logged out"}
         response.status_code = status.HTTP_200_OK
-
-        return response
-
 
 
