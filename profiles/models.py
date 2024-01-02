@@ -4,8 +4,8 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from cloudinary.models import CloudinaryField
 from django.conf import settings
-
-User = settings.AUTH_USER_MODEL
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class UserManager(BaseUserManager):
@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
             return user
 
     def create_superuser(self, username, email, password):
-        owner = Owner.objects.create(name='User')
+        owner = User.objects.create(name='User')
         user = self.create_user(
             username=username,
             email=email,
@@ -40,7 +40,7 @@ class UserManager(BaseUserManager):
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
-        return user
+        return self._create_user(username, email, password, owner=owner)
 
 
 class UserAccount(AbstractUser):
