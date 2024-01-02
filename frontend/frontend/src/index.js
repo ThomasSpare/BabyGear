@@ -11,11 +11,11 @@ import { ProfileDataProvider } from "./contexts/ProfileDataContext";
 
 ReactDOM.render(
       <Router>
-            <CurrentUserProvider>
+          <CurrentUserProvider>
             <ProfileDataProvider>
-                  <App /> 
+                <App /> 
             </ProfileDataProvider>
-            </CurrentUserProvider>
+          </CurrentUserProvider>
       </Router>,
  document.getElementById("root")
 );
