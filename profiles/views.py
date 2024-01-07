@@ -91,29 +91,14 @@ class LoginAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class LogoutAPIView(APIView):
-    def post(self, request):
 
-        response = Response()
-        response.set_cookie(
-        key=JWT_AUTH_COOKIE,
-        value='',
-        httponly=True,
-        expires='Thu, 01 Jan 1970 00:00:00 GMT',
-        max_age=0,
-        samesite=JWT_AUTH_SAMESITE,
-        secure=JWT_AUTH_SECURE,
-    )
-        response.set_cookie(
-        key=JWT_AUTH_REFRESH_COOKIE,
-        value='',
-        httponly=True,
-        expires='Thu, 01 Jan 1970 00:00:00 GMT',
-        max_age=0,
-        samesite=JWT_AUTH_SAMESITE,
-        secure=JWT_AUTH_SECURE,
-    )
-        response.data = {"success": True, "message": "Logged out"}
-        response.status_code = status.HTTP_200_OK
+# This logout view dont rework redo it
+# Ask How does the dj-rest-auth token get deleted ??
+class LogoutAPIView(APIView):
+
+    def get(self, request, pk):
+        request.user.auth_token.delete()
+        logout(request)
+        return redirect('login')
 
 

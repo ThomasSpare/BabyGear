@@ -14,11 +14,11 @@ class ProfileSerializer(serializers.ModelSerializer):
    class Meta:
        model = UserAccount
        fields = [
-           'avatar', 'username', 'first_name', 'last_name', 'email', 
+           'id', 'avatar', 'username', 'first_name', 'last_name', 'email', 
            'birth_date', 'country', 'password', 'date_joined', 'parent'
        ]
        read_only_fields = [
-           'avatar', 'username', 'first_name', 'last_name', 'email', 
+           'id', 'avatar', 'username', 'first_name', 'last_name', 'email', 
            'birth_date', 'country', 'password', 'date_joined', 'parent'
        ]
 
@@ -44,7 +44,7 @@ class Meta:
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAccount
-        fields = ('username')
+        fields = ('__all__')
 
         extra_kwargs = {
             "password": {"write_only": True},

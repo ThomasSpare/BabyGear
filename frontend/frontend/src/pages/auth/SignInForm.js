@@ -24,9 +24,10 @@ function SignInForm() {
 
   const [signInData, setSignInData] = useState({
     username: "",
+    email: "",
     password: "",
   });
-  const { username, password } = signInData;
+  const { username, email, password } = signInData;
 
   const [errors, setErrors] = useState({});
 
@@ -37,8 +38,7 @@ function SignInForm() {
     try {
       console.log(username);
       console.log(password);
-      const { data } = await axios.post("profiles/login", signInData);
-      console.log(data);
+      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
       history.goBack();
@@ -46,10 +46,6 @@ function SignInForm() {
       setErrors(err.response?.data);
     }
   };
-
-  function handleClick() {
-    history.push("/");
-  }
 
   const handleChange = (event) => {
     setSignInData({
@@ -81,6 +77,17 @@ function SignInForm() {
                 {message}
               </Alert>
             ))}
+            <Form.Group controlId="email">
+              <Form.Label className="d-none">Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                name="email"
+                className={styles.Input}
+                value={email}
+                onChange={handleChange}
+              />
+            </Form.Group>
 
             <Form.Group controlId="password">
               <Form.Label className="d-none">Password</Form.Label>
@@ -101,7 +108,6 @@ function SignInForm() {
             <Button
               className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
               type="submit"
-              onClick={handleClick}
             >
               Sign in
             </Button>

@@ -14,18 +14,19 @@ import { removeTokenTimestamp} from "../utils/utils";
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-  
       const handleSignOut = async () => {
         try{
-          await axios.post("profiles/logout");
+          // const userId = currentUser[0].id;
+          const url = `/dj-rest-auth/logout/`;
+          // console.log(userId)
+          await axios.get(url);
           setCurrentUser(null);
           removeTokenTimestamp();
-          window.location.href = "/";
+          window.location.href = "/login";
     } catch (err) {
       // console.log(err)
     }
   };
-
   const authLinks = (
       <>
     <li className="nav-item">
@@ -33,7 +34,7 @@ const NavBar = () => {
         className='nav-item'
         to={`/profiles/profiles/${currentUser?.profile_id}`}
         >
-        <Avatar src={currentUser?.avatar} text="Profile" height={40} />
+        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
       </li>
       <li className="nav-item">
@@ -52,7 +53,7 @@ const NavBar = () => {
     </NavLink>
     </li>
     <li>
-    <NavLink className='nav-link' to="/login">
+    <NavLink className='nav-link' to="dj-rest-auth/login/">
       Login
     </NavLink>
     </li>

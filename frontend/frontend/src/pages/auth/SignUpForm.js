@@ -29,7 +29,14 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try{
-      await axios.post("profiles/register", signUpData)
+      const response = await axios.post("/dj-rest-auth/registration/", signUpData)
+      if (response.status === 201) { // HTTP status for 'Created'
+        alert("Registration successful!");
+        history.push('/signin')
+        // Redirect to a different page or display a success message
+      } else {
+        throw new Error("Unexpected response");
+      }
       history.push('/signup')
     }catch(err){
       setErrors(err.response?.data)
@@ -66,9 +73,9 @@ const SignUpForm = () => {
           onChange={handleChange}
           />
         </Form.Group>
-        {/* {errors.username1?.map((message, idx) =>
+        {errors.username1?.map((message, idx) =>
         <Alert variant="warning" key={idx}>{ message }</Alert>
-        )} */}
+        )}
         <Form.Group controlId="password2">
           <Form.Label className="d-none">Confirm password</Form.Label>
           <Form.Control
