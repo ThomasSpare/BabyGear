@@ -14,7 +14,7 @@ CLOUDINARY_STORAGE = {
 }
 
 BASE_URL = [
-        "https://8000-thomasspare-babygear-vcpagz97del.ws-eu107.gitpod.io",
+        "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
 MEDIA_URL = '/media/'
@@ -31,12 +31,12 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost:8000",
     "baby-gear-3dce8aa6c614.herokuapp.com",
-    "https://8000-thomasspare-babygear-vcpagz97del.ws-eu107.gitpod.io",
+    "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-                    "https://8000-thomasspare-babygear-vcpagz97del.ws-eu107.gitpod.io",
-                    "https://8080-thomasspare-babygear-vcpagz97del.ws-eu107.gitpod.io",
+                    "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+                    "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
                     ]
 
 CORS_ALLOW_CREDENTIALS = True
