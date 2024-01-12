@@ -42,7 +42,7 @@ function ProfilePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userId = currentUser[0].id;
+        const userId = currentUser.pk;
         const [{ data: pageProfile }, { data: profilePosts }] =
           await Promise.all([
             axiosReq.get(`/${userId}`),
@@ -64,7 +64,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+      {profile?.is_owner && <ProfileEditDropdown id={profile?.pk} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image

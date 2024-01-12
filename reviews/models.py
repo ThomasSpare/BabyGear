@@ -78,6 +78,12 @@ class Title(models.Model):
         blank=True,
         null=True,
     )
+        image = models.ImageField(
+        upload_to='titles/',
+        blank=True,
+        null=True,
+        verbose_name='Image'
+    )
         slug = models.SlugField(max_length=200, unique=True, blank=True)
 
 

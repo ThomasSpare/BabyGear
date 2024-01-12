@@ -14,7 +14,8 @@ CLOUDINARY_STORAGE = {
 }
 
 BASE_URL = [
-        "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+        "127.0.0.1:8000",
+        # "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
 MEDIA_URL = '/media/'
@@ -29,14 +30,17 @@ PASSWORD = os.environ.get("PASSWORD")
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "127.0.0.1:8000",
     "localhost:8000",
     "baby-gear-3dce8aa6c614.herokuapp.com",
     "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-                    "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
-                    "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+                    "http://127.0.0.1:8000",
+                    "http://localhost:8080",
+                    # "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+                    # "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
                     ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -48,15 +52,15 @@ if 'CLIENT_ORIGIN' in os.environ:
    CORS_ORIGIN_WHITELIST = [
        os.environ.get('CLIENT_ORIGIN'),
    ]
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-   extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
-   CORS_ALLOWED_ORIGIN_REGEXES = [
-       rf"{extracted_url}\.gitpod\.io$",
-   ]
+# if 'CLIENT_ORIGIN_DEV' in os.environ:
+#    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+#    CORS_ALLOWED_ORIGIN_REGEXES = [
+#        rf"{extracted_url}\.gitpod\.io$",
+#    ]
 
-CORS_ALLOWED_ORIGIN_REGEXES = [
-       rf"{extracted_url}\.gitpod\.io$",
-   ]
+# CORS_ALLOWED_ORIGIN_REGEXES = [
+#        rf"{extracted_url}\.gitpod\.io$",
+#    ]
 
 CORS_ALLOW_ALL_HEADERS = True
 
@@ -134,9 +138,10 @@ AUTHENTICATION_BACKENDS = [
 
 ACCOUNT_LOGOUT_ON_GET = True 
 
-STATICFILES_STORAGE = (
-    "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
-)
+# STATICFILES_STORAGE = (
+#     "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
+# )
+
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 BASE_URL = os.environ.get("BASE_URL")
@@ -151,15 +156,12 @@ JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
-REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'chatrooms.serializers.CurrentUserSerializer'
-}
-
 REST_AUTH = {
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'my-app-auth',
     'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
-}
+    'USER_DETAILS_SERIALIZER': 'profiles.serializers.UserSerializer',
+    }
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

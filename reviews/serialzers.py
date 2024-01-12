@@ -35,6 +35,8 @@ class TitleSerializer(serializers.ModelSerializer):
             "description",
             "category",
             "slug",
+            "score",
+            "image",
         )
 
 

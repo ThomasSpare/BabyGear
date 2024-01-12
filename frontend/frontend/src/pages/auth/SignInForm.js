@@ -80,7 +80,7 @@ function SignInForm() {
             <Form.Group controlId="email">
               <Form.Label className="d-none">Email</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
                 placeholder="Email"
                 name="email"
                 className={styles.Input}

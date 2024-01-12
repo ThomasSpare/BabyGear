@@ -31,7 +31,7 @@ class ProductViewSet(CreateListDestroyViewSet):
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
-    serializer_class = ReviewSerializer
+    serializer_class = TitleSerializer
     permission_classes = [
     permissions.IsAuthenticatedOrReadOnly,
     IsAuthorOrModerPermission]
@@ -43,7 +43,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         title_str = self.kwargs.get('title')
-        title = get_object_or_404(Title, name=title_str)
+        title = get_object_or_404(Title)
         return Review.objects.filter(title=title)
 
 

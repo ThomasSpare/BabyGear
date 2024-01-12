@@ -1,35 +1,34 @@
-import React, { useRef, useState } from "react";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import React, { useRef,
+ useState } from "react";
+import Button from 'react-bootstrap/Button';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
-
 import Asset from "../components/Asset";
-
 import Upload from "../assets/upload.png";
-
 import styles from "../styles/ReviewCreateEditForm.module.css";
 import appStyles from "../styles/App.module.css";
 import btnStyles from "../styles/Button.module.css";
-
-import { useHistory } from "react-router";
-import { axiosReq } from "../api/axiosDefaults";
 import { useRedirect } from "../hooks/useRedirect";
+import Alert from 'react-bootstrap/Alert';
+import Form from 'react-bootstrap/Form';
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
-function ReviewCreateForm() {
+
+const ReviewCreateForm = () => {
+
   useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
-    title: "",
-    content: "",
+    name_of_product: "",
+    description: "",
+    score: "",
     image: "",
   });
-  const { title, content, image } = postData;
+  const { name_of_product, description, score, image } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -55,12 +54,13 @@ function ReviewCreateForm() {
     event.preventDefault();
     const formData = new FormData();
 
-    formData.append("title", title);
-    formData.append("content", content);
+    formData.append("name_of_product", name_of_product);
+    formData.append("description", description);
+    formData.append("score", score);
     formData.append("image", imageInput.current.files[0]);
 
     try {
-      const { data } = await axiosReq.post("/reviews/", formData);
+      const { data } = await axios.post("/reviews/", formData);
       history.push(`/reviews/${data.id}`);
     } catch (err) {
       // console.log(err);
@@ -73,15 +73,15 @@ function ReviewCreateForm() {
   const textFields = (
     <div className="text-center">
       <Form.Group>
-        <Form.Label>Title</Form.Label>
+        <Form.Label>Product to review</Form.Label>
         <Form.Control
           type="text"
-          name="title"
-          value={title}
+          name="name_of_product"
+          value={name_of_product}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.title?.map((message, idx) => (
+      {errors?.name_of_product?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -92,12 +92,28 @@ function ReviewCreateForm() {
         <Form.Control
           as="textarea"
           rows={6}
-          name="content"
-          value={content}
+          name="description"
+          value={description}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.content?.map((message, idx) => (
+      {errors?.description?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+<Form.Group>
+        <Form.Label>Product Score</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={1}
+          name="score"
+          value={score}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.score?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -148,19 +164,21 @@ function ReviewCreateForm() {
                   />
                 </Form.Label>
               )}
-
-              <Form.File
-                id="image-upload"
-                accept="image/*"
-                onChange={handleChangeImage}
-                ref={imageInput}
-              />
-            </Form.Group>
-            {errors?.image?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
+          
+            <Form.Group controlId="image-upload" className="mb-3">
+              <Form.Label></Form.Label>
+              <Form.Control type="file"    
+                  id="image-upload"
+                  accept="image/*"
+                  onChange={handleChangeImage}
+                  ref={imageInput}/>
+              </Form.Group>
+              {errors?.image?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
+              </Form.Group>
 
             <div className="d-md-none">{textFields}</div>
           </Container>
@@ -171,6 +189,6 @@ function ReviewCreateForm() {
       </Row>
     </Form>
   );
-}
+};
 
 export default ReviewCreateForm;

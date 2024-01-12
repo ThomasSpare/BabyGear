@@ -6,16 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import "./api/axiosDefaults";
 import { BrowserRouter as Router } from "react-router-dom";
 import { CurrentUserProvider } from "./contexts/CurrentUserContext";
-import { ProfileDataProvider } from "./contexts/ProfileDataContext";
+// import { ProfileDataProvider } from "./contexts/ProfileDataContext";
 
 
 ReactDOM.render(
       <Router>
-          <CurrentUserProvider>
-            <ProfileDataProvider>
-                <App /> 
-            </ProfileDataProvider>
-          </CurrentUserProvider>
+        <CurrentUserProvider>
+          <App />
+          </CurrentUserProvider>   
       </Router>,
  document.getElementById("root")
 );

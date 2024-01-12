@@ -23,7 +23,8 @@ import ProfilePage from "./profiles/ProfilePage";
 
 function App() {
   const currentUser = useCurrentUser();
-  const profile_id = currentUser?.profile_id || "";
+  // const profile_id = currentUser?.profile_id || "";
+
   return (
     <div className={styles.App}>
           <Switch>
@@ -38,9 +39,9 @@ function App() {
               <Route exact path="/seats" render={() => <Seats />} />
               <Route exact path="/bottles" render={() => <Bottles />} />
               <Route exact path="/reviews/create" render={() => <ReviewCreateForm />} />
-              <Route exact path="/reviews/:id" render={() => <ReviewsPage />} />
+              <Route exact path="/reviews" render={() => <ReviewsPage />} />
               <Route exact path="/posts/:id/edit" render={() => <ReviewEditForm />} />
-              <Route exact path="/profiles/profiles/"{...`${profile_id}`} render={() => <ProfilePage />} />
+              <Route exact path="/profiles/profiles/"{...`${currentUser?.pk}`} render={() => <ProfilePage />} />
               <Route
             exact
             path="/profiles/:id/edit/username"

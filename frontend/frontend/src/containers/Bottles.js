@@ -46,8 +46,8 @@ const Bottles = () => {
         <Link to="/readreviews">
         <a href="/readreviews" class="btn btn-light">Read reviews</a>
         </Link>
-        <Link to="/reviews">
-        <a href="/reviews" class="btn btn-light">Write a review</a>
+        <Link to="/reviews/create">
+        <a href="/reviews/create" class="btn btn-light">Write a review</a>
         </Link>
         </div>
         </div>

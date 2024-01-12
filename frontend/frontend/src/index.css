@@ -19,6 +19,11 @@ a{
 
 }
 
+#welcome {
+  margin-right: 118px;
+  margin-left: 52px;
+}
+
 label,
 p{
   color:rgb(61, 44, 77);
