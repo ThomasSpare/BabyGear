@@ -8,3 +8,5 @@ node_modules/
 .github/
 cloudinary_python.txt
 /.venv
+# Ignore logs from simple_deploy.
+simple_deploy_logs/

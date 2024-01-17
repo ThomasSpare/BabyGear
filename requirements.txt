@@ -53,3 +53,6 @@ urllib3==1.26.9
 websockets==10.3
 whitenoise==6.2.0
 zope.interface==5.4.0
+
+django-simple-deploy          # Added by simple_deploy command.
+gunicorn                      # Added by simple_deploy command.
