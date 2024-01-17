@@ -22,22 +22,55 @@ class TitleSerializer(serializers.ModelSerializer):
         queryset=Category.objects.all(), slug_field="slug", many=True
     )
     name_of_product = serializers.SlugRelatedField(
-        queryset=Title.objects.all(), slug_field="Features"
+        queryset=Title.objects.all(), slug_field="name_of_product"
     )
 
     class Meta:
         model = Title
         fields = (
-            "profile_id",
+            "id",
             "name_of_product",
-            "product_type",
             "release_year",
+            "product_type",
             "description",
             "category",
-            "slug",
             "score",
             "image",
         )
+
+
+class ReviewCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ("title", "author", "score", "pub_date")
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    title = TitleSerializer(read_only=True)
+    author = serializers.SlugRelatedField(
+        default=serializers.CurrentUserDefault(), read_only=True, slug_field="author"
+    )
+    productname = serializers.HiddenField(default=CurrentTitleDefault())
+
+    class Meta:
+        model = Review
+        fields = ("productname", "title", "author", "score", "pub_date")
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Review.objects.all(), fields=("author", "pub_date")
+            )
+        ]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "email", "country", "parent")
+
+    def validate(self, data):
+        if data.get("email") == (None):
+            raise serializers.ValidationError("Email does not exist!")
+        return data
 
 
 class ReadTitleSerializer(serializers.ModelSerializer):
@@ -55,6 +88,7 @@ class ReadTitleSerializer(serializers.ModelSerializer):
             "description",
             "category",
             "score",
+            "image",
         )
 
 

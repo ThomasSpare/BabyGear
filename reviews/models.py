@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from profiles.models import UserAccount as User
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-
 from .validators import year_validator
 
 
@@ -59,6 +58,10 @@ class ProductType(models.Model):
 
 
 class Title(models.Model):
+        """
+        Model for the CreateReviewForm that lets users
+        write and post photos of reviewed products
+        """
         name_of_product = models.CharField(
         max_length=200,
         verbose_name='name_of_product'
@@ -83,6 +86,14 @@ class Title(models.Model):
         blank=True,
         null=True,
         verbose_name='Image'
+    )
+        score = models.IntegerField(
+        null=True,
+        blank=True,
+        validators=[
+            MaxValueValidator(10, '10'),
+            MinValueValidator(1, '1')
+        ],
     )
         slug = models.SlugField(max_length=200, unique=True, blank=True)
 

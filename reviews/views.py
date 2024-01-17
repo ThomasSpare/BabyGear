@@ -1,13 +1,30 @@
 from django.db.models import Avg
 from django.shortcuts import render
+from rest_framework import serializers
 from django.shortcuts import get_object_or_404
 from rest_framework import filters, permissions, status, viewsets
 from django_filters.rest_framework import DjangoFilterBackend
-from reviews.models import Category, Review, Title, ProductType
+from django.http import HttpResponse
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+from rest_framework.viewsets import ViewSet
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import permissions
+from rest_framework import filters
+from rest_framework import generics
+from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
+
+from .models import Category, Review, Title, ProductType
 from profiles.models import UserAccount as User
-from .mixins import CreateListDestroyViewSet
+from .mixins import CreateListDestroyViewSet, viewsets
 from .filters import TitleFilter
 from .serialzers import CategorySerializer, ReviewSerializer, TitleSerializer, ProductSerializer, ReadTitleSerializer
+from django import forms
 from .permissions import (AdminOrReadOnly, IsAdminOrStaffPermission,
                           IsAuthorOrModerPermission, IsUserForSelfPermission)
 
@@ -30,21 +47,20 @@ class ProductViewSet(CreateListDestroyViewSet):
     permission_classes = (AdminOrReadOnly,)
 
 
-class ReviewViewSet(viewsets.ModelViewSet):
+class CreateReview(generics.ListCreateAPIView):
+    queryset = Title.objects.all()
     serializer_class = TitleSerializer
-    permission_classes = [
-    permissions.IsAuthenticatedOrReadOnly,
-    IsAuthorOrModerPermission]
 
     def perform_create(self, serializer):
-        title = self.kwargs.get('title')
-        name_of_product = get_object_or_404(Title, id=id)
+        print(self.request.data)
+        name_of_product = self.request.data.get('name_of_product')
+        name_of_product = get_object_or_404(Title, slug=name_of_product)
         serializer.save(author=self.request.user, name_of_product=name_of_product)
 
     def get_queryset(self):
         title_str = self.kwargs.get('title')
         title = get_object_or_404(Title)
-        return Review.objects.filter(title=title)
+        return Title.objects.filter(title=title)
 
 
 class TitleViewSet(viewsets.ModelViewSet):

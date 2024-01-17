@@ -17,7 +17,7 @@ export const useRedirect = (userAuthStatus) => {
       } catch (err) {
         // if user is not logged in, the code below will run
         if (userAuthStatus === "loggedOut") {
-          history.push("/signin");
+          history.push("/dj-rest-auth/login/");
         }
       }
     };

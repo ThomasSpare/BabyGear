@@ -1,5 +1,6 @@
 import React, { useRef,
  useState } from "react";
+import Layout from "../components/Layout";
 import Button from 'react-bootstrap/Button';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -40,28 +41,34 @@ const ReviewCreateForm = () => {
     });
   };
 
-  const handleChangeImage = (event) => {
+  const handleChangeImage = async (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
+      const newImage = await URL.createObjectURL(event.target.files[0]);
       setPostData({
         ...postData,
-        image: URL.createObjectURL(event.target.files[0]),
+        image: newImage,
       });
     }
   };
 
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-
+    
     formData.append("name_of_product", name_of_product);
     formData.append("description", description);
     formData.append("score", score);
-    formData.append("image", imageInput.current.files[0]);
-
+    if (imageInput.current.files && imageInput.current.files.length > 0){
+      formData.append("image", imageInput.current.files[0]);
+    }
+    
+    console.log("Form Data:", Object.fromEntries(formData));
     try {
-      const { data } = await axios.post("/reviews/", formData);
-      history.push(`/reviews/${data.id}`);
+      const { data } = await axios.post("reviews/", formData);
+      console.log(data)
+      history.push(`reviews/${data.id}`);
     } catch (err) {
       // console.log(err);
       if (err.response?.status !== 401) {
@@ -72,9 +79,10 @@ const ReviewCreateForm = () => {
 
   const textFields = (
     <div className="text-center">
-      <Form.Group>
+      <Form.Group controlid="name_of_product">
         <Form.Label>Product to review</Form.Label>
         <Form.Control
+          id="name_of_product"
           type="text"
           name="name_of_product"
           value={name_of_product}
@@ -88,8 +96,9 @@ const ReviewCreateForm = () => {
       ))}
 
       <Form.Group>
-        <Form.Label>Content</Form.Label>
+        <Form.Label controlid="description">Content</Form.Label>
         <Form.Control
+          id="description"
           as="textarea"
           rows={6}
           name="description"
@@ -104,8 +113,9 @@ const ReviewCreateForm = () => {
       ))}
 
 <Form.Group>
-        <Form.Label>Product Score</Form.Label>
+        <Form.Label controlid="score">Product Score</Form.Label>
         <Form.Control
+          id="score"
           as="textarea"
           rows={1}
           name="score"
@@ -132,6 +142,7 @@ const ReviewCreateForm = () => {
   );
 
   return (
+    <Layout title= 'Baby Gear' content='baby products, product comparison site, pregnant, newborn, smart gadgets'>
     <Form onSubmit={handleSubmit}>
       <Row>
         <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
@@ -165,8 +176,8 @@ const ReviewCreateForm = () => {
                 </Form.Label>
               )}
           
-            <Form.Group controlId="image-upload" className="mb-3">
-              <Form.Label></Form.Label>
+            <Form.Group controlid="image-upload" className="mb-3">
+              <Form.Label  className="d-flex justify-content-center"></Form.Label>
               <Form.Control type="file"    
                   id="image-upload"
                   accept="image/*"
@@ -188,6 +199,7 @@ const ReviewCreateForm = () => {
         </Col>
       </Row>
     </Form>
+    </Layout>
   );
 };
 

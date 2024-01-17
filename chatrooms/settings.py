@@ -1,7 +1,7 @@
+from pathlib import Path
 import os
 import re
 from datetime import timedelta
-from pathlib import Path
 
 import dj_database_url
 import django_heroku
@@ -14,8 +14,8 @@ CLOUDINARY_STORAGE = {
 }
 
 BASE_URL = [
-        "127.0.0.1:8000",
-        # "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+        # "127.0.0.1:8000",
+        "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
 MEDIA_URL = '/media/'
@@ -30,17 +30,18 @@ PASSWORD = os.environ.get("PASSWORD")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "127.0.0.1:8000",
-    "localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
     "baby-gear-3dce8aa6c614.herokuapp.com",
     "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+    "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
                     "http://127.0.0.1:8000",
                     "http://localhost:8080",
-                    # "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
-                    # "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+                    "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+                    "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
                     ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -52,8 +53,11 @@ if 'CLIENT_ORIGIN' in os.environ:
    CORS_ORIGIN_WHITELIST = [
        os.environ.get('CLIENT_ORIGIN'),
    ]
+
 # if 'CLIENT_ORIGIN_DEV' in os.environ:
-#    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+#    extracted_url = re.match(
+#         r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
+#     ).group(0)
 #    CORS_ALLOWED_ORIGIN_REGEXES = [
 #        rf"{extracted_url}\.gitpod\.io$",
 #    ]
@@ -87,6 +91,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'rest_auth.registration',
     'allauth.socialaccount.providers.facebook',
+    'simple_deploy',
     'profiles',
     'followers',
     'reviews',
@@ -138,9 +143,9 @@ AUTHENTICATION_BACKENDS = [
 
 ACCOUNT_LOGOUT_ON_GET = True 
 
-# STATICFILES_STORAGE = (
-#     "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
-# )
+STATICFILES_STORAGE = (
+    "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
+)
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 

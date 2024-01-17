@@ -36,9 +36,7 @@ function SignInForm() {
     event.preventDefault();
 
     try {
-      console.log(username);
-      console.log(password);
-      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      const { data } = await axios.post("dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
       history.goBack();
@@ -52,7 +50,6 @@ function SignInForm() {
       ...signInData,
       [event.target.name]: event.target.value,
     });
-    console.log(signInData);
   };
 
   return (

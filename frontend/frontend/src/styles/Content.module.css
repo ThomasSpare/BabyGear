@@ -1,0 +1,7 @@
+.Image {
+    display: inline-block;
+    max-width: 40%;
+    padding: 0px;
+    border: 20px;
+    border-color: black;
+}
