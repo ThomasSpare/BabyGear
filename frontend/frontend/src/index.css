@@ -178,3 +178,10 @@ body{
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+/* Score text in CreateReviewForm */
+#root > div > div > form > div > div.d-none.d-md-block.p-0.p-md-2.col-lg-4.col-md-5 > div > div > div:nth-child(3) > label{
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column-reverse;
+}
+

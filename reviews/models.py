@@ -81,12 +81,6 @@ class Title(models.Model):
         blank=True,
         null=True,
     )
-        image = models.ImageField(
-        upload_to='titles/',
-        blank=True,
-        null=True,
-        verbose_name='Image'
-    )
         score = models.IntegerField(
         null=True,
         blank=True,
@@ -107,13 +101,31 @@ class Title(models.Model):
 
 
 class Review(models.Model):
+    """
+    Represents a review for a product.
+
+    Attributes:
+        author (User): The author of the review.
+        name_of_product (str): The name of the product being reviewed.
+        title (Title): The title associated with the review.
+        review (str): The content of the review.
+        score (int): The score given to the product (between 1 and 10).
+        image (ImageField): An optional image associated with the review.
+        pub_date (DateTimeField): The publication date of the review.
+
+    Methods:
+        __str__(): Returns a string representation of the review.
+        title_upper(): Returns the uppercase version of the review's title.
+    """
     author = models.ForeignKey(
         User, on_delete=models.CASCADE,
         related_name='author',
     )
-    productname = models.ForeignKey(
-        Title, on_delete=models.CASCADE,
-        related_name='product_name',
+    name_of_product = models.CharField(
+        default=None, 
+        null=True,
+        max_length=200,
+        verbose_name='name_of_product'
     )
     title = models.ForeignKey(Title, max_length=40, default=None, null=True, on_delete=models.CASCADE, related_name='reviews')
     review = models.TextField(default=None, null=True)
@@ -122,6 +134,12 @@ class Review(models.Model):
             MaxValueValidator(10, '10'),
             MinValueValidator(1, '1')
         ],
+    )
+    image = models.ImageField(
+        upload_to='titles/',
+        blank=True,
+        null=True,
+        verbose_name='Image'
     )
     pub_date = models.DateTimeField(
         auto_now_add=True,

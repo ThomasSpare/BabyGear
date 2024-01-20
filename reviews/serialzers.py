@@ -35,29 +35,27 @@ class TitleSerializer(serializers.ModelSerializer):
             "description",
             "category",
             "score",
-            "image",
         )
 
 
 class ReviewCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ("title", "author", "score", "pub_date")
+        fields = ("title", "author", "review", "score", "image", "pub_date")
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    title = TitleSerializer(read_only=True)
     author = serializers.SlugRelatedField(
         default=serializers.CurrentUserDefault(), read_only=True, slug_field="author"
     )
-    productname = serializers.HiddenField(default=CurrentTitleDefault())
+    name_of_product = serializers.HiddenField(default=CurrentTitleDefault())
 
     class Meta:
         model = Review
-        fields = ("productname", "title", "author", "score", "pub_date")
+        fields = ("name_of_product", "title", "author", "image", "review", "score", "pub_date")
         validators = [
             UniqueTogetherValidator(
-                queryset=Review.objects.all(), fields=("author", "pub_date")
+                queryset=Review.objects.all(), fields=("title", "review")
             )
         ]
 

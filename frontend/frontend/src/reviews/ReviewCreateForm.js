@@ -16,6 +16,7 @@ import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import Rating from "../components/Rating";
 
 
 const ReviewCreateForm = () => {
@@ -24,12 +25,12 @@ const ReviewCreateForm = () => {
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
-    name_of_product: "",
-    description: "",
+    title: "",
+    review: "",
     score: "",
     image: "",
   });
-  const { name_of_product, description, score, image } = postData;
+  const { title, review, score, image } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -41,10 +42,10 @@ const ReviewCreateForm = () => {
     });
   };
 
-  const handleChangeImage = async (event) => {
+  const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
-      const newImage = await URL.createObjectURL(event.target.files[0]);
+      const newImage = URL.createObjectURL(event.target.files[0]);
       setPostData({
         ...postData,
         image: newImage,
@@ -52,13 +53,13 @@ const ReviewCreateForm = () => {
     }
   };
 
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     
-    formData.append("name_of_product", name_of_product);
-    formData.append("description", description);
+    formData.append("title", title);
+    formData.append("review", review);
     formData.append("score", score);
     if (imageInput.current.files && imageInput.current.files.length > 0){
       formData.append("image", imageInput.current.files[0]);
@@ -79,50 +80,51 @@ const ReviewCreateForm = () => {
 
   const textFields = (
     <div className="text-center">
-      <Form.Group controlid="name_of_product">
-        <Form.Label>Product to review</Form.Label>
+      <Form.Group>
+        <Form.Label controlid="title">Product to review</Form.Label>
         <Form.Control
-          id="name_of_product"
+          id="title"
           type="text"
-          name="name_of_product"
-          value={name_of_product}
+          name="title"
+          value={title}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.name_of_product?.map((message, idx) => (
+      {errors?.title?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
 
       <Form.Group>
-        <Form.Label controlid="description">Content</Form.Label>
+        <Form.Label controlid="review">Content</Form.Label>
         <Form.Control
-          id="description"
+          id="review"
           as="textarea"
           rows={6}
-          name="description"
-          value={description}
+          name="review"
+          value={review}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.description?.map((message, idx) => (
+      {errors?.review?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
 
 <Form.Group>
-        <Form.Label controlid="score">Product Score</Form.Label>
-        <Form.Control
-          id="score"
-          as="textarea"
-          rows={1}
-          name="score"
-          value={score}
-          onChange={handleChange}
-        />
-      </Form.Group>
+  <Form.Label controlid="score">Product Score</Form.Label>
+  <Form.Control
+    id="score"
+    as={Rating}
+    rows={0}
+    name="score"
+    value={score}
+    onChange={handleChange}
+  >
+  </Form.Control>
+</Form.Group>
       {errors?.score?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
@@ -176,10 +178,12 @@ const ReviewCreateForm = () => {
                 </Form.Label>
               )}
           
-            <Form.Group controlid="image-upload" className="mb-3">
-              <Form.Label  className="d-flex justify-content-center"></Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label controlid="image" className="d-flex justify-content-center"></Form.Label>
               <Form.Control type="file"    
-                  id="image-upload"
+                  id="image"
+                  name="image"
+                  value={image}
                   accept="image/*"
                   onChange={handleChangeImage}
                   ref={imageInput}/>

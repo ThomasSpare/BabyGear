@@ -27,5 +27,8 @@
    "[python]": {
       "editor.defaultFormatter": "ms-python.black-formatter"
    },
-   "CodeGPT.Autocomplete.enabled": true
+   "CodeGPT.Autocomplete.enabled": true,
+   "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+   }
 }

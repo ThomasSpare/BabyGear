@@ -23,7 +23,7 @@ from .models import Category, Review, Title, ProductType
 from profiles.models import UserAccount as User
 from .mixins import CreateListDestroyViewSet, viewsets
 from .filters import TitleFilter
-from .serialzers import CategorySerializer, ReviewSerializer, TitleSerializer, ProductSerializer, ReadTitleSerializer
+from .serialzers import CategorySerializer, ReviewSerializer, TitleSerializer, ProductSerializer, ReadTitleSerializer, ReviewCreateSerializer
 from django import forms
 from .permissions import (AdminOrReadOnly, IsAdminOrStaffPermission,
                           IsAuthorOrModerPermission, IsUserForSelfPermission)
@@ -47,20 +47,20 @@ class ProductViewSet(CreateListDestroyViewSet):
     permission_classes = (AdminOrReadOnly,)
 
 
-class CreateReview(generics.ListCreateAPIView):
-    queryset = Title.objects.all()
-    serializer_class = TitleSerializer
+class CreateReview(APIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
 
     def perform_create(self, serializer):
         print(self.request.data)
         name_of_product = self.request.data.get('name_of_product')
-        name_of_product = get_object_or_404(Title, slug=name_of_product)
-        serializer.save(author=self.request.user, name_of_product=name_of_product)
+        title = get_object_or_404(Review, slug=title)
+        serializer.save(author=self.request.user, title=title)
 
     def get_queryset(self):
         title_str = self.kwargs.get('title')
-        title = get_object_or_404(Title)
-        return Title.objects.filter(title=title)
+        title = get_object_or_404(Review)
+        return Review.objects.filter(title=title)
 
 
 class TitleViewSet(viewsets.ModelViewSet):

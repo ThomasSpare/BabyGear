@@ -14,7 +14,7 @@
 
  svg .svg-elem-1 {
   fill: transparent;
-  -webkit-transition: fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 0.8s;
+  -WebkitTransition: fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 0.8s;
           transition: fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 0.8s;
 }
 
