@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseUrl = "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-us107.gitpod.io";
+const baseUrl = "baby-gear-3dce8aa6c614.herokuapp.com";
+// const baseUrl = "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-us107.gitpod.io";
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 axios.defaults.baseURL = baseUrl;
 
