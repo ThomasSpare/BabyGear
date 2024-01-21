@@ -27,7 +27,8 @@ function SignInForm() {
     email: "",
     password: "",
   });
-  const { username, email, password } = signInData;
+  const { username, email, password } = signInData ?? {};
+  console.log(signInData)
 
   const [errors, setErrors] = useState({});
 

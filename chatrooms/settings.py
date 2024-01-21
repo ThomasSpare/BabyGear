@@ -14,7 +14,6 @@ CLOUDINARY_STORAGE = {
 }
 
 BASE_URL = [
-        # "127.0.0.1:8000",
         "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
@@ -30,16 +29,11 @@ PASSWORD = os.environ.get("PASSWORD")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "http://127.0.0.1:8000",
-    "http://localhost:8000",
-    "baby-gear-3dce8aa6c614.herokuapp.com",
     "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
     "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-                    "http://127.0.0.1:8000",
-                    "http://localhost:8080",
                     "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
                     "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
                     ]

@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const baseUrl = "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-us107.gitpod.io";
-const baseUrl = "http://127.0.0.1:8000";
+const baseUrl = "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-us107.gitpod.io";
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 axios.defaults.baseURL = baseUrl;
 
