@@ -14,7 +14,8 @@ CLOUDINARY_STORAGE = {
 }
 
 BASE_URL = [
-        "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+        "baby-gear-3dce8aa6c614.herokuapp.com",
+        # "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
 MEDIA_URL = '/media/'
@@ -29,13 +30,15 @@ PASSWORD = os.environ.get("PASSWORD")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
-    "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+    "baby-gear-3dce8aa6c614.herokuapp.com",
+    # "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+    # "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-                    "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
-                    "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+                    "baby-gear-3dce8aa6c614.herokuapp.com",
+                    # "https://8000-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
+                    # "https://8080-thomasspare-babygear-vc1ic99dcbk.ws-eu107.gitpod.io",
                     ]
 
 CORS_ALLOW_CREDENTIALS = True
