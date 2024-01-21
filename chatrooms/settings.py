@@ -89,7 +89,6 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'allauth.socialaccount.providers.facebook',
     'simple_deploy',
-    'Pillow',
     'profiles',
     'followers',
     'reviews',
