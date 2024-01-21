@@ -130,13 +130,14 @@ class Review(models.Model):
     title = models.ForeignKey(Title, max_length=40, default=None, null=True, on_delete=models.CASCADE, related_name='reviews')
     review = models.TextField(default=None, null=True)
     score = models.IntegerField(
+        null=True,
         validators=[
             MaxValueValidator(10, '10'),
             MinValueValidator(1, '1')
         ],
     )
     image = models.ImageField(
-        upload_to='titles/',
+        upload_to='',
         blank=True,
         null=True,
         verbose_name='Image'
